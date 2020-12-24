@@ -7,9 +7,9 @@ const style = `
     margin-bottom: 8vw;
 }
 
-@media only screen and (max-width: 687px){
+@media only screen and (max-width: 786px){
     .main{
-        margin-top: 23vw;
+        margin-top: 100px;
     }
 }
     
