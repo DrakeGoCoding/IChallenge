@@ -17,15 +17,15 @@ export default class Quiz {
         this.answers.push(answer);
     }
 
-    getCorrectAnswer() {
-        return this.answers.find(answer => answer.isCorrect);
+    getCorrectAnswers() {
+        return this.answers.filter(answer => answer.isCorrect);
     }
 
     /**
      * 
-     * @param {Answer} userAnswer 
+     * @param {Array} userAnswers
      */
-    checkAnswer(userAnswer) {
-        return userAnswer.isCorrect;
+    checkAnswer(userAnswers) {
+        return userAnswers.every(answer => answer.isCorrect);
     }
 }

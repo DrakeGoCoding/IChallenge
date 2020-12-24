@@ -2,11 +2,15 @@ import QuizSet from "./QuizSet.js"
 
 export default class QuizCollection {
     userID;
-    quizCollection;
+    #quizCollection;
 
     constructor(userID) {
         this.userID = userID;
-        this.quizCollection = [];
+        this.#quizCollection = [];
+    }
+
+    getQuizSetList(){
+        return this.#quizCollection;
     }
 
     /**
@@ -14,7 +18,7 @@ export default class QuizCollection {
      * @param {QuizSet} quizSet 
      */
     addQuizSet(quizSet) {
-        this.quizCollection.push(quizSet);
+        this.#quizCollection.push(quizSet);
     }
 
 }
