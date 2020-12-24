@@ -1,9 +1,9 @@
 import './screens/home.js'
 
-import'./components/homeHeader.js'
-import'./components/createPlusBtn.js'
-import'./components/quizInfoList.js'
-import'./components/quizInfoItem.js'
+import'./components/homepage/homeHeader.js'
+import'./components/homepage/createPlusBtn.js'
+import'./components/homepage/quizInfoList.js'
+import'./components/homepage/quizInfoItem.js'
 
 
 
