@@ -11,12 +11,20 @@ import './components/quizCreator/previewItem.js'
 import './components/quizCreator/addQuestionBtn.js'
 import './components/quizCreator/quizInput.js'
 
+import'./screens/quizDisplay.js'
+import './components/quizDisplay/quizHeader.js'
+import './components/quizDisplay/quizContainer.js'
 
+//enable/ disable the comments for displaying the screens
 
 // document.getElementById('container').innerHTML=`
 //     <home-screen></home-screen>
 // `
 
+// document.getElementById('container').innerHTML=`
+//     <quiz-creator></quiz-creator>
+// `
+
 document.getElementById('container').innerHTML=`
-    <quiz-creator></quiz-creator>
+    <quiz-display></quiz-display>
 `

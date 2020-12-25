@@ -24,15 +24,7 @@ const style = `
     align-items: center;
     flex-direction: row-reverse;
 }
-.user-icon{
-    margin-right: 4vw;
-    color: #fff;
-    font-size: 40px;
-}
-.user-icon:hover{
-    cursor: pointer;
-    text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
-}
+
 @media only screen and (max-width: 1000px){
     .main-header{
         height: 70px;
@@ -57,7 +49,7 @@ const style = `
 }
 `
 
-class CreatorHeader extends HTMLElement{
+class QuizHeader extends HTMLElement{
     constructor(){
         super()
         this._shadowDom = this.attachShadow({mode: 'open'})
@@ -76,7 +68,6 @@ class CreatorHeader extends HTMLElement{
         <div class="main-header">
             <div class="logo">Queazy</div>
             <div class="header-right-bar">
-                <div class="user-icon"><i class="fa fa-user"></i></div>
                 <div class="theme-toggle"></div>
             </div>
         </div>
@@ -84,4 +75,4 @@ class CreatorHeader extends HTMLElement{
     }
 }
 
-window.customElements.define('creator-header', CreatorHeader)
+window.customElements.define('quiz-header', QuizHeader)
