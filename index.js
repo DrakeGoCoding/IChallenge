@@ -21,6 +21,8 @@ import './component/quizDisplay/recordContainer.js'
 import './screen/quizStarter.js'
 import './component/quizDisplay/starterContainer.js'
 
+import "./test.js"
+
 export function redirect(screenName) {
     if (screenName === 'home-screen') {
         document.getElementById('container').innerHTML = `

@@ -11,4 +11,8 @@ export default class Answer{
         this.content = content;
         this.isCorrect = isCorrect;
     }
+
+    static parseDocument(answerDocument){
+        return new Answer(answerDocument.content, answerDocument.isCorrect);
+    }
 }

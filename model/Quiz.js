@@ -1,3 +1,4 @@
+import { addQuizDocument } from "../utils.js";
 import Answer from "./Answer.js"
 
 export default class Quiz {
@@ -27,5 +28,17 @@ export default class Quiz {
      */
     checkAnswer(userAnswer) {
         return userAnswer.isCorrect;
+    }
+
+    pushToFireBase(){
+        addQuizDocument(this);
+    }
+
+    static parseDocument(quizDocument){
+        const quiz = new Quiz(quizDocument.content);
+        quizDocument.answers.forEach(answer => {
+            quiz.addAnswer(Answer.parseDocument(answer));
+        })
+        return quiz; 
     }
 }
