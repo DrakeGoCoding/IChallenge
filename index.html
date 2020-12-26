@@ -4,8 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IChallenge</title>
+    <link rel="stylesheet" href="css/style.css">
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link href="https://fonts.googleapis.com/css2?family=Rowdies&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <script src="index.js" type="module"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCFAqz0CtKRJJbGd2_bKVirXrOCiMV1rWI",
+        authDomain: "queazy-c0ea4.firebaseapp.com",
+        projectId: "queazy-c0ea4",
+        storageBucket: "queazy-c0ea4.appspot.com",
+        messagingSenderId: "392808312503",
+        appId: "1:392808312503:web:4b4ef52ef40a701946a732"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <div id="container"></div>
+
+    <script src="./index.js" type="module"></script>
 </body>
 </html>
