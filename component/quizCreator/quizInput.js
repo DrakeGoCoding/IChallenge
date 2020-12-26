@@ -1,10 +1,10 @@
 const style = `
-.question-create-box{
+#question-create-box{
     width: calc(100% - 400px);
     margin-left: 350px;
     font-family: 'JetBrains Mono', monospace;
 }
-.question-input textarea{     
+#question-input textarea{     
     height: 150px;
     width: 100%;
     background-color: #252525;
@@ -58,7 +58,15 @@ const style = `
 .color-blue{
     background-color: #69C9D0;
 }
-.summit-btn{
+.correct-check{
+    height: 35px;
+    width: 35px;
+    margin-right: 15px;
+    
+    background: #666666;
+  color: #ffffff;
+}
+#summit-btn{
     position: fixed;
     font-family: 'JetBrains Mono', monospace;
     width: 120px;
@@ -71,17 +79,17 @@ const style = `
     top: 90vh;
     right: 5vw;
 }
-.summit-btn:hover{
+#summit-btn:hover{
     cursor: pointer;
     box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }
 
 @media only screen and (max-width: 768px){
-    .question-create-box{
+    #question-create-box{
         margin:auto;
         width: 80vw;   
     }
-    .question-input textarea{     
+    #question-input textarea{     
         height: 100px;
         width: 100%;
         font-size: 20px;
@@ -95,7 +103,7 @@ const style = `
         padding: 15px;
         height: 50px;
     }
-    .summit-btn{
+    #summit-btn{
         top: 75vh;
         font-size: 15px;
         width: 80px;
@@ -115,19 +123,43 @@ class QuizInput extends HTMLElement{
         <style>
         ${style}
         </style>
-        <div class="question-create-box"> 
-            <div class="question-input"><textarea placeholder='Type your question'></textarea></div>
+        <div id="question-create-box"> 
+            <div id="question-input"><textarea placeholder='Type your question'></textarea></div>
             <div class="answer-input">        
-                <div class="answer ans1"> <div class='ans-decor color-red'></div> A. <textarea placeholder='Add Answer'></textarea></div>
-                <div class="answer ans2"> <div class='ans-decor color-blue'></div> B. <textarea placeholder='Add Answer'></textarea></div>
-                <div class="answer ans3"> <div class='ans-decor color-red'></div> C. <textarea placeholder='Add Answer'></textarea></div>
-                <div class="answer ans4"> <div class='ans-decor color-blue'></div> D. <textarea placeholder='Add Answer'></textarea></div>
+                <div class="answer"> <div class='ans-decor color-red'></div> <input type="checkbox" class="correct-check"> A. <textarea id='ans1' placeholder='Add Answer'></textarea></div>
+                <div class="answer" id='ans2'> <div class='ans-decor color-blue'></div> <input type="checkbox" class="correct-check" > B. <textarea placeholder='Add Answer'></textarea></div>
+                <div class="answer" id='ans3'> <div class='ans-decor color-red'></div> <input type="checkbox" class="correct-check" > C. <textarea placeholder='Add Answer'></textarea></div>
+                <div class="answer" id='ans4'> <div class='ans-decor color-blue'></div> <input type="checkbox" class="correct-check" > D. <textarea placeholder='Add Answer'></textarea></div>
             </div>
         </div>
 
-        <div class='summit-btn'>Done</div>
+        <div id='summit-btn'>Done</div>
         `
+
+        const quizCreateForm = this._shadowDom.getElementById('question-create-box')
+        const summitBtn = this._shadowDom.getElementById('summit-btn')
+
+        summitBtn.addEventListener('click', async (e) => {
+            e.preventDefault()
+
+            let question = this._shadowDom.getElementById('question-input').value
+            let ans1 = this._shadowDom.getElementById('ans1').value
+            let ans2 = this._shadowDom.getElementById('ans2').value
+            let ans3 = this._shadowDom.getElementById('ans3').value
+            let ans4 = this._shadowDom.getElementById('ans4').value
+
+            console.log(ans1);
+
+            if (question && ans1 && ans2 && ans3 && ans4){
+                const quiz = {
+                    question: question,
+                }
+                console.log(quiz);
+            }
+            
+        })
     }
+    
 }
 
 window.customElements.define('quiz-input', QuizInput)

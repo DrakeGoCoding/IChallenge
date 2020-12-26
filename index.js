@@ -1,39 +1,50 @@
-import './screens/home.js'
-import './components/homepage/homeHeader.js'
-import './components/homepage/createPlusBtn.js'
-import './components/homepage/quizInfoList.js'
-import './components/homepage/quizInfoItem.js'
+import './screen/homeScreen.js'
+import './component/homeScreen/homeHeader.js'
+import './component/homeScreen/createPlusBtn.js'
+import './component/homeScreen/quizInfoList.js'
+import './component/homeScreen/quizInfoItem.js'
 
-import './screens/quizCreator.js'
-import './components/quizCreator/creatorHeader.js'
-import './components/quizCreator/previewColumn.js'
-import './components/quizCreator/previewItem.js'
-import './components/quizCreator/addQuestionBtn.js'
-import './components/quizCreator/quizInput.js'
+import './screen/quizCreator.js'
+import './component/quizCreator/creatorHeader.js'
+import './component/quizCreator/previewColumn.js'
+import './component/quizCreator/previewItem.js'
+import './component/quizCreator/addQuestionBtn.js'
+import './component/quizCreator/quizInput.js'
 
-import './screens/quizDisplay.js'
-import './components/quizDisplay/quizHeader.js'
-import './components/quizDisplay/quizContainer.js'
+import './screen/quizDisplay.js'
+import './component/quizDisplay/quizHeader.js'
+import './component/quizDisplay/quizContainer.js'
 
-import './screens/quizRecords.js'
-import './components/quizRecord/recordContainer.js'
+import './screen/quizRecords.js'
+import './component/quizDisplay/recordContainer.js'
 
-//enable/ disable the comments for displaying the screens
+import './screen/quizStarter.js'
+import './component/quizDisplay/starterContainer.js'
 
 
 
-// document.getElementById('container').innerHTML=`
-//     <home-screen></home-screen>
-// `
+export function redirect(screenName) {
+    if (screenName === 'home-screen') {
+        document.getElementById('container').innerHTML = `
+        <home-screen></home-screen>
+        `
+    } else if (screenName === 'quiz-creator') {
+        document.getElementById('container').innerHTML = `
+        <quiz-creator></quiz-creator>
+        `
+    } else if (screenName == 'quiz-starter') {
+        document.getElementById('container').innerHTML = `
+        <quiz-starter></quiz-starter>
+        `
+    } else if (screenName == 'quiz-display') {
+        document.getElementById('container').innerHTML = `
+        <quiz-display></quiz-display>
+        `
+    } else if (screenName == 'quiz-record') {
+        document.getElementById('container').innerHTML = `
+        <quiz-record></quiz-record>
+        `
+    }
+}
 
-document.getElementById('container').innerHTML=`
-    <quiz-creator></quiz-creator>
-`
-
-// document.getElementById('container').innerHTML=`
-//     <quiz-display></quiz-display>
-// `
-
-// document.getElementById('container').innerHTML=`
-//     <quiz-record></quiz-record>
-// `
+redirect('quiz-creator')
