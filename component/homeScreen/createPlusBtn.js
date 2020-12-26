@@ -1,24 +1,24 @@
 const style = `
-.create-btn{
+#create-btn{
     position: fixed;
     color: #fff;
     font-size: 60px;
     left: 90vw;
     top: 80vh;
 }
-.create-btn:hover{
+#create-btn:hover{
     cursor: pointer;
     text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }
 @media only screen and (max-width: 768px){
-    .create-btn{
+    #create-btn{
         font-size: 50px;
         left: 92vw;
         top:85vh;
     }
 }
 @media only screen and (max-width: 400px){
-    .create-btn{
+    #create-btn{
         left: 88vw;
     }
 }
@@ -35,8 +35,8 @@ class CreatePlusBtn extends HTMLElement{
         <style>
         ${style}
         </style>
-        <div class="create-btn"> <i class="fa fa-plus-circle"></i> </div>
-        `
+        <div id="create-btn"> <i class="fa fa-plus-circle"></i> </div>
+        ` 
     }
 }
 

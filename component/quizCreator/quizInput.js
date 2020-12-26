@@ -80,7 +80,7 @@ const style = `
     right: 5vw;
 }
 #summit-btn:hover{
-    cursor: pointer;
+    cursor: no-drop;
     box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }
 
@@ -124,12 +124,12 @@ class QuizInput extends HTMLElement{
         ${style}
         </style>
         <div id="question-create-box"> 
-            <div id="question-input"><textarea placeholder='Type your question'></textarea></div>
+            <div id="question-input"><textarea id='question'placeholder='Type your question'></textarea></div>
             <div class="answer-input">        
                 <div class="answer"> <div class='ans-decor color-red'></div> <input type="checkbox" class="correct-check"> A. <textarea id='ans1' placeholder='Add Answer'></textarea></div>
-                <div class="answer" id='ans2'> <div class='ans-decor color-blue'></div> <input type="checkbox" class="correct-check" > B. <textarea placeholder='Add Answer'></textarea></div>
-                <div class="answer" id='ans3'> <div class='ans-decor color-red'></div> <input type="checkbox" class="correct-check" > C. <textarea placeholder='Add Answer'></textarea></div>
-                <div class="answer" id='ans4'> <div class='ans-decor color-blue'></div> <input type="checkbox" class="correct-check" > D. <textarea placeholder='Add Answer'></textarea></div>
+                <div class="answer"> <div class='ans-decor color-blue'></div> <input type="checkbox" class="correct-check" > B. <textarea id='ans2' placeholder='Add Answer'></textarea></div>
+                <div class="answer"> <div class='ans-decor color-red'></div> <input type="checkbox" class="correct-check" > C. <textarea id='ans3' placeholder='Add Answer'></textarea></div>
+                <div class="answer"> <div class='ans-decor color-blue'></div> <input type="checkbox" class="correct-check" > D. <textarea id='ans4' placeholder='Add Answer'></textarea></div>
             </div>
         </div>
 
@@ -142,20 +142,27 @@ class QuizInput extends HTMLElement{
         summitBtn.addEventListener('click', async (e) => {
             e.preventDefault()
 
-            let question = this._shadowDom.getElementById('question-input').value
+            let question = this._shadowDom.getElementById('question').value
             let ans1 = this._shadowDom.getElementById('ans1').value
             let ans2 = this._shadowDom.getElementById('ans2').value
             let ans3 = this._shadowDom.getElementById('ans3').value
             let ans4 = this._shadowDom.getElementById('ans4').value
 
-            console.log(ans1);
 
             if (question && ans1 && ans2 && ans3 && ans4){
                 const quiz = {
                     question: question,
+                    ans1: ans1,
+                    ans2: ans2,
+                    ans3: ans3,
+                    ans4: ans4
                 }
+                firebase.firestore().collection('posts').add(quiz);
+                alert('Posted Successfully!')
                 console.log(quiz);
             }
+            
+
             
         })
     }

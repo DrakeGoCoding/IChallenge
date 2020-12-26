@@ -9,14 +9,14 @@ const style = `
     justify-content: space-between;
     align-items: center;
 }
-.logo{
+#logo{
     margin-left: 4vw;
     font-family: 'Rowdies', cursive;
     font-size: 65px;
     color: #fff;
     text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }
-.logo:hover{
+#logo:hover{
     cursor:pointer;
 }
 .header-right-bar{
@@ -37,7 +37,7 @@ const style = `
     .main-header{
         height: 70px;
     }
-    .logo{
+    #logo{
         font-size: 50px;
     }
     .user-icon{
@@ -48,7 +48,7 @@ const style = `
     .main-header{
         height: 80px
     }
-    .logo{
+    #logo{
         font-size: 40px;
     }
     .user-icon{
@@ -74,13 +74,16 @@ class CreatorHeader extends HTMLElement{
          </style>
          
         <div class="main-header">
-            <div class="logo">Queazy</div>
+            <div id="logo">Queazy</div>
             <div class="header-right-bar">
                 <div class="user-icon"><i class="fa fa-user"></i></div>
                 <div class="theme-toggle"></div>
             </div>
         </div>
         `
+        this._shadowDom.getElementById('logo').addEventListener('click', () => {
+            router.navigate('home-screen')
+        })
     }
 }
 

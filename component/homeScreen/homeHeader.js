@@ -24,12 +24,12 @@ const style = `
     align-items: center;
     flex-direction: row-reverse;
 }
-.user-icon{
+#user-icon{
     margin-right: 4vw;
     color: #fff;
     font-size: 40px;
 }
-.user-icon:hover{
+#user-icon:hover{
     cursor: pointer;
     text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }
@@ -62,7 +62,7 @@ const style = `
     .logo{
         font-size: 50px;
     }
-    .user-icon{
+    #user-icon{
         font-size: 35px;
     }
     .search-box{
@@ -79,7 +79,7 @@ const style = `
     .logo{
         font-size: 40px;
     }
-    .user-icon{
+    #user-icon{
         font-size: 28px;
     }
     .search-box{
@@ -110,7 +110,7 @@ class HomeHeader extends HTMLElement{
         <div class="main-header">
             <div class="logo">Queazy</div>
             <div class="header-right-bar">
-                <div class="user-icon"><i class="fa fa-user"></i></div>
+                <div id="user-icon"><i class="fa fa-user"></i></div>
                 <div class="search-box">
                     <div class="search-icon"><i class="fa fa-search"></i></div>
                     <input type="text" placeholder="Search quizzes' title">
@@ -120,6 +120,7 @@ class HomeHeader extends HTMLElement{
         </div>
         `
     }
+    
 }
 
 window.customElements.define('home-header', HomeHeader)

@@ -21,7 +21,8 @@ import './component/quizDisplay/recordContainer.js'
 import './screen/quizStarter.js'
 import './component/quizDisplay/starterContainer.js'
 
-
+import './navigo.js'
+import './dialog.js'
 
 export function redirect(screenName) {
     if (screenName === 'home-screen') {
@@ -47,4 +48,7 @@ export function redirect(screenName) {
     }
 }
 
-redirect('home-screen')
+redirect('quiz-creator')
+
+
+

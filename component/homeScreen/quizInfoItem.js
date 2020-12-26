@@ -50,20 +50,20 @@ const style = `
     display: flex;
     justify-content: flex-end;
 }
-.share-btn, .play-btn, .view-btn{
+#share-btn, #play-btn, #view-btn{
     margin-left: 1vw;
     border: 2px solid #fff;
     padding: 0.4vw;
     border-radius: 10px;
 }
 
-.share-btn:hover, .play-btn:hover, .view-btn:hover{
+#share-btn:hover, #play-btn:hover, #view-btn:hover{
     cursor: pointer;
     background-color: #010101;
     box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 950px){
     .quiz-info-left{
         font-size: 14vw;
         line-height: 20vw;
@@ -90,7 +90,7 @@ const style = `
         font-size: 15vw;
         line-height: 22vw;
     }
-    .share-btn, .play-btn, .view-btn{
+    #share-btn, #play-btn, #view-btn{
         padding: 5px 12px;
         margin-right: 1vw;
         border: 1.5px solid #fff;
@@ -131,13 +131,17 @@ class QuizInfoItem extends HTMLElement{
             </div>
             <div class="quiz-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sapien ante, gravida nec augue fermentum, eleifend ultrices erat. Nunc elit ligula, tristique eu euismod vel, condimentum non ipsum. Ut pharetra ex quis enim iaculis tincidunt. Proin odio arcu, lobortis sed faucibus sed, luctus id sapien. </div>
             <div class="quiz-btn">
-                <div class="view-btn"> <i class="fa fa-eye"></i> <span>View Records</span> </div>
-                <div class="play-btn"> <i class="fa fa-play"></i> <span>Play Now</span> </div>
-                <div class="share-btn"> <i class="fa fa-share-alt"></i> <span>Share</span> </div>
+                <div id="view-btn"> <i class="fa fa-eye"></i> <span>View Records</span> </div>
+                <div id="play-btn"> <i class="fa fa-play"></i> <span>Play Now</span> </div>
+                <div id="share-btn"> <i class="fa fa-share-alt"></i> <span>Share</span> </div>
             </div>
         </div>
     </div>
          `
+
+         this._shadowDom.getElementById('play-btn').addEventListener('click', () => {
+            router.navigate('quiz-starter')
+          })
      }
 }
 
