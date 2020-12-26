@@ -12,10 +12,11 @@ const style = `
     width: 12vw;
     height: 12vw;
     border-radius: 10px;
-    background-image: url(./img/quiz-img-default-dark.png);
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-color: #000;
+    color: #fff;
+    font-size: 120px;
+    text-align: center;
+    line-height: 12vw;
 }
 .quiz-info-right{
     margin-top: 2vw;
@@ -63,6 +64,9 @@ const style = `
 }
 
 @media only screen and (max-width: 768px){
+    .quiz-info-left{
+        font-size: 80px;
+    }
     .quiz-info-item{
         width: 80vw;
     }
@@ -110,7 +114,7 @@ class QuizInfoItem extends HTMLElement{
 
     <div class="quiz-info-item">
         <div class="quiz-info-left">
-            <div class="quiz-img"></div>
+            <div class="quiz-img"> <i class="fa fa-quora" aria-hidden="true"></i> </div>
         </div>
         <div class="quiz-info-right">
             <div class="quiz-name">Name of the Quiz</div>

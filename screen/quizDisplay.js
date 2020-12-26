@@ -1,6 +1,8 @@
 const style = `
 .main{
     margin-top: 100px;
+    position: fixed;
+    width: 100%;
 }
 `
 

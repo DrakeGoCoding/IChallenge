@@ -1,6 +1,6 @@
 const style = `
 .preview-column{
-    position: absolute;
+    position: fixed;
     overflow: scroll;
     width: 280px;
     height: 100vh;
