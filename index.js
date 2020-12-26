@@ -1,30 +1,48 @@
-import Account from "./model/Account.js";
-import Answer from "./model/Answer.js";
-import Quiz from "./model/Quiz.js";
-import QuizCollection from "./model/QuizCollection.js";
-import QuizSet from "./model/QuizSet.js";
+import './screen/homeScreen.js'
+import './component/homeScreen/homeHeader.js'
+import './component/homeScreen/createPlusBtn.js'
+import './component/homeScreen/quizInfoList.js'
+import './component/homeScreen/quizInfoItem.js'
 
-let admin = new Account("admin", "123456");
+import './screen/quizCreator.js'
+import './component/quizCreator/creatorHeader.js'
+import './component/quizCreator/previewColumn.js'
+import './component/quizCreator/previewItem.js'
+import './component/quizCreator/addQuestionBtn.js'
+import './component/quizCreator/quizInput.js'
 
-console.log(admin);
+import './screen/quizDisplay.js'
+import './component/quizDisplay/quizHeader.js'
+import './component/quizDisplay/quizContainer.js'
 
-let quiz1 = new Quiz("1 + 1 = ?");
-quiz1.addAnswer(new Answer("0", false));
-quiz1.addAnswer(new Answer("1", false));
-quiz1.addAnswer(new Answer("2", true));
-quiz1.addAnswer(new Answer("3", false));
+import './screen/quizRecords.js'
+import './component/quizDisplay/recordContainer.js'
 
-let quiz2 = new Quiz("2 x 2 = ?");
-quiz2.addAnswer(new Answer("2", false));
-quiz2.addAnswer(new Answer("4", true));
-quiz2.addAnswer(new Answer("6", false));
-quiz2.addAnswer(new Answer("8", false));
+import './screen/quizStarter.js'
+import './component/quizDisplay/starterContainer.js'
 
-let quizSet = new QuizSet("New QuizSet");
-quizSet.addQuiz(quiz1);
-quizSet.addQuiz(quiz2);
+export function redirect(screenName) {
+    if (screenName === 'home-screen') {
+        document.getElementById('container').innerHTML = `
+        <home-screen></home-screen>
+        `
+    } else if (screenName === 'quiz-creator') {
+        document.getElementById('container').innerHTML = `
+        <quiz-creator></quiz-creator>
+        `
+    } else if (screenName == 'quiz-starter') {
+        document.getElementById('container').innerHTML = `
+        <quiz-starter></quiz-starter>
+        `
+    } else if (screenName == 'quiz-display') {
+        document.getElementById('container').innerHTML = `
+        <quiz-display></quiz-display>
+        `
+    } else if (screenName == 'quiz-record') {
+        document.getElementById('container').innerHTML = `
+        <quiz-record></quiz-record>
+        `
+    }
+}
 
-let quizCollection = new QuizCollection(acc.userName);
-quizCollection.addQuizSet(quizSet);
-
-console.log(quizCollection.getQuizSetList());
+redirect('home-screen')
