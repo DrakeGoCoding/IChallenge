@@ -23,9 +23,9 @@ export default class Quiz {
 
     /**
      * 
-     * @param {Array} userAnswers
+     * @param {Answer} userAnswer
      */
-    checkAnswer(userAnswers) {
-        return userAnswers.every(answer => answer.isCorrect);
+    checkAnswer(userAnswer) {
+        return userAnswer.isCorrect;
     }
 }
