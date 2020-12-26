@@ -14,7 +14,7 @@ const style = `
     border-radius: 10px;
     background-color: #000;
     color: #fff;
-    font-size: 120px;
+    font-size: 8vw;
     text-align: center;
     line-height: 12vw;
 }
@@ -65,7 +65,8 @@ const style = `
 
 @media only screen and (max-width: 768px){
     .quiz-info-left{
-        font-size: 80px;
+        font-size: 14vw;
+        line-height: 20vw;
     }
     .quiz-info-item{
         width: 80vw;
@@ -85,6 +86,10 @@ const style = `
     }
 }
 @media only screen and (max-width: 400px){
+    .quiz-info-left{
+        font-size: 15vw;
+        line-height: 22vw;
+    }
     .share-btn, .play-btn, .view-btn{
         padding: 5px 12px;
         margin-right: 1vw;
