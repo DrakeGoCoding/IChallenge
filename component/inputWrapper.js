@@ -1,3 +1,20 @@
+const style = `
+ .error{
+     color: red;
+     font-family: sans-serif;
+ }
+input {
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid #dbdbdb;
+    padding: 12px;
+    box-sizing: border-box;
+    
+}
+.input-wrapper{
+    margin-bottom: 10px;
+}
+`
 class InputWrapper extends HTMLElement {
     constructor() {
         super()

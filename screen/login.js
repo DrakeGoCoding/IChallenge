@@ -11,7 +11,7 @@ class LoginScreen extends HTMLElement{
     connectedCallback(){
         this._shadowRoot.innerHTML=`
         <div class="login-container">
-            <form id="login-form>
+            <form id="login-form">
                 <input-wrapper id="email" type="text" placeholder="Email">Email</input-wrapper>
                 <input-wrapper id="password" type="password" placeholder="Password"></input-wrapper>
                 <button type="submit">Log in</button>
@@ -20,7 +20,7 @@ class LoginScreen extends HTMLElement{
             </form>
         </div> 
         `
-        const loginForm = this._shadowRoot.getElementById(login-form)
+        const loginForm = this._shadowRoot.getElementById('login-form')
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault()
             const email = this._shadowRoot.getElementById('email').value

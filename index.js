@@ -19,14 +19,22 @@ import './screen/quizRecords.js'
 import './component/quizDisplay/recordContainer.js'
 
 import './screen/quizStarter.js'
+import './screen/login.js'
+import './screen/signUp.js'
+import './component/inputWrapper.js'
 import './component/quizDisplay/starterContainer.js'
 
 export function redirect(screenName) {
     if (screenName === 'home-screen') {
-        document.getElementById('container').innerHTML = `
+        document.getElementById('container').innerHTML =`
         <home-screen></home-screen>
         `
-    } else if (screenName === 'login-screen'){
+    } else if (screenName === 'signup-screen'){
+        document.getElementById('container').innerHTML =`
+        <signUp-screen></signUp-screen>
+        `
+    }
+     else if (screenName === 'login-screen'){
         document.getElementById('container').innerHTML =`
         <login-screen></login-screen>
         `
@@ -50,4 +58,4 @@ export function redirect(screenName) {
     }
 }
 
-redirect('home-screen')
+redirect('login-screen')
