@@ -4,9 +4,9 @@ import Quiz from "./model/Quiz.js";
 import QuizCollection from "./model/QuizCollection.js";
 import QuizSet from "./model/QuizSet.js";
 
-let acc = new Account("acc", "123456");
+let admin = new Account("admin", "123456");
 
-console.log(acc);
+console.log(admin);
 
 let quiz1 = new Quiz("1 + 1 = ?");
 quiz1.addAnswer(new Answer("0", false));
