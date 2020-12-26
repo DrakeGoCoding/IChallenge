@@ -244,7 +244,7 @@ header ul li {
   transition: .3s;
 }
 
-.slider .navigation .btn:hover {
+.slider .navigation .btn.active {
   background: rgba(194, 4, 64, 0.8);
   transition: .3s;
 }
