@@ -1,3 +1,4 @@
+import { redirect } from '../index.js'
 import { getDataFromDocs, saveToLocalStorage } from '../utils.js'
 class LoginScreen extends HTMLElement{
     constructor(){
@@ -34,6 +35,21 @@ class LoginScreen extends HTMLElement{
                 isValid = false
                 this.setError('password', 'Please input password')
             }
+            if (!isValid){
+                return
+            }
+            const user = await firebase.firestore()
+            .collection('Accounts')
+            .where('email', '==', email)
+            .where('password', '==', password)
+            .get()
+            if (user.empty) {
+                alert('Email or password is wrong, try again')
+            } else {
+                saveToLocalStorage('currentUser', getDataFromDocs(user)[0])
+                redirect('home-screen')
+            }
         })
     }
 } 
+window.customElements.define('login-screen', LoginScreen)

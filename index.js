@@ -26,7 +26,12 @@ export function redirect(screenName) {
         document.getElementById('container').innerHTML = `
         <home-screen></home-screen>
         `
-    } else if (screenName === 'quiz-creator') {
+    } else if (screenName === 'login-screen'){
+        document.getElementById('container').innerHTML =`
+        <login-screen></login-screen>
+        `
+    }
+     else if (screenName === 'quiz-creator') {
         document.getElementById('container').innerHTML = `
         <quiz-creator></quiz-creator>
         `
