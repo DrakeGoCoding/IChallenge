@@ -1,8 +1,6 @@
 import { addQuizSetDocument, getDataFromDoc } from "../utils.js";
 import Quiz from "./Quiz.js"
 
-const MAX_HIGHSCORE_LIST = 5;
-
 export default class QuizSet {
     title;
     description;
@@ -77,3 +75,5 @@ export default class QuizSet {
         return quizSet;
     }
 }
+
+const MAX_HIGHSCORE_LIST = 5;
