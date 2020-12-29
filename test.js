@@ -27,7 +27,11 @@ quizSet.addQuiz(quiz2);
 // beebee.addQuizSet(quizSet);
 
 getAccountDocByUserName('beebee').then(accDoc => {
-    const acc = Account.parseDocument(accDoc);
-    console.log(acc);
+    Account.parseDocument(accDoc).then(account => {
+        console.log(account);
+        const quizCollection = account.quizCollection;
+        const quizSet = quizCollection[0];
+        quizSet.addNewRecord("1234", 13);
+    })
 });
 

@@ -51,10 +51,9 @@ export default class QuizSet {
                 highScoreList: firebase.firestore.FieldValue.arrayUnion(newRecord)
             })
         }
-
         else {
             // else if highScoreList is full, check if newRecord beats any lowest highscore and replace it if possible
-            const minHighScore = this.highScoreList.reduce((prev, cur) => prev.score < cur.score ? prev : cur);
+            let minHighScore = this.highScoreList.reduce((prev, cur) => prev.score < cur.score ? prev : cur);
             if (score > minHighScore.score) {
                 quizSetDoc.update({
                     highScoreList: firebase.firestore.FieldValue.arrayRemove(minHighScore)
@@ -77,7 +76,7 @@ export default class QuizSet {
         return res.id;
     }
 
-    static parseDocument(quizSetDocument) {
+    static async parseDocument(quizSetDocument) {
         const quizSet = new QuizSet(quizSetDocument.title, quizSetDocument.description);
         quizSet.id = quizSetDocument.id;
         quizSet.recordCount = quizSetDocument.recordCount;
@@ -85,16 +84,17 @@ export default class QuizSet {
 
         const highScoreList = quizSetDocument.highScoreList;
         for (const highScore of highScoreList) {
-            quizSet.addNewHighScore(highScore.userID, hightScore.score);
-
+            quizSet.highScoreList.push({
+                'userID': highScore.userID, 
+                'score':highScore.score
+            });
         }
 
         const quizRefList = quizSetDocument.quizList;
         for (const quizRef of quizRefList) {
-            quizRef.get().then(doc => {
-                const data = getDataFromDoc(doc);
-                quizSet.quizList.push(Quiz.parseDocument(data));
-            })
+            const quizDoc = await quizRef.get();
+            const data = getDataFromDoc(quizDoc);
+            quizSet.quizList.push(Quiz.parseDocument(data));
         }
         return quizSet;
     }

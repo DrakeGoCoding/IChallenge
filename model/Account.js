@@ -32,16 +32,15 @@ export default class Account {
         return res.id;
     }
 
-    static parseDocument(accountDocument) {
+    static async parseDocument(accountDocument) {
         const account = new Account(accountDocument.userName, accountDocument.password);
         account.id = accountDocument.id;
 
         const quizRefCollection = accountDocument.quizCollection;
         for (const quizSetRef of quizRefCollection){
-            quizSetRef.get().then(doc => {
-                const data = getDataFromDoc(doc);
-                account.quizCollection.push(QuizSet.parseDocument(data));
-            })
+            const quizSetDoc = await quizSetRef.get();
+            const data = getDataFromDoc(quizSetDoc);
+            account.quizCollection.push(await QuizSet.parseDocument(data));
         }
         return account;
     }
