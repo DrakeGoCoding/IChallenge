@@ -14,37 +14,41 @@ const admin = new Account("admin", "admin");
 getAccountDocByUserName("admin").then(doc => {
     // ...
     // check password here before redirecting
+    // ... 
 
     // on redirecting
     // use this static method "parseDocument()" to parse account document on database back to Account object
-    // const currentUser = Account.parseDocument(doc);
+    // WARNING: this "parseDocument()" method returns a promise => need ".then()" or "async"/"await" keyword 
+    Account.parseDocument(doc).then(account => {
+        console.log(account);
+    })
 })
 
-// // on creating a new Quiz Set
-// const quizSet = new QuizSet("Math", "Here is a description");
+// on creating a new Quiz Set
+const quizSet = new QuizSet("Math", "Here is a description");
 
-// // on creating a new Quiz
-// const quiz1 = new Quiz("1 + 1 = ?");
+// on creating a new Quiz
+const quiz1 = new Quiz("3 + 2 = ?");
 
-// // on adding an answer
-// quiz1.addAnswer(new Answer("0", false));
-// quiz1.addAnswer(new Answer("1", false));
-// quiz1.addAnswer(new Answer("2", true));
-// quiz1.addAnswer(new Answer("3", false));
-// // similarly
-// const quiz2 = new Quiz("2 x 2 = ?");
-// quiz2.addAnswer(new Answer("2", false));
-// quiz2.addAnswer(new Answer("4", true));
-// quiz2.addAnswer(new Answer("6", false));
-// quiz2.addAnswer(new Answer("8", false));
+// on adding an answer
+quiz1.addAnswer(new Answer("5", true));
+quiz1.addAnswer(new Answer("6", false));
+quiz1.addAnswer(new Answer("7", false));
+quiz1.addAnswer(new Answer("8", false));
+// similarly
+const quiz2 = new Quiz("2 x 5 = ?");
+quiz2.addAnswer(new Answer("1", false));
+quiz2.addAnswer(new Answer("2", false));
+quiz2.addAnswer(new Answer("5", false));
+quiz2.addAnswer(new Answer("10", true));
 
-// // after finishing quizzes creation, add created quizzes to quizSet
-// quizSet.addQuiz(quiz1);
-// quizSet.addQuiz(quiz2);
+// after finishing quizzes creation, add created quizzes to quizSet
+quizSet.addQuiz(quiz1);
+quizSet.addQuiz(quiz2);
 
 // // after finishing quizSet creation, add created quizSet to account
 // // "addQuizSet()" method will also update database automatically
-// beebee.addQuizSet(quizSet);
+// admin.addQuizSet(quizSet);
 
 
 // // ---------------------------------
