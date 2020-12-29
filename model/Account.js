@@ -35,11 +35,14 @@ export default class Account {
     static parseDocument(accountDocument) {
         const account = new Account(accountDocument.userName, accountDocument.password);
         account.id = accountDocument.id;
-        accountDocument.quizCollection.forEach(quizSetRef => {
+
+        const quizRefCollection = accountDocument.quizCollection;
+        for (const quizSetRef of quizRefCollection){
             quizSetRef.get().then(doc => {
-                account.quizCollection.push(QuizSet.parseDocument(getDataFromDoc(doc)));
+                const data = getDataFromDoc(doc);
+                account.quizCollection.push(QuizSet.parseDocument(data));
             })
-        })
+        }
         return account;
     }
 }

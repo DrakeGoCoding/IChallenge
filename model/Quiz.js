@@ -31,17 +31,18 @@ export default class Quiz {
         return userAnswer.isCorrect;
     }
 
-    async pushToFireBase(){
+    async pushToFireBase() {
         const res = await addQuizDocument(this);
         return res.id;
     }
 
-    static parseDocument(quizDocument){
+    static parseDocument(quizDocument) {
         const quiz = new Quiz(quizDocument.content);
         quiz.id = quizDocument.id;
-        quizDocument.answers.forEach(answer => {
+        const answers = quizDocument.answers;
+        for (const answer of answers) {
             quiz.addAnswer(Answer.parseDocument(answer));
-        })
-        return quiz; 
+        }
+        return quiz;
     }
 }

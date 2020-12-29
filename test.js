@@ -2,9 +2,10 @@ import Account from "./model/Account.js";
 import Answer from "./model/Answer.js";
 import Quiz from "./model/Quiz.js";
 import QuizSet from "./model/QuizSet.js";
+import { getAccountDocByUserName, getQuizDocByID } from "./utils.js";
 
 const beebee = new Account("beebee", "123456");
-beebee.pushToFireBase().then(id => beebee.id = id);
+// beebee.pushToFireBase().then(id => beebee.id = id);
 
 const quizSet = new QuizSet("Math 1", "Here is a description");
 
@@ -23,4 +24,10 @@ quiz2.addAnswer(new Answer("8", false));
 quizSet.addQuiz(quiz1);
 quizSet.addQuiz(quiz2);
 
-beebee.addQuizSet(quizSet);
+// beebee.addQuizSet(quizSet);
+
+getAccountDocByUserName('beebee').then(accDoc => {
+    const acc = Account.parseDocument(accDoc);
+    console.log(acc);
+});
+

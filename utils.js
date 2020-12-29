@@ -74,7 +74,7 @@ export async function addQuizSetDocument(quizSet) {
     const quizPromiseList = [];
     const db = firebase.firestore();
     quizSet.quizList.forEach(quiz => quizPromiseList.push(addQuizDocument(quiz)));
-    return Promise.all(quizPromiseList).then(async(values) => {
+    return Promise.all(quizPromiseList).then(async (values) => {
         for (const item of values) {
             quizRefList.push(db.doc('Quizs/' + item.id));
         }
