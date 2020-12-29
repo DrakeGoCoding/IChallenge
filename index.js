@@ -47,4 +47,4 @@ export function redirect(screenName) {
     }
 }
 
-redirect('home-screen')
+redirect('quiz-record')

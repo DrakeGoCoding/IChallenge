@@ -7,6 +7,9 @@ export default class Account {
     password;
     quizCollection;
 
+    // create a new account object using userName and password
+    // just leave the password plaintext form here, after pushing this account to database,
+    // password will be encoded later
     constructor(userName, password) {
         this.userName = userName;
         this.password = password;
@@ -17,6 +20,7 @@ export default class Account {
      * 
      * @param {QuizSet} quizSet 
      */
+    // add a new quizset to this account object and update database simultaneously
     addQuizSet(quizSet) {
         this.quizCollection.push(quizSet);
         const db = firebase.firestore();
@@ -27,11 +31,13 @@ export default class Account {
         });
     }
 
+    // push a new account to database
     async pushToFireBase() {
         const res = await addAccountDocument(this);
         return res.id;
     }
 
+    // parse an account document and all of its attributes back to object
     static async parseDocument(accountDocument) {
         const account = new Account(accountDocument.userName, accountDocument.password);
         account.id = accountDocument.id;

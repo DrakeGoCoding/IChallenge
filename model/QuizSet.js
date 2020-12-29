@@ -15,6 +15,7 @@ export default class QuizSet {
      * @param {String} title 
      * @param {String} description 
      */
+    // create a new quiz set from title and description
     constructor(title, description) {
         this.title = title;
         this.description = description;
@@ -28,6 +29,7 @@ export default class QuizSet {
      * 
      * @param {Quiz} quiz 
      */
+    // add a new quiz to this quiz set
     addQuiz(quiz) {
         this.quizList.push(quiz);
     }
@@ -37,6 +39,8 @@ export default class QuizSet {
      * @param {String} userID 
      * @param {Number} score 
      */
+    // add new record to this quiz set object and update database simultaneously
+    // this method also sorts out a maximum of 5 highest score and update database
     addNewRecord(userID, score) {
         const quizSetDoc = firebase.firestore().collection('QuizSets').doc(this.id);
         const newRecord = {
@@ -71,11 +75,13 @@ export default class QuizSet {
         }
     }
 
+    // push a quiz set to database 
     async pushToFireBase() {
         const res = await addQuizSetDocument(this);
         return res.id;
     }
 
+    // parse a quiz set document and all of its attributes back to object
     static async parseDocument(quizSetDocument) {
         const quizSet = new QuizSet(quizSetDocument.title, quizSetDocument.description);
         quizSet.id = quizSetDocument.id;
