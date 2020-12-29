@@ -2,6 +2,7 @@ import { addQuizSetDocument, getDataFromDoc } from "../utils.js";
 import Quiz from "./Quiz.js"
 
 export default class QuizSet {
+    id;
     title;
     description;
     recordCount;
@@ -52,17 +53,20 @@ export default class QuizSet {
             })
         }
 
-        // TO DO: update QuizSets on firestore
+        // TO DO: update this quizset's highScoreList attribute on firestore
 
         this.recordCount++;
     }
 
-    pushToFireBase(){
-        addQuizSetDocument(this);
+    async pushToFireBase(){
+        const res = await addQuizSetDocument(this);
+        return res.id;
     }
 
     static parseDocument(quizSetDocument){
         const quizSet = new QuizSet(quizSetDocument.title, quizSetDocument.description);
+        quizSet.id = quizSetDocument.id;
+        quizSet.recordCount = quizSetDocument.recordCount;
         quizSet.createdDate = new Date(quizSetDocument.createdDate);
         quizSetDocument.quizList.forEach(quizRef => {
             quizRef.get().then(doc => {

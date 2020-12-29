@@ -2,6 +2,7 @@ import { addAccountDocument, getDataFromDoc } from "../utils.js";
 import QuizSet from "./QuizSet.js"
 
 export default class Account {
+    id;
     userName;
     password;
     quizCollection;
@@ -18,15 +19,22 @@ export default class Account {
      */
     addQuizSet(quizSet) {
         this.quizCollection.push(quizSet);
-        // quizSet.pushToFireBase();
+        const db = firebase.firestore();
+        quizSet.pushToFireBase().then(quizId => {
+            db.collection('Accounts').doc(this.id).update({
+                quizCollection: firebase.firestore.FieldValue.arrayUnion(db.doc('QuizSets/' + quizId))
+            })
+        });
     }
 
-    pushToFireBase() {
-        addAccountDocument(this);
+    async pushToFireBase() {
+        const res = await addAccountDocument(this);
+        return res.id;
     }
 
     static parseDocument(accountDocument) {
         const account = new Account(accountDocument.userName, accountDocument.password);
+        account.id = accountDocument.id;
         accountDocument.quizCollection.forEach(quizSetRef => {
             quizSetRef.get().then(doc => {
                 account.quizCollection.push(QuizSet.parseDocument(getDataFromDoc(doc)));

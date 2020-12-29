@@ -2,6 +2,7 @@ import { addQuizDocument } from "../utils.js";
 import Answer from "./Answer.js"
 
 export default class Quiz {
+    id;
     content;
     answers;
 
@@ -30,12 +31,14 @@ export default class Quiz {
         return userAnswer.isCorrect;
     }
 
-    pushToFireBase(){
-        addQuizDocument(this);
+    async pushToFireBase(){
+        const res = await addQuizDocument(this);
+        return res.id;
     }
 
     static parseDocument(quizDocument){
         const quiz = new Quiz(quizDocument.content);
+        quiz.id = quizDocument.id;
         quizDocument.answers.forEach(answer => {
             quiz.addAnswer(Answer.parseDocument(answer));
         })
