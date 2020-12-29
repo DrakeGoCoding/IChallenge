@@ -40,19 +40,28 @@ body {
     left: 50%;
     transform: translate(-50%,-50%);
     width: 600px;
-    background: var(--clr-white);
+    background: rgba(0, 0, 0, 0.85);
     padding: 40px;
     box-sizing: border-box;
     border: 3px solid var(--clr-accent);
-    box-shadow: 0 5px 10px rgba(0,0,0,.2) ;
-    opacity: 0.87;
+    border-radius: 10px;
+    box-shadow: 10px 10px var(--clr-dark-blue), -10px -10px var(--clr-dark-red) ;
 }
 
+.img-container {
+    display: flex;
+    align-items: center;
+
+}
+.section .box .img-container img {
+    width: 300px;
+    margin: auto;
+}
 .box h2{
-    font-size: 3rem;
+    font-size: 4rem;
     margin: 0 0 40px;
     padding: 0;
-    color: var(--clr-primary);
+    color: var(--clr-dark-white);
     font-family: var(--ff-title);
 
 }
@@ -68,17 +77,36 @@ body {
     box-shadow: none;
     outline: none;
     border: none;
-    border-bottom: 3px solid var(--clr-accent);
-    background: var(--clr-white);
+    border-bottom: 3px solid var(--clr-dark-blue);
+    background: none;
+    color: var(--clr-dark-blue);
+    font-family: var(--ff-title);
+    font-weight: 600;
+    font-size: 1.2rem;
 }
 
 .box input[type="submit"] {
-    border-bottom: none;
+    display: block;
+    margin: auto;
+    border-bottom: 4px solid #4be2c4;
     cursor: pointer;
-    background: var(--clr-primary);
-    color: var(--clr-white);
+    border-radius: 20px;
+    background: var(--clr-dark-blue);
+    width: 60%;
+    color: var(--clr-dark-white);
+    font-weight: 600;
+    box-shadow: 0px 5px 0 #218f79;
     margin-bottom: 0;
+    outline: none;
     text-transform: uppercase;
+    transition: .2s;
+}
+
+.box input[type="submit"]:active {
+    box-shadow: none;
+    transform: translateY(5px);
+    transition: .2s;
+
 }
 
 .box form div {
@@ -88,7 +116,7 @@ body {
 .box form div label {
     position: relative;
     font-size: 30px;
-    top: -100px;
+    top: -110px;
     left: 0;
     color: #5c5c5c;
     transition: .5s;
@@ -99,18 +127,15 @@ body {
 {
     top: -110px;
     left: 0;
-    color: var(--clr-primary);
+    color: var(--clr-dark-red);
     font-size: 25px;
     font-weight: bold;
 }
 
 .box input:focus
 {
-    border-bottom: 2px solid var(--clr-primary);
+    border-bottom: 2px solid var(--clr-dark-red);
 }
-
-
-
 
 
 * {
@@ -145,8 +170,11 @@ body {
 	font-size: 50px;
 	margin-top: 20%;
 }
+
+/* animated background */
+
 .animation-area {
-	background: linear-gradient(  #44c2a9,#6350b6, #a5405e);
+	background: linear-gradient( #020202, #242424, #020202);
 	width: 100%;
 	height: 100vh;
 }
@@ -165,7 +193,8 @@ body {
 	width: 25px;
     height: 25px;
     border-radius: 10px;;
-	background: rgba(255, 255, 255, 0.2);
+    background: rgba(87, 250, 215, 0.6);
+    box-shadow: 10px 5px 5px rgba(223, 76, 88, 0.6);
 	animation: animate 20s linear infinite;
 	bottom: -150px;
 }
