@@ -63,6 +63,3 @@ quizSet.addQuiz(quiz2);
 // // const player = ...?
 // // const score = ...?
 // quizSet.addNewRecord(player, score)
-
-
-
