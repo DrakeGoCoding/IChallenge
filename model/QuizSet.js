@@ -45,7 +45,8 @@ export default class QuizSet {
         const quizSetDoc = firebase.firestore().collection('QuizSets').doc(this.id);
         const newRecord = {
             'player': player,
-            'score': score
+            'score': score,
+            'tỉmeAchieved': new Date().toISOString()
         }
         // If highscoreList has not reached maximum, just push newHighScore normally
         if (this.highScoreList.length < MAX_HIGHSCORE_LIST) {
