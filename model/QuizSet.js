@@ -93,7 +93,8 @@ export default class QuizSet {
         for (const highScore of highScoreList) {
             quizSet.highScoreList.push({
                 'player': highScore.player, 
-                'score':highScore.score
+                'score':highScore.score,
+                'timeAchieved': new Date(highScore.timeAchieved)
             });
         }
 
