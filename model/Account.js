@@ -10,6 +10,11 @@ export default class Account {
     // create a new account object using userName and password
     // just leave the password plaintext form here, after pushing this account to database,
     // password will be encoded later
+    /**
+     * 
+     * @param {String} userName 
+     * @param {String} password 
+     */
     constructor(userName, password) {
         this.userName = userName;
         this.password = password;
