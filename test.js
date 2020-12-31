@@ -5,7 +5,7 @@ import QuizSet from "./model/QuizSet.js";
 import { getAccountDocByUserName } from "./utils.js";
 
 // on registration
-const admin = new Account("admin", "admin");
+const admin = new Account("admin", "123456");
 
 // to upload new account to database
 // admin.pushToFireBase()
