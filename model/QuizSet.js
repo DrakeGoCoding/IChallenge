@@ -36,15 +36,15 @@ export default class QuizSet {
 
     /**
      * 
-     * @param {String} userID 
+     * @param {String} player
      * @param {Number} score 
      */
     // add new record to this quiz set object and update database simultaneously
     // this method also sorts out a maximum of 5 highest score and update database
-    addNewRecord(userID, score) {
+    addNewRecord(player, score) {
         const quizSetDoc = firebase.firestore().collection('QuizSets').doc(this.id);
         const newRecord = {
-            'userID': userID,
+            'player': player,
             'score': score
         }
         // If highscoreList has not reached maximum, just push newHighScore normally
@@ -91,7 +91,7 @@ export default class QuizSet {
         const highScoreList = quizSetDocument.highScoreList;
         for (const highScore of highScoreList) {
             quizSet.highScoreList.push({
-                'userID': highScore.userID, 
+                'player': highScore.player, 
                 'score':highScore.score
             });
         }
