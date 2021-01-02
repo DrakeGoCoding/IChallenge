@@ -39,15 +39,15 @@ export default class QuizSet {
      * @param {String} quizId 
      */
     // delete a quiz then update database
-    deleteQuiz(quizId) {
+    async deleteQuiz(quizId) {
         const index = this.quizList.findIndex(quiz => quiz.id === quizId);
 
         if (index !== -1) {
             this.quizList.splice(index, 1);
 
             const db = firebase.firestore();
-            db.collection('Quizs').doc(quizId).delete();
-            db.collection('QuizSets').doc(this.id).update({
+            await db.collection('Quizs').doc(quizId).delete();
+            await db.collection('QuizSets').doc(this.id).update({
                 quizList: firebase.firestore.FieldValue.arrayRemove(db.doc('Quizs/' + quizId))
             })
 
@@ -57,8 +57,11 @@ export default class QuizSet {
     }
     
     // delete all quizzes from this quizset then update database
-    deleteAllQuizzes() {
+    async deleteAllQuizzes() {
         this.quizList.forEach(quiz => this.deleteQuiz(quiz.id));
+        for (const quiz of this.quizList){
+            await this.deleteQuiz(quiz.id);
+        }
     }
 
     /**
