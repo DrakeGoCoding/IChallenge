@@ -67,7 +67,7 @@ class SignUp extends HTMLElement{
         <img src="Logo.png" class="logo">
             <input-wrapper id="first-name" type="text" placeholder="First name"></input-wrapper>
             <input-wrapper id="last-name" type="text" placeholder="Last name"></input-wrapper>
-            <input-wrapper id="email" type="text" placeholder="Email">Email</input-wrapper>
+            <input-wrapper id="userName" type="text" placeholder="User name">User name</input-wrapper>
             <input-wrapper id="password" type="password" placeholder="Password"></input-wrapper>
             <input-wrapper id="confirm-password" type="password" placeholder="Confirm password"></input-wrapper>
             <button type="submit" id="submit">Register</button>
@@ -83,7 +83,7 @@ class SignUp extends HTMLElement{
 
             const firstName = this._shadowRoot.getElementById('first-name').value
             const lastName = this._shadowRoot.getElementById('last-name').value
-            const email = this._shadowRoot.getElementById('email').value
+            const userName = this._shadowRoot.getElementById('userName').value
             const password = this._shadowRoot.getElementById('password').value
             const confirmPassword = this._shadowRoot.getElementById('confirm-password').value
             let isValid = true
@@ -100,10 +100,10 @@ class SignUp extends HTMLElement{
                 this.setError('last-name', 'Please input last name')
             }
             if (
-                email.trim() === ''
+                userName.trim() === ''
             ) {
                 isValid = false
-                this.setError('email', 'Please input email')
+                this.setError('email', 'Please input your very own user name')
             }
             if (
                 password.trim() === ''
@@ -119,17 +119,17 @@ class SignUp extends HTMLElement{
             }
             const user = {
                 fullName: `${firstName} ${lastName}`,
-                email: `${email}`,
-                password: `${password}`
+                userName: `${userName}`,
+                password: `${CryptoJS.MD5(password).toString()}`
             }
 
-            const check = await this.checkEmailExist(email)
+            const check = await this.checkUserNameExist(userName)
             if (check) {
-                alert('Email exist, try another')
+                alert('User name exist, try something unique')
             } else {
-                firebase.firestore().collection('users').add(user)
+                firebase.firestore().collection('Accounts').add(user)
                 alert ("Register successfully")
-                redirect('login')
+                redirect('login-screen')
             }
             
         })
@@ -140,8 +140,8 @@ class SignUp extends HTMLElement{
     setError(id, message) {
         this._shadowRoot.getElementById(id).setAttribute('error', message)
     }
-    async checkEmailExist(email) {
-        const res = await firebase.firestore().collection('Accounts').where('email', '==', email).get()
+    async checkUserNameExist(userName) {
+        const res = await firebase.firestore().collection('Accounts').where('userName', '==', userName).get()
         return !res.empty
     }
 }

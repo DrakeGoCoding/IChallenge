@@ -1,6 +1,14 @@
 import { redirect } from '../index.js'
 import { getDataFromDocs, writeToLocalStorage } from '../utils.js'
 const style = `
+:root {
+    --clr-dark-background: #171718;
+    --clr-darker-background: #0d0d0e;
+    --clr-dark-red: #c20440;
+    --clr-dark-blue: #1fceab;
+    --clr-dark-white: #fefdff;
+    --clr-dark-grey: #575557;
+}
 * {
     margin: 0;
     padding: 0;
@@ -21,9 +29,13 @@ const style = `
     cursor: pointer;
     display: block;
     margin: auto;
-    
+    background-color: #c20440;
+    color: #1fceab;
+    font-weight: bolder;
 }
-
+a{
+    color: #fefdff;
+}
 
     
 
@@ -46,7 +58,7 @@ class LoginScreen extends HTMLElement{
         <div class="login-container">
             <form id="login-form">
             <img src="Logo.png" class="logo">
-                <input-wrapper id="email" type="text" placeholder="Email">Email</input-wrapper>
+                <input-wrapper id="userName" type="text" placeholder="User name">User name</input-wrapper>
                 <input-wrapper id="password" type="password" placeholder="Password"></input-wrapper>
                 <button type="submit" id="submit">Log in</button>
                 <br></br>
@@ -57,13 +69,13 @@ class LoginScreen extends HTMLElement{
         const loginForm = this._shadowRoot.getElementById('login-form')
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault()
-            const email = this._shadowRoot.getElementById('email').value
+            const userName = this._shadowRoot.getElementById('userName').value
             const password = this._shadowRoot.getElementById('password').value
             let isValid = true
 
-            if (email.trim === ''){
+            if (userName.trim === ''){
                 isValid = false
-                this.setError('email', 'Please input email')
+                this.setError('userName', 'Please input your own user name')
             }
             if (password.trim ===''){
                 isValid = false
@@ -74,15 +86,18 @@ class LoginScreen extends HTMLElement{
             }
             const user = await firebase.firestore()
             .collection('Accounts')
-            .where('email', '==', email)
-            .where('password', '==', password)
+            .where('userName', '==', userName)
+            .where('password', '==', CryptoJS.MD5(password).toString())
             .get()
             if (user.empty) {
-                alert('Email or password is wrong, try again')
+                alert('User name or password is wrong, try again')
             } else {
                 writeToLocalStorage('currentUser', getDataFromDocs(user)[0])
                 redirect('home-screen')
             }
+        })
+        this._shadowRoot.getElementById('redirect').addEventListener('click', () => {
+            redirect('signup-screen')
         })
     }
 } 
