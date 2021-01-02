@@ -20,11 +20,7 @@ export default class Account {
         this.password = password;
         this.quizCollection = [];
     }
-
-    getReference() {
-        return firebase.firestore().collection('Accounts').doc(this.id);
-    }
-
+    
     /**
      * 
      * @param {QuizSet} quizSet 
