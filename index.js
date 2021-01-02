@@ -47,4 +47,4 @@ export function redirect(screenName) {
     }
 }
 
-redirect('quiz-record')
+redirect('quiz-creator')
