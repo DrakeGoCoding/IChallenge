@@ -1,3 +1,59 @@
+import { redirect } from "../index.js"
+
+const style =`
+:root {
+    --clr-dark-background: #171718;
+    --clr-darker-background: #0d0d0e;
+    --clr-dark-red: #c20440;
+    --clr-dark-blue: #1fceab;
+    --clr-dark-white: #fefdff;
+    --clr-dark-grey: #575557;
+}
+* {
+    margin: 0;
+    padding: 0;
+    background-color: #171718;
+    font-family: JetBrains Mono, monospace;
+}
+.register-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 5px;
+}
+#submit{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background-color: #c20440;
+    color: #1fceab;
+    font-weight: bolder;
+}
+#submit:active {
+    box-shadow: none;
+    transform: translateY(5px);
+    transition: .2s;
+}
+#signup-form:focus ~ label{
+    top: -110px;
+    left: 0;
+    color: var(--clr-dark-red);
+    font-size: 25px;
+    font-weight: bold;
+
+}
+#signup-form:focus{
+    border-bottom: 2px solid var(--clr-dark-red);
+}
+a{
+    color: #fefdff;
+}
+
+`
 class SignUp extends HTMLElement{
     constructor(){
         super()
@@ -5,14 +61,16 @@ class SignUp extends HTMLElement{
     }
     connectedCallback(){
         this._shadowRoot.innerHTML=`
+        <style>${style}</style>
         <div class="register-container">
         <form id="signup-form">
+        <img src="Logo.png" class="logo">
             <input-wrapper id="first-name" type="text" placeholder="First name"></input-wrapper>
             <input-wrapper id="last-name" type="text" placeholder="Last name"></input-wrapper>
             <input-wrapper id="email" type="text" placeholder="Email">Email</input-wrapper>
             <input-wrapper id="password" type="password" placeholder="Password"></input-wrapper>
             <input-wrapper id="confirm-password" type="password" placeholder="Confirm password"></input-wrapper>
-            <button type="submit">Register</button>
+            <button type="submit" id="submit">Register</button>
             <br></br>
             <a id="redirect">Already have an account ? Log in </a>
 
@@ -76,7 +134,7 @@ class SignUp extends HTMLElement{
             
         })
         this._shadowRoot.getElementById('redirect').addEventListener('click', () => {
-            router.navigate('login')
+            redirect('login-screen')
         })
     }
     setError(id, message) {

@@ -1,5 +1,5 @@
 import { redirect } from '../index.js'
-import { getDataFromDocs, saveToLocalStorage } from '../utils.js'
+import { getDataFromDocs, writeToLocalStorage } from '../utils.js'
 const style = `
 * {
     margin: 0;
@@ -23,6 +23,7 @@ const style = `
     margin: auto;
     
 }
+
 
     
 
@@ -79,7 +80,7 @@ class LoginScreen extends HTMLElement{
             if (user.empty) {
                 alert('Email or password is wrong, try again')
             } else {
-                saveToLocalStorage('currentUser', getDataFromDocs(user)[0])
+                writeToLocalStorage('currentUser', getDataFromDocs(user)[0])
                 redirect('home-screen')
             }
         })

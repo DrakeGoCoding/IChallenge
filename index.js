@@ -60,4 +60,4 @@ export function redirect(screenName) {
     }
 }
 
-redirect('quiz-record')
+redirect('signup-screen')
