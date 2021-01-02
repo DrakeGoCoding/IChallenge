@@ -24,6 +24,8 @@ import './screen/signUp.js'
 import './component/inputWrapper.js'
 import './component/quizDisplay/starterContainer.js'
 
+import "./test.js"
+
 export function redirect(screenName) {
     if (screenName === 'home-screen') {
         document.getElementById('container').innerHTML =`
@@ -58,4 +60,4 @@ export function redirect(screenName) {
     }
 }
 
-redirect('login-screen')
+redirect('quiz-record')
