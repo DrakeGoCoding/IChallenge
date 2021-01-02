@@ -1,3 +1,5 @@
+import { getItemFromLocalStorage, getQuizSetDocByID} from "/utils.js";
+
 const style = `
 .starter-container{
     margin: auto;
@@ -66,13 +68,18 @@ class StarterContainer extends HTMLElement{
         this._shadowDom = this.attachShadow({mode:'open'})
     }
     connectedCallback(){
-        this._shadowDom.innerHTML=`
+        let quizSetId = getItemFromLocalStorage("currentQuiz")
+        getQuizSetDocByID(quizSetId).then(quizSet => {
+            console.log(quizSet);
+
+            this._shadowDom.innerHTML=`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
             ${style}
         </style>
+        
         <div class="starter-container">
-            <div class="quiz-name">Name of the Quiz</div>
+            <div class="quiz-name">${quizSet.title}</div>
             <div class="greeting">Are you ready?</div>
             <div class="name-input">
                 <textarea placeholder="Enter your name"></textarea>
@@ -81,6 +88,10 @@ class StarterContainer extends HTMLElement{
             <div class="start-btn"> <i class="fa fa-play"></i> Start the Quiz</div>
         </div>
         `
+        })
+
+        
+        
     }
 }
 

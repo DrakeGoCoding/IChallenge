@@ -14,6 +14,7 @@ class QuizInfolist extends HTMLElement{
 
     connectedCallback(){
         getAccountDocByUserName("admin").then(doc => {
+            console.log('fix lai func getAccountDocByUserName theo localStorage!!');
             Account.parseDocument(doc).then(account => {
                 let quizCollection = account.quizCollection;
                 quizCollection.forEach(quizSet => {
@@ -24,7 +25,8 @@ class QuizInfolist extends HTMLElement{
                             time="${quizSet.createdDate}"
                             question-no="${quizSet.quizList.length}"
                             record-count="${quizSet.recordCount}"
-                            description="${quizSet.description}">
+                            description="${quizSet.description}"
+                            id=${quizSet.id}>
                         </quiz-info-item>
                         `
                 })

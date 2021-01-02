@@ -1,5 +1,5 @@
 
-import { convertDate } from "/utils.js";
+import { convertDate, writeToLocalStorage } from "/utils.js";
 
 const style = `
 .quiz-info-item{
@@ -118,6 +118,7 @@ class QuizInfoItem extends HTMLElement{
         this.questionNo = this.getAttribute('question-no')
         this.recordCount = this.getAttribute('record-count')
         this.description = this.getAttribute('description')
+        this.id = this.getAttribute('id')
 
         this.timeCreated = convertDate(this.timeCreated)
 
@@ -141,7 +142,7 @@ class QuizInfoItem extends HTMLElement{
                 <div class="question-no"> <i class="fa fa-book"></i> ${this.questionNo} questions</div>
                 <div class="played-times"> <i class="fa fa-play"></i> played ${this.recordCount} times</div>
             </div>
-            <div class="quiz-description">${this.description} </div>
+            <div class="quiz-description">${this.description}</div>
             <div class="quiz-btn">
                 <div id="view-btn"> <i class="fa fa-eye"></i> <span>View Records</span> </div>
                 <div id="play-btn"> <i class="fa fa-play"></i> <span>Play Now</span> </div>
@@ -152,6 +153,7 @@ class QuizInfoItem extends HTMLElement{
          `
 
          this._shadowDom.getElementById('play-btn').addEventListener('click', () => {
+            writeToLocalStorage('currentQuiz', this.id)
             router.navigate('quiz-starter')
           })
      }
