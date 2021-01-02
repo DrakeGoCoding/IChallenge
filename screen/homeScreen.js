@@ -1,6 +1,5 @@
-import '../JQuery/jquery.js'
-import '../JQuery/jquery-ui.min.js'
-
+//import '../JQuery/jquery.js'
+//import '../JQuery/jquery-ui.min.js'
 
 const style = `
 .home-container{
@@ -84,9 +83,7 @@ const style = `
 #confirm-btn:hover, #cancel-btn:hover{
     box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
     cursor: pointer;
-}
-
-    
+}  
 `
 
 class HomeScreen extends HTMLElement {
@@ -96,6 +93,8 @@ class HomeScreen extends HTMLElement {
     }
 
     connectedCallback() {
+        
+
         this._shadowDom.innerHTML = `
         <style>
             ${style}
@@ -109,26 +108,6 @@ class HomeScreen extends HTMLElement {
             </div> 
 
             
-        </div>
-        <div id="overlay">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div id="create-dialog">
-                    <div class="name-input">
-                        <div>Enter your Quiz's name</div>
-                        <textarea placeholder="Sample Quiz"></textarea>
-                    </div>
-                
-                    <div class="description-input">
-                        <div>Enter your Quiz's description</div>
-                        <textarea placeholder="This quiz is about..."></textarea>
-                    </div>
-                    <div class="btn-row">
-                        <div id='confirm-btn'>Confirm</div>
-                        <div id='cancel-btn'>Cancel</div>
-                    </div>
-                </div> 
-            </div>
         </div>
         
         `

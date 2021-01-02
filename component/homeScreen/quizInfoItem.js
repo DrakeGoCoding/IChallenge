@@ -1,3 +1,6 @@
+
+import { convertDate } from "/utils.js";
+
 const style = `
 .quiz-info-item{
     background-color:#252525;
@@ -109,7 +112,16 @@ class QuizInfoItem extends HTMLElement{
      }
 
      connectedCallback(){
-         this._shadowDom.innerHTML=`
+        this.title = this.getAttribute('title')
+        this.author = this.getAttribute('author')
+        this.timeCreated = this.getAttribute('time')
+        this.questionNo = this.getAttribute('question-no')
+        this.recordCount = this.getAttribute('record-count')
+        this.description = this.getAttribute('description')
+
+        this.timeCreated = convertDate(this.timeCreated)
+
+        this._shadowDom.innerHTML=`
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Rowdies&display=swap" rel="stylesheet">
@@ -122,14 +134,14 @@ class QuizInfoItem extends HTMLElement{
             <div class="quiz-img"> <i class="fa fa-quora" aria-hidden="true"></i> </div>
         </div>
         <div class="quiz-info-right">
-            <div class="quiz-name">Name of the Quiz</div>
-            <div class="quiz-author">created by AuthorName</div>
-            <div class="quiz-created-time">22:05 22/12/2020</div>
+            <div class="quiz-name">${this.title}</div>
+            <div class="quiz-author">created by ${this.author}</div>
+            <div class="quiz-created-time">${this.timeCreated}</div>
             <div class="quiz-summary">
-                <div class="question-no"> <i class="fa fa-book"></i> 9 questions</div>
-                <div class="played-times"> <i class="fa fa-play"></i> played 3 times</div>
+                <div class="question-no"> <i class="fa fa-book"></i> ${this.questionNo} questions</div>
+                <div class="played-times"> <i class="fa fa-play"></i> played ${this.recordCount} times</div>
             </div>
-            <div class="quiz-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sapien ante, gravida nec augue fermentum, eleifend ultrices erat. Nunc elit ligula, tristique eu euismod vel, condimentum non ipsum. Ut pharetra ex quis enim iaculis tincidunt. Proin odio arcu, lobortis sed faucibus sed, luctus id sapien. </div>
+            <div class="quiz-description">${this.description} </div>
             <div class="quiz-btn">
                 <div id="view-btn"> <i class="fa fa-eye"></i> <span>View Records</span> </div>
                 <div id="play-btn"> <i class="fa fa-play"></i> <span>Play Now</span> </div>

@@ -1,3 +1,8 @@
+import Account from "/model/Account.js";
+import { getAccountDocByUserName } from "/utils.js";
+
+
+
 const style = `
 
 `
@@ -8,13 +13,23 @@ class QuizInfolist extends HTMLElement{
     }
 
     connectedCallback(){
-        this._shadowDom.innerHTML= `
-        <quiz-info-item></quiz-info-item>
-        <quiz-info-item></quiz-info-item>
-        <quiz-info-item></quiz-info-item>
-        <quiz-info-item></quiz-info-item>
-        <quiz-info-item></quiz-info-item>
-        `
+        getAccountDocByUserName("admin").then(doc => {
+            Account.parseDocument(doc).then(account => {
+                let quizCollection = account.quizCollection;
+                quizCollection.forEach(quizSet => {
+                    this._shadowDom.innerHTML = `
+                        <quiz-info-item 
+                            title="${quizSet.title}"
+                            author="${account.userName}"
+                            time="${quizSet.createdDate}"
+                            question-no="${quizSet.quizList.length}"
+                            record-count="${quizSet.recordCount}"
+                            description="${quizSet.description}">
+                        </quiz-info-item>
+                        `
+                })
+            })
+        })
     }
 }
 

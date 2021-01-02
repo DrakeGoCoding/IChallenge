@@ -110,3 +110,21 @@ export async function addQuizDocument(quiz) {
     const res = await firebase.firestore().collection('Quizs').add(quizDoc);
     return res;
 }
+
+
+/**
+ * 
+ * @param {date} dateStr 
+ */
+export function convertDate(dateStr) {
+    const date = new Date(dateStr)
+    const day = validateNiceNumber(date.getDate())
+    const month = validateNiceNumber(date.getMonth() + 1)
+    const year = date.getFullYear()
+    const hour = validateNiceNumber(date.getHours())
+    const minutes = validateNiceNumber(date.getMinutes())
+    return `${day}/${month}/${year} ${hour}:${minutes}`
+  }
+  function validateNiceNumber(number) {
+    return (number < 10) ? ('0' + number) : (number)
+  }
