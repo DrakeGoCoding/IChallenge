@@ -47,11 +47,11 @@ quiz2.addAnswer(new Answer("10", true));
 // quizSet.addQuiz(quiz2);
 
 // after finishing quizSet creation, add created quizSet to account
-// "addQuizSet()" method will also update database automatically
+// "addQuizSet()" method will also update database
 // admin.addQuizSet(quizSet);
 
 // to delete a quizSet
-// "deleteQuizSet()" method will also update database automatically
+// "deleteQuizSet()" method will also update database
 // const quizSetId = ...?
 // admin.deleteQuizSet(quizSetId);
 
@@ -62,7 +62,7 @@ quiz2.addAnswer(new Answer("10", true));
 // ---------------------------------
 
 // in order to add new high score to quizSet
-// "addNewRecord()" method will also update database automatically 
+// "addNewRecord()" method will also update database
 // const playerId = ...?
 // const score = ...?
 // quizSet.addNewRecord(playerId, score)

@@ -29,7 +29,7 @@ export default class Account {
      * 
      * @param {QuizSet} quizSet 
      */
-    // add a new quizset to this account object and update database simultaneously
+    // add a new quizset to this account object and update database
     addQuizSet(quizSet) {
         this.quizCollection.push(quizSet);
         const db = firebase.firestore();
@@ -44,7 +44,7 @@ export default class Account {
      * 
      * @param {String} quizSetId 
      */
-    // delete a quizset and all of its quizzes inside then update database simultaneously
+    // delete a quizset and all of its quizzes inside then update database
     deleteQuizSet(quizSetId) {
         const index = this.quizCollection.findIndex(quizSet => quizSet.id === quizSetId);
 
