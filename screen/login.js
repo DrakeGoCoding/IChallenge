@@ -51,8 +51,8 @@ class LoginScreen extends HTMLElement{
         this._shadowRoot = this.attachShadow ({mode: 'open'})
     }
     setError(id, message) {
-        this._shadowRoot.getElementById(id).setAttribute('error', message)}
-
+        this._shadowRoot.getElementById(id).setAttribute('error', message)
+    }
     connectedCallback(){
         this._shadowRoot.innerHTML=`
         <style>${style}</style>
@@ -74,11 +74,11 @@ class LoginScreen extends HTMLElement{
             const password = this._shadowRoot.getElementById('password').value
             let isValid = true
 
-            if (userName.trim === ''){
+            if (userName.trim() === ''){
                 isValid = false
                 this.setError('userName', 'Please input your own user name')
             }
-            if (password.trim ===''){
+            if (password.trim() ===''){
                 isValid = false
                 this.setError('password', 'Please input password')
             }
