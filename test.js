@@ -62,6 +62,6 @@ quizSet.addQuiz(quiz2);
 
 // in order to add new high score to quizSet
 // "addNewRecord()" method will also update database
-// const playerId = ...?
+// const player = ...?
 // const score = ...?
-// quizSet.addNewRecord(playerId, score)
+// quizSet.addNewRecord(player, score)
