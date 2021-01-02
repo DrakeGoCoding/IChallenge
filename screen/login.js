@@ -1,5 +1,36 @@
 import { redirect } from '../index.js'
 import { getDataFromDocs, saveToLocalStorage } from '../utils.js'
+const style = `
+* {
+    margin: 0;
+    padding: 0;
+    background: ##010101;
+    font-family: JetBrains Mono, monospace;
+}
+.login-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 5px;
+}
+#submit{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    
+}
+
+    
+
+
+
+
+
+`
 class LoginScreen extends HTMLElement{
     constructor(){
         super()
@@ -10,11 +41,13 @@ class LoginScreen extends HTMLElement{
 
     connectedCallback(){
         this._shadowRoot.innerHTML=`
+        <style>${style}</style>
         <div class="login-container">
             <form id="login-form">
+            <img src="Logo.png" class="logo">
                 <input-wrapper id="email" type="text" placeholder="Email">Email</input-wrapper>
                 <input-wrapper id="password" type="password" placeholder="Password"></input-wrapper>
-                <button type="submit">Log in</button>
+                <button type="submit" id="submit">Log in</button>
                 <br></br>
                 <a id="redirect">Don't have an account ? Register </a>
             </form>
