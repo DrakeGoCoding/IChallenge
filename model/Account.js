@@ -28,7 +28,6 @@ export default class Account {
     // add a new quizset to this account object and update database
     addQuizSet(quizSet) {
         this.quizCollection.push(quizSet);
-        const db = firebase.firestore();
         quizSet.pushToFireBase().then(quizId => {
             db.collection('Accounts').doc(this.id).update({
                 quizCollection: firebase.firestore.FieldValue.arrayUnion(db.doc('QuizSets/' + quizId))
@@ -47,8 +46,7 @@ export default class Account {
         if (index !== -1) {
             this.quizCollection[index].deleteAllQuizzes().then(() => {
                 this.quizCollection.splice(index, 1);
-
-                const db = firebase.firestore();
+                
                 db.collection('QuizSets').doc(quizSetId).delete();
                 db.collection('Accounts').doc(this.id).update({
                     quizCollection: firebase.firestore.FieldValue.arrayRemove(db.doc('QuizSets/' + quizSetId))
@@ -81,3 +79,5 @@ export default class Account {
         return account;
     }
 }
+
+const db = firebase.firestore();

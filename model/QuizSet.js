@@ -45,7 +45,6 @@ export default class QuizSet {
         if (index !== -1) {
             this.quizList.splice(index, 1);
 
-            const db = firebase.firestore();
             await db.collection('Quizs').doc(quizId).delete();
             await db.collection('QuizSets').doc(this.id).update({
                 quizList: firebase.firestore.FieldValue.arrayRemove(db.doc('Quizs/' + quizId))
@@ -72,7 +71,7 @@ export default class QuizSet {
     // add new record to this quiz set object and update database
     // this method also sorts out a maximum of 5 highest score and update database
     addNewRecord(player, score) {
-        const quizSetDoc = firebase.firestore().collection('QuizSets').doc(this.id);
+        const quizSetDoc = db.collection('QuizSets').doc(this.id);
         const newRecord = {
             'player': player,
             'score': score,
@@ -139,3 +138,4 @@ export default class QuizSet {
 }
 
 const MAX_HIGHSCORE_LIST = 5;
+const db = firebase.firestore();
