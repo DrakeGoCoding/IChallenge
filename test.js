@@ -11,7 +11,7 @@ const admin = new Account("admin", "123456");
 // admin.pushToFireBase()
 
 // on login
-getAccountDocByUserName("admin").then(doc => {
+getAccountDocByUserName("beebee").then(doc => {
     // ...
     // check password here before redirecting
     // ... 
@@ -43,23 +43,26 @@ quiz2.addAnswer(new Answer("5", false));
 quiz2.addAnswer(new Answer("10", true));
 
 // after finishing quizzes creation, add created quizzes to quizSet
-quizSet.addQuiz(quiz1);
-quizSet.addQuiz(quiz2);
+// quizSet.addQuiz(quiz1);
+// quizSet.addQuiz(quiz2);
 
-// // after finishing quizSet creation, add created quizSet to account
-// // "addQuizSet()" method will also update database automatically
+// after finishing quizSet creation, add created quizSet to account
+// "addQuizSet()" method will also update database automatically
 // admin.addQuizSet(quizSet);
 
+// to delete a quizSet
+// "deleteQuizSet()" method will also update database automatically
+// const quizSetId = ...?
+// admin.deleteQuizSet(quizSetId);
 
-// // ---------------------------------
-// // ---------------------------------
-// // On user finishing playing quizzes
-// // ---------------------------------
-// // ---------------------------------
+// ---------------------------------
+// ---------------------------------
+// On user finishing playing quizzes
+// ---------------------------------
+// ---------------------------------
 
-
-// // in order to add new high score to quizSet
-// // similaryly this "addNewRecord" will also update database automatically 
-// // const player = ...?
-// // const score = ...?
-// quizSet.addNewRecord(player, score)
+// in order to add new high score to quizSet
+// "addNewRecord()" method will also update database automatically 
+// const playerId = ...?
+// const score = ...?
+// quizSet.addNewRecord(playerId, score)

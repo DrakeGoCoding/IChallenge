@@ -36,15 +36,41 @@ export default class QuizSet {
 
     /**
      * 
-     * @param {String} player
+     * @param {String} quizId 
+     */
+    // delete a quiz then update database simultaneously
+    deleteQuiz(quizId) {
+        const index = this.quizList.findIndex(quiz => quiz.id === quizId);
+
+        if (index !== -1) {
+            this.quizList.splice(index, 1);
+
+            const db = firebase.firestore();
+            db.collection('Quizs').doc(quizId).delete();
+            db.collection('QuizSets').doc(this.id).update({
+                quizList: firebase.firestore.FieldValue.arrayRemove(db.doc('Quizs/' + quizId))
+            })
+
+            console.log(`Quiz with id ${quizId} is deleted`);
+        }
+        else console.log(`Quiz with id ${quizId} is unavailable`);
+    }
+
+    deleteAllQuizzes() {
+        this.quizList.forEach(quiz => this.deleteQuiz(quiz.id));
+    }
+
+    /**
+     * 
+     * @param {String} playerId
      * @param {Number} score 
      */
     // add new record to this quiz set object and update database simultaneously
     // this method also sorts out a maximum of 5 highest score and update database
-    addNewRecord(player, score) {
+    addNewRecord(playerId, score) {
         const quizSetDoc = firebase.firestore().collection('QuizSets').doc(this.id);
         const newRecord = {
-            'player': player,
+            'player': playerId,
             'score': score,
             'tỉmeAchieved': new Date().toISOString()
         }
@@ -92,8 +118,8 @@ export default class QuizSet {
         const highScoreList = quizSetDocument.highScoreList;
         for (const highScore of highScoreList) {
             quizSet.highScoreList.push({
-                'player': highScore.player, 
-                'score':highScore.score,
+                'player': highScore.playerId,
+                'score': highScore.score,
                 'timeAchieved': new Date(highScore.timeAchieved)
             });
         }
