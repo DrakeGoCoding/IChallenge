@@ -1,14 +1,4 @@
-const style = `
-<style>
-    .main{
-        margin-top: 100px;
-        position: fixed;
-        width: 100%;
-    }
-</style>
-`
-
-class QuizCreator extends HTMLElement {
+export default class QuizCreator extends HTMLElement {
     constructor() {
         super()
         this._shadowDom = this.attachShadow({ mode: 'open' })
@@ -27,3 +17,13 @@ class QuizCreator extends HTMLElement {
 }
 
 window.customElements.define('quiz-creator', QuizCreator)
+
+const style = `
+<style>
+    .main{
+        margin-top: 100px;
+        position: fixed;
+        width: 100%;
+    }
+</style>
+`

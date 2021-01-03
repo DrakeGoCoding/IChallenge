@@ -1,3 +1,25 @@
+export default class CreatorHeader extends HTMLElement{
+    constructor(){
+        super()
+        this._shadowDom = this.attachShadow({mode: 'open'})
+    }
+
+    connectedCallback(){
+        this._shadowDom.innerHTML = `
+            ${style} 
+            <div class="main-header">
+                <div class="logo">Queazy</div>
+                <div class="header-right-bar">
+                    <div class="user-icon"><i class="fa fa-user"></i></div>
+                    <div class="theme-toggle"></div>
+                </div>
+            </div>
+        `
+    }
+}
+
+window.customElements.define('creator-header', CreatorHeader)
+
 const style = `
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Rowdies&display=swap" rel="stylesheet">
@@ -60,25 +82,3 @@ const style = `
     }
 </style>
 `
-
-class CreatorHeader extends HTMLElement{
-    constructor(){
-        super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
-    }
-
-    connectedCallback(){
-        this._shadowDom.innerHTML = `
-            ${style} 
-            <div class="main-header">
-                <div class="logo">Queazy</div>
-                <div class="header-right-bar">
-                    <div class="user-icon"><i class="fa fa-user"></i></div>
-                    <div class="theme-toggle"></div>
-                </div>
-            </div>
-        `
-    }
-}
-
-window.customElements.define('creator-header', CreatorHeader)

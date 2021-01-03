@@ -1,3 +1,20 @@
+export default class AddQuestionBtn extends HTMLElement{
+    constructor(){
+        super()
+        this._shadowDom = this.attachShadow({mode: 'open'})
+    }
+
+    connectedCallback(){
+        this._shadowDom.innerHTML=`
+            ${style}
+            <div class="add-question-btn">Add Question</div>
+            <div class="add-question-btn-plus"><i class="fa fa-plus-square"></i></div>
+        `
+    }
+}
+
+window.customElements.define('add-question-btn', AddQuestionBtn)
+
 const style = `
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -37,20 +54,3 @@ const style = `
     }
 </style>
 `
-
-class AddQuestionBtn extends HTMLElement{
-    constructor(){
-        super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
-    }
-
-    connectedCallback(){
-        this._shadowDom.innerHTML=`
-            ${style}
-            <div class="add-question-btn">Add Question</div>
-            <div class="add-question-btn-plus"><i class="fa fa-plus-square"></i></div>
-        `
-    }
-}
-
-window.customElements.define('add-question-btn', AddQuestionBtn)

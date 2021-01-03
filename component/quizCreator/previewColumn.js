@@ -1,4 +1,4 @@
-class PreviewColumn extends HTMLElement {
+export default class PreviewColumn extends HTMLElement {
     previewItemCount = 1;
 
     constructor() {
@@ -21,9 +21,10 @@ class PreviewColumn extends HTMLElement {
         const previewItemList = this._shadowDom.querySelector('.preview-item-list');
 
         newQuestionBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            previewItemList.innerHTML += `<preview-item count=${++this.previewItemCount}></preview-item>`;
+            const previewItem = document.createElement('preview-item');
+            previewItem.setAttribute('count', ++ this.previewItemCount);
+            previewItemList.appendChild(previewItem);
+            previewItem.displayQuestion();
             newQuestionBtn.scrollIntoView({ behavior: "smooth", block: "center" });
         })
     }

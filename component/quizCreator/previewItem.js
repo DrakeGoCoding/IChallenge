@@ -1,4 +1,4 @@
-class PreviewItem extends HTMLElement {
+export default class PreviewItem extends HTMLElement {
     constructor() {
         super()
         this._shadowDom = this.attachShadow({ mode: 'open' })
@@ -47,7 +47,8 @@ class PreviewItem extends HTMLElement {
 
         deletePreviewItem.addEventListener('click', e => {
             previewItemList.removeChild(this);
-            console.log(`Delete question ${this.questionCount}`);
+            const previewColumn = previewItemList.getRootNode().host;
+            console.log(PreviewColumn.previewItemCount);
         })
     }
 
@@ -70,10 +71,13 @@ class PreviewItem extends HTMLElement {
     }
 
     attributeChangedCallback(attribute, oldValue, newValue) {
-        if (attribute === 'content'){
-            console.log(oldValue, newValue);
-            this._shadowDom.querySelector('.question-box').innerHTML = newValue;
+        if (attribute === 'content') {
+            this._shadowDom.querySelector('.question-box').innerHTML = (newValue !== 'null' ? newValue : '');
         }
+    }
+
+    disconnectedCallback() {
+        console.log(`Delete question ${this.questionCount}`);
     }
 }
 
