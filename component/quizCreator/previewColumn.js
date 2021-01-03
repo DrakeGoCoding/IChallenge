@@ -1,12 +1,11 @@
 export default class PreviewColumn extends HTMLElement {
-    previewItemCount = 1;
-
     constructor() {
         super();
         this._shadowDom = this.attachShadow({ mode: 'open' });
     }
 
     connectedCallback() {
+        this.previewItemCount = this.getAttribute('preview-item-count') || '1';
         this._shadowDom.innerHTML = `
             ${style}
             <div class="preview-column">
@@ -22,7 +21,7 @@ export default class PreviewColumn extends HTMLElement {
 
         newQuestionBtn.addEventListener('click', (e) => {
             const previewItem = document.createElement('preview-item');
-            previewItem.setAttribute('count', ++ this.previewItemCount);
+            previewItem.setAttribute('count', ++this.previewItemCount);
             previewItemList.appendChild(previewItem);
             previewItem.displayQuestion();
             newQuestionBtn.scrollIntoView({ behavior: "smooth", block: "center" });

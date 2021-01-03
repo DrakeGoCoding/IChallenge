@@ -46,9 +46,17 @@ export default class PreviewItem extends HTMLElement {
         })
 
         deletePreviewItem.addEventListener('click', e => {
+            const previewColumn = this.getRootNode().host;
+            previewColumn.previewItemCount -= 1;
             previewItemList.removeChild(this);
-            const previewColumn = previewItemList.getRootNode().host;
-            console.log(PreviewColumn.previewItemCount);
+
+            const firstItem = previewItemList.children[0]
+            if (firstItem !== null) firstItem.displayQuestion();
+             
+            for (let i = 0; i < previewColumn.previewItemCount; i++) {
+                const previewItem = previewItemList.children[i];
+                previewItem.setAttribute('count', i + 1);
+            }
         })
     }
 
@@ -71,6 +79,10 @@ export default class PreviewItem extends HTMLElement {
     }
 
     attributeChangedCallback(attribute, oldValue, newValue) {
+        if (attribute === 'count'){
+            const questionCount = this._shadowDom.querySelector('.question-count');
+            if (questionCount !== null) questionCount.innerHTML = `Question ${newValue}:`;
+        }
         if (attribute === 'content') {
             this._shadowDom.querySelector('.question-box').innerHTML = (newValue !== 'null' ? newValue : '');
         }
