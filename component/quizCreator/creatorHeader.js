@@ -1,10 +1,10 @@
-export default class CreatorHeader extends HTMLElement{
-    constructor(){
+export default class CreatorHeader extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
 
-    connectedCallback(){
+    connectedCallback() {
         this._shadowDom.innerHTML = `
             ${style} 
             <div class="main-header">

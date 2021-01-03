@@ -52,12 +52,24 @@ export default class PreviewItem extends HTMLElement {
 
             const firstItem = previewItemList.children[0]
             if (firstItem !== null) firstItem.displayQuestion();
-             
+
             for (let i = 0; i < previewColumn.previewItemCount; i++) {
                 const previewItem = previewItemList.children[i];
                 previewItem.setAttribute('count', i + 1);
             }
         })
+    }
+
+    isValidPreviewItem() {
+        return this.getAttribute('content') !== null
+            && this.getAttribute('answer1') !== null
+            && this.getAttribute('answer2') !== null
+            && this.getAttribute('answer3') !== null
+            && this.getAttribute('answer4') !== null
+            && (this.getAttribute('check1') === 'checked'
+                || this.getAttribute('check2') === 'checked'
+                || this.getAttribute('check3') === 'checked'
+                || this.getAttribute('check4') === 'checked')
     }
 
     displayQuestion() {
@@ -79,7 +91,7 @@ export default class PreviewItem extends HTMLElement {
     }
 
     attributeChangedCallback(attribute, oldValue, newValue) {
-        if (attribute === 'count'){
+        if (attribute === 'count') {
             const questionCount = this._shadowDom.querySelector('.question-count');
             if (questionCount !== null) questionCount.innerHTML = `Question ${newValue}:`;
         }

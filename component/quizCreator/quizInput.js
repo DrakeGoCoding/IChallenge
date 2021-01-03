@@ -27,22 +27,22 @@ export default class QuizInput extends HTMLElement {
                 <div class="answer-input">        
                     <div class="answer"> 
                         <div class='ans-decor color-red'></div> 
-                        <input id='check1' type="checkbox" class="correct-check" ${this.check1}> A. 
+                        <input id='check1' type="radio" name="correct" class="correct-check" ${this.check1}> A. 
                         <textarea id='ans1' placeholder='Add Answer'>${this.answer1}</textarea>
                     </div>
                     <div class="answer"> 
                         <div class='ans-decor color-blue'></div> 
-                        <input id='check2' type="checkbox" class="correct-check" ${this.check2}> B. 
+                        <input id='check2' type="radio" name="correct" class="correct-check" ${this.check2}> B. 
                         <textarea id='ans2' placeholder='Add Answer'>${this.answer2}</textarea>
                     </div>
                     <div class="answer"> 
                         <div class='ans-decor color-red'></div> 
-                        <input id='check3' type="checkbox" class="correct-check" ${this.check3}> C. 
+                        <input id='check3' type="radio" name="correct" class="correct-check" ${this.check3}> C. 
                         <textarea id='ans3' placeholder='Add Answer'>${this.answer3}</textarea>
                     </div>
                     <div class="answer"> 
                         <div class='ans-decor color-blue'></div> 
-                        <input id='check4' type="checkbox" class="correct-check" ${this.check4}> D. 
+                        <input id='check4' type="radio" name="correct" class="correct-check" ${this.check4}> D. 
                         <textarea id='ans4' placeholder='Add Answer'>${this.answer4}</textarea>
                     </div>
                 </div>
@@ -95,7 +95,14 @@ export default class QuizInput extends HTMLElement {
         }
 
         summitBtn.addEventListener('click', async (e) => {
-            // TO DO: update firebase and redirect to home screen
+            const previewItemList = this.parentElement.querySelector('preview-column').shadowRoot.querySelector('.preview-item-list');
+            for (const previewItem of previewItemList.children) {
+                if (previewItem.isValidPreviewItem()) {
+                    // TO DO: update firebase and redirect to home screen
+                    previewItem.shadowRoot.querySelector('.question-count').style.color = '#69C9D0';
+                }
+                else previewItem.shadowRoot.querySelector('.question-count').style.color = '#EE1D52';
+            }
             console.log("submit");
         })
 
@@ -233,6 +240,8 @@ const style = `
         width: 150px;
         height: 40px;
         background-color:#fff;
+        border: none;
+        outline: none;
         display: flex;
         align-items: center;
         justify-content: center;

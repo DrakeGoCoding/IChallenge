@@ -12,7 +12,7 @@ export default class QuizCreator extends HTMLElement {
                 <preview-column></preview-column>
                 <quiz-input count=1></quiz-input>
             </div>
-        `       
+        `
     }
 }
 
