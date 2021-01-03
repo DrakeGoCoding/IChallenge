@@ -300,7 +300,7 @@ class SignUp extends HTMLElement {
          <input-wrapper id="userName" type="text" placeholder="User name">User name</input-wrapper>
          <input-wrapper id="password" type="password" placeholder="Password"></input-wrapper>
          <input-wrapper id="confirm-password" type="password" placeholder="Confirm password"></input-wrapper>
-             <button type="submit" id="submit">Log in</button>
+             <button type="submit" id="submit">Sign up</button>
          </form>
          <div class="register">
              <h3>Already have an account? <a id="redirect">Login</a></h3>
@@ -350,8 +350,9 @@ class SignUp extends HTMLElement {
             // }
             const account = new Account(userName, password)
             account.pushToFireBase()
-
-            const check = await this.checkUserNameExist(userName)
+            const check = await this.checkUserNameExist('userName')
+            alert('Account registered successfully!')
+            router.navigate('/login-screen')
             // if (check) {
             //     alert('User name exist, try something unique')
             // } else {
@@ -362,7 +363,7 @@ class SignUp extends HTMLElement {
 
         })
         this._shadowRoot.getElementById('redirect').addEventListener('click', () => {
-            router.navigate('/login-screen')
+            router.navigate('login-screen')
         })
     }
     // setError(id, message) {

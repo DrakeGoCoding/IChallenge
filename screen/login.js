@@ -357,7 +357,7 @@ class LoginScreen extends HTMLElement{
                 if(CryptoJS.MD5(password).toString(CryptoJS.enc.Hex) === accountDoc.password){
                     const account = await Account.parseDocument(accountDoc);
                     writeToLocalStorage('currentUser', account);
-                    router.navigate('/home-screen')
+                    router.navigate('home-screen')
                 } else {
                     this.setError('password', `Oops, you've just entered a password from another dimension.`)
                 }
@@ -366,7 +366,7 @@ class LoginScreen extends HTMLElement{
         
         })
         this._shadowRoot.querySelector('.register h3 a').addEventListener('click', () => {
-        router.navigate('/signup-screen')
+            router.navigate('signup-screen')
         })
     }
 } 

@@ -17,7 +17,7 @@ import './component/quizDisplay/quizContainer.js'
 
 import './screen/quizRecords.js'
 import './component/quizDisplay/recordContainer.js'
-
+import './navigo.js'
 import './screen/quizStarter.js'
 import './screen/login.js'
 import './screen/signUp.js'

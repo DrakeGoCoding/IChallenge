@@ -2,17 +2,28 @@ var root = null;
 var useHash = true; // Defaults to: false
 var hash = '#!'; // Defaults to: '#'
 var router = new Navigo(root, useHash, hash);
+import { getAccountDocByUserName } from './utils.js'
 router
   .on({
-    'login': function () {
-      redirect('/login-screen')
+    'login-screen': function () {
+      redirect('login-screen')
     },
-    'signup': function () {
-      redirect('/signup-screen')
+    'signup-screen': function () {
+      redirect('signup-screen')
+    },
+    'home-screen': async function(){
+        const check = await checkAuthen()
+        if (check){
+            redirect('home-screen')
+        } else {
+            redirect('login-screen')
+        }
     },
     '*': function () {
       redirect('login-screen')
     },
+    
+    
     
   })
   .resolve();
@@ -48,5 +59,18 @@ function redirect(screenName) {
         <quiz-record></quiz-record>
         `
     }
+}
+async function checkAuthen(){
+    const accountDoc = await getAccountDocByUserName(userName)
+            if(accountDoc){
+                if(CryptoJS.MD5(password).toString(CryptoJS.enc.Hex) === accountDoc.password){
+                    const account = await Account.parseDocument(accountDoc);
+                    writeToLocalStorage('currentUser', account);
+                    router.navigate('home-screen')
+                } else {
+                    this.setError('password', `Oops, you've just entered a password from another dimension.`)
+                }
+                
+            }
 }
 window.router = router
