@@ -299,16 +299,16 @@ class LoginScreen extends HTMLElement{
         <div class="section">
             <div class="box">
                 <div class="img-container">
-                    <img src="Logo.png" alt="Queazy-Logo">
+                    <img src="../img/Logo.png" alt="Queazy-Logo">
                 </div>
-                <h2>Login</h2>
+                <h2>Log in</h2>
                 <form id="login-form">
                 <input-wrapper id="userName" type="text" placeholder="User name">User name</input-wrapper>
                 <input-wrapper id="password" type="password" placeholder="Password"></input-wrapper>
                     <button type="submit" id="submit">Log in</button>
                 </form>
                 <div class="register">
-                    <h3>Don't have an account? <a id="redirect">Sign-up</a></h3>
+                    <h3>Don't have an account? <a id="redirect">Sign up</a></h3>
                 </div>
             </div>
             <div class="animation-area">

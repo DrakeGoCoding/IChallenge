@@ -629,7 +629,8 @@ class HomePage extends HTMLElement {
     }
     connectedCallback(){
         this._shadowRoot.innerHTML = `
-
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
             ${style}
         </style>
@@ -637,7 +638,7 @@ class HomePage extends HTMLElement {
         <div class="container-all">
             <section class="master-header">
                 <header>
-                    <a href="#"><img src="./image/Logo.png" class="logo" alt="logo"></a>
+                    <a href="#"><img src="../img/Logo.png" class="logo" alt="logo"></a>
                     <input type="checkbox" id="check">
                     <label for="check" class="check-btn">
                         <i class="fa fa-bars"></i>
@@ -652,19 +653,19 @@ class HomePage extends HTMLElement {
             </section>
 
             <main>
-                </section class="slider-container">
+                <section class="slider-container">
                     <div class="slider">
                         <div class="slide active">
-                            <img src="./image/Welcome_.png" alt="img">
+                            <img src="../img/Welcome_.png" alt="img">
                             <div class="content">
                                 <h2>Welcome to <span>Queazy</span></h2>
                                 <p>Modern Quiz maker for everyone</p>
-                                <button><a href="#">Login in</a></button>
-                                <button><a href="#">Sign up</a></button>
+                                <button ><a id="redirect">Log in</a></button>
+                                <button ><a id="redirect2">Sign up</a></button>
                             </div>
                         </div>
                         <div class="slide">
-                            <img src="./image/Easy_.png" alt="img">
+                            <img src="../img/Easy_.png" alt="img">
                             <div class="content">
                                 <h2>Queazy is <span>Easy</span></h2>
                                 <p>Queazy offer you a simple tool to create and share quizzes</p>
@@ -673,7 +674,7 @@ class HomePage extends HTMLElement {
                             </div>
                         </div>
                         <div class="slide">
-                            <img src="./image/Fun_.png" alt="img">
+                            <img src="../img/Fun_.png" alt="img">
                             <div class="content">
                                 <h2>Queazy is <span>Fun</span></h2>
                                 <p>Queazy make your quizzes look funnier and friendlier</p>
@@ -682,7 +683,7 @@ class HomePage extends HTMLElement {
                             </div>
                         </div>
                         <div class="slide">
-                            <img src="./image/Free_.png" alt="img">
+                            <img src="../img/Free_.png" alt="img">
                             <div class="content">
                                 <h2>Queazy is <span>Free</span></h2>
                                 <p>Queazy is totally free for everyone</p>
@@ -758,6 +759,35 @@ class HomePage extends HTMLElement {
             </footer>
         </div>
         `
+        var slides = this._shadowRoot.querySelectorAll('.slider-container .slider .slide');
+        var btns = this._shadowRoot.querySelectorAll('.navigation .btn');
+        let currentSlide = 1;
+        
+        var manualNav = function(manual) {
+            slides.forEach((slide) => {
+                slide.classList.remove('active');
+                
+                btns.forEach((btn) => {
+                    btn.classList.remove('active');
+                })
+            })
+            slides[manual].classList.add('active');
+            btns[manual].classList.add('active');
+        }
+        
+        btns.forEach((btn, i) => {
+            btn.addEventListener('click', () => {
+                manualNav(i);
+                currentSlide = 1
+            })
+        })
+        this._shadowRoot.getElementById('redirect').addEventListener('click', () => {
+            redirect('login-screen')
+            console.log('1234');
+        })
+        this._shadowRoot.getElementById('redirect2').addEventListener('click', () => {
+            redirect('signup-screen')
+        })
     }
     
 }
