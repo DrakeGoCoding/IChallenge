@@ -60,4 +60,4 @@ export function redirect(screenName) {
     }
 }
 
-redirect('signup-screen')
+redirect('login-screen')

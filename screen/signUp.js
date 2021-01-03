@@ -10,48 +10,270 @@ const style = `
     --clr-dark-white: #fefdff;
     --clr-dark-grey: #575557;
 }
-* {
-    margin: 0;
-    padding: 0;
-    background-color: #171718;
-    font-family: JetBrains Mono, monospace;
-}
-.register-container{
-    width: 100vw;
+.section {
+    position: relative;
+    width: 100%;
     height: 100vh;
     display: flex;
+    align-items: center;
     justify-content: center;
-    position: relative;
-    padding: 5px;
+    overflow: hidden;
+    background: var(--clr-acce);
 }
-#submit{
-    width: 85%;
-    padding: 10px 30px;
-    cursor: pointer;
+
+
+body {
+    font-family: 'JetBrains Mono', monospace;
+}
+.box {
+    display: block;
+    z-index: 4;
+}
+
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 600px;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 40px;
+    box-sizing: border-box;
+    border: 3px solid var(--clr-accent);
+    border-radius: 10px;
+    box-shadow: 10px 10px #1fceab, -10px -10px #c20440 ;
+}
+
+.img-container {
+    display: flex;
+    align-items: center;
+
+}
+.section .box .img-container img {
+    width: 300px;
+    margin: auto;
+}
+.box h2{
+    font-size: 4rem;
+    margin: 0 0 40px;
+    padding: 0;
+    color: #fefdff;
+    font-family: 'Source Sans Pro', sans-serif;
+
+}
+
+.box input {
+    padding: 10px 0;
+    margin-bottom: 35px;
+}
+
+.box input {
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    border-bottom: 3px solid #1fceab;
+    background: none;
+    color: #1fceab;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+html {
+
+}
+
+.box button {
     display: block;
     margin: auto;
-    background-color: #c20440;
-    color: #1fceab;
-    font-weight: bolder;
+    border-bottom: 4px solid #4be2c4;
+    cursor: pointer;
+    border-radius: 20px;
+    background: #1fceab;
+    width: 60%;
+    color: #fefdff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-transform: bold;
+    box-shadow: 0px 5px 0 #218f79;
+    margin-bottom: 0;
+    outline: none;
+    text-transform: uppercase;
+    transition: .2s;
+    padding: 10px 0;
 }
-#submit:active {
+
+.box button:active {
     box-shadow: none;
     transform: translateY(5px);
     transition: .2s;
-}
-#signup-form:focus ~ label{
-    top: -110px;
-    left: 0;
-    color: var(--clr-dark-red);
-    font-size: 25px;
-    font-weight: bold;
 
 }
-#signup-form:focus{
-    border-bottom: 2px solid var(--clr-dark-red);
+
+.box form div {
+    position: relative;
 }
-a{
-    color: #fefdff;
+
+.box form div label {
+    position: relative;
+    font-size: 30px;
+    top: -110px;
+    left: 0;
+    color: #5c5c5c;
+    transition: .5s;
+    pointer-events: none;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.box input:focus ~ label
+{
+    top: -110px;
+    left: 0;
+    color: #c20440;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.box input:focus
+{
+    border-bottom: 2px solid #c20440;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Baloo 2', cursive;
+}
+.banner-text {
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+.banner-text ul {
+    height: 50px;
+    float: right;
+}
+.banner-text ul li {
+    display: inline-block;
+    padding: 40px 15px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 20px;
+}
+.banner-text ul li:hover {
+    cursor: pointer;
+}
+.banner-text h2 {
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+    margin-top: 20%;
+}
+
+/* animated background */
+
+.animation-area {
+    background: linear-gradient( #020202, #242424, #020202);
+    width: 100%;
+    height: 100vh;
+}
+.box-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.box-area li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 10px;;
+    background: rgba(87, 250, 215, 0.6);
+    box-shadow: 10px 5px 5px rgba(223, 76, 88, 0.6);
+    animation: animate 20s linear infinite;
+    bottom: -150px;
+}
+.box-area li:nth-child(1) {
+    left: 86%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+.box-area li:nth-child(2) {
+    left: 12%;
+    width: 30px;
+    height: 30px;
+    animation-delay: 1.5s;
+    animation-duration: 10s;
+}
+.box-area li:nth-child(3) {
+    left: 70%;
+    width: 100px;
+    height: 100px;
+    animation-delay: 5.5s;
+}
+.box-area li:nth-child(4) {
+    left: 42%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 15s;
+}
+.box-area li:nth-child(5) {
+    left: 65%;
+    width: 40px;
+    height: 40px;
+    animation-delay: 0s;
+}
+.box-area li:nth-child(6) {
+    left: 15%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3.5s;
+}
+@keyframes animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-800px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.register h3 {
+    padding: 20px 0;
+    color: #575557;
+}
+
+.register h3 a {
+    text-decoration: none;
+    color: #1fceab;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.register h3 a:hover {
+    text-decoration: underline;
+    color: #c20440;
+    transition: .2s;
 }
 
 `
@@ -66,18 +288,35 @@ class SignUp extends HTMLElement {
     connectedCallback() {
         this._shadowRoot.innerHTML = `
         <style>${style}</style>
-        <div class="register-container">
-        <form id="signup-form">
-        <img src="Logo.png" class="logo">
-            <input-wrapper id="userName" type="text" placeholder="User name">User name</input-wrapper>
-            <input-wrapper id="password" type="password" placeholder="Password"></input-wrapper>
-            <input-wrapper id="confirm-password" type="password" placeholder="Confirm password"></input-wrapper>
-            <button type="submit" id="submit">Register</button>
-            <br></br>
-            <a id="redirect">Already have an account ? Log in </a>
 
-        </form>
+
+     <div class="section">
+     <div class="box">
+         <div class="img-container">
+             <img src="Logo.png" alt="Queazy-Logo">
+         </div>
+         <h2>Sign up</h2>
+         <form id="signup-form">
+         <input-wrapper id="userName" type="text" placeholder="User name">User name</input-wrapper>
+         <input-wrapper id="password" type="password" placeholder="Password"></input-wrapper>
+         <input-wrapper id="confirm-password" type="password" placeholder="Confirm password"></input-wrapper>
+             <button type="submit" id="submit">Log in</button>
+         </form>
+         <div class="register">
+             <h3>Already have an account? <a id="redirect">Login</a></h3>
+         </div>
      </div>
+     <div class="animation-area">
+         <ul class="box-area">
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
+         </ul>
+     </div>
+ </div>   
         `
         const signUpForm = this._shadowRoot.getElementById('signup-form')
         signUpForm.addEventListener('submit', async (e) => {
@@ -90,13 +329,13 @@ class SignUp extends HTMLElement {
                 userName.trim() === ''
             ) {
                 isValid = false
-                this.setError('userName', 'Please input your very own user name')
+                this.setError('userName', 'Please input your user name')
             }
             if (
                 password.trim() === ''
             ) {
                 isValid = false
-                this.setError('password', 'Please input some magic security letters')
+                this.setError('password', 'Please input some security letters')
             }
             if (password !== confirmPassword) {
                 this.setError('confirm-password', "Password didn't match")
