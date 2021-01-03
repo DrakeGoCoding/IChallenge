@@ -1,5 +1,6 @@
 import { redirect } from '../index.js'
-import { getDataFromDocs, writeToLocalStorage } from '../utils.js'
+import Account from '../model/Account.js'
+import { getAccountDocByUserName, getDataFromDocs, writeToLocalStorage } from '../utils.js'
 const style = `
 :root {
     --clr-dark-background: #171718;
@@ -12,7 +13,7 @@ const style = `
 * {
     margin: 0;
     padding: 0;
-    background: ##010101;
+    background: #171718;
     font-family: JetBrains Mono, monospace;
 }
 .login-container{
@@ -50,8 +51,8 @@ class LoginScreen extends HTMLElement{
         this._shadowRoot = this.attachShadow ({mode: 'open'})
     }
     setError(id, message) {
-        this._shadowRoot.getElementById(id).setAttribute('error', message)}
-
+        this._shadowRoot.getElementById(id).setAttribute('error', message)
+    }
     connectedCallback(){
         this._shadowRoot.innerHTML=`
         <style>${style}</style>
@@ -73,28 +74,40 @@ class LoginScreen extends HTMLElement{
             const password = this._shadowRoot.getElementById('password').value
             let isValid = true
 
-            if (userName.trim === ''){
+            if (userName.trim() === ''){
                 isValid = false
                 this.setError('userName', 'Please input your own user name')
             }
-            if (password.trim ===''){
+            if (password.trim() ===''){
                 isValid = false
                 this.setError('password', 'Please input password')
             }
             if (!isValid){
                 return
             }
-            const user = await firebase.firestore()
-            .collection('Accounts')
-            .where('userName', '==', userName)
-            .where('password', '==', CryptoJS.MD5(password).toString())
-            .get()
-            if (user.empty) {
-                alert('User name or password is wrong, try again')
-            } else {
-                writeToLocalStorage('currentUser', getDataFromDocs(user)[0])
-                redirect('home-screen')
+            // const user = await firebase.firestore()
+            // .collection('Accounts')
+            // .where('userName', '==', userName)
+            // .where('password', '==', CryptoJS.MD5(password).toString())
+            // .get()
+            // if (user.empty) {
+            //     alert('User name or password is wrong, try again')
+            // } else {
+            //     writeToLocalStorage('currentUser', getDataFromDocs(user)[0])
+            //     redirect('home-screen')
+            // }
+            const accountDoc = await getAccountDocByUserName(userName)
+            if(accountDoc){
+                if(CryptoJS.MD5(password).toString(CryptoJS.enc.Hex) === accountDoc.password){
+                    const account = await Account.parseDocument(accountDoc);
+                    writeToLocalStorage('currentUser', account);
+                    redirect('home-screen')
+                } else {
+                    this.setError('password', `Oops, you've just entered a password from another dimension.`)
+                }
+                
             }
+        
         })
         this._shadowRoot.getElementById('redirect').addEventListener('click', () => {
             redirect('signup-screen')

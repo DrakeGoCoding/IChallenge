@@ -1,6 +1,7 @@
 import { redirect } from "../index.js"
+import Account from "../model/Account.js"
 
-const style =`
+const style = `
 :root {
     --clr-dark-background: #171718;
     --clr-darker-background: #0d0d0e;
@@ -54,19 +55,20 @@ a{
 }
 
 `
-class SignUp extends HTMLElement{
-    constructor(){
+class SignUp extends HTMLElement {
+    constructor() {
         super()
-        this._shadowRoot = this.attachShadow ({mode: 'open'})
+        this._shadowRoot = this.attachShadow({ mode: 'open' })
     }
-    connectedCallback(){
-        this._shadowRoot.innerHTML=`
+    setError(id, message) {
+        this._shadowRoot.getElementById(id).setAttribute('error', message)
+    }
+    connectedCallback() {
+        this._shadowRoot.innerHTML = `
         <style>${style}</style>
         <div class="register-container">
         <form id="signup-form">
         <img src="Logo.png" class="logo">
-            <input-wrapper id="first-name" type="text" placeholder="First name"></input-wrapper>
-            <input-wrapper id="last-name" type="text" placeholder="Last name"></input-wrapper>
             <input-wrapper id="userName" type="text" placeholder="User name">User name</input-wrapper>
             <input-wrapper id="password" type="password" placeholder="Password"></input-wrapper>
             <input-wrapper id="confirm-password" type="password" placeholder="Confirm password"></input-wrapper>
@@ -80,36 +82,21 @@ class SignUp extends HTMLElement{
         const signUpForm = this._shadowRoot.getElementById('signup-form')
         signUpForm.addEventListener('submit', async (e) => {
             e.preventDefault()
-
-            const firstName = this._shadowRoot.getElementById('first-name').value
-            const lastName = this._shadowRoot.getElementById('last-name').value
             const userName = this._shadowRoot.getElementById('userName').value
             const password = this._shadowRoot.getElementById('password').value
             const confirmPassword = this._shadowRoot.getElementById('confirm-password').value
             let isValid = true
             if (
-                firstName.trim() === ''
-            ) {
-                isValid = false
-                this.setError('first-name', 'Please input first name')
-            }
-            if (
-                lastName.trim() === ''
-            ) {
-                isValid = false
-                this.setError('last-name', 'Please input last name')
-            }
-            if (
                 userName.trim() === ''
             ) {
                 isValid = false
-                this.setError('email', 'Please input your very own user name')
+                this.setError('userName', 'Please input your very own user name')
             }
             if (
                 password.trim() === ''
             ) {
                 isValid = false
-                this.setError('password', 'Please input Password')
+                this.setError('password', 'Please input some magic security letters')
             }
             if (password !== confirmPassword) {
                 this.setError('confirm-password', "Password didn't match")
@@ -117,29 +104,31 @@ class SignUp extends HTMLElement{
             if (!isValid) {
                 return
             }
-            const user = {
-                fullName: `${firstName} ${lastName}`,
-                userName: `${userName}`,
-                password: `${CryptoJS.MD5(password).toString()}`
-            }
+            // const user = {
+            //     fullName: `${firstName} ${lastName}`,
+            //     userName: `${userName}`,
+            //     password: `${CryptoJS.MD5(password).toString()}`
+            // }
+            const account = new Account(userName, password)
+            account.pushToFireBase()
 
             const check = await this.checkUserNameExist(userName)
-            if (check) {
-                alert('User name exist, try something unique')
-            } else {
-                firebase.firestore().collection('Accounts').add(user)
-                alert ("Register successfully")
-                redirect('login-screen')
-            }
-            
+            // if (check) {
+            //     alert('User name exist, try something unique')
+            // } else {
+            //     firebase.firestore().collection('Accounts').add(user)
+            //     alert ("Register successfully")
+            //     redirect('login-screen')
+            // }
+
         })
         this._shadowRoot.getElementById('redirect').addEventListener('click', () => {
             redirect('login-screen')
         })
     }
-    setError(id, message) {
-        this._shadowRoot.getElementById(id).setAttribute('error', message)
-    }
+    // setError(id, message) {
+    //     this._shadowRoot.getElementById(id).setAttribute('error', message)
+    // }
     async checkUserNameExist(userName) {
         const res = await firebase.firestore().collection('Accounts').where('userName', '==', userName).get()
         return !res.empty
