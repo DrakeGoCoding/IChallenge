@@ -1,4 +1,4 @@
-import { redirect } from '../index.js'
+// import { redirect } from '../index.js'
 import Account from '../model/Account.js'
 import { getAccountDocByUserName, getDataFromDocs, writeToLocalStorage } from '../utils.js'
 const style = `
@@ -101,7 +101,7 @@ class LoginScreen extends HTMLElement{
                 if(CryptoJS.MD5(password).toString(CryptoJS.enc.Hex) === accountDoc.password){
                     const account = await Account.parseDocument(accountDoc);
                     writeToLocalStorage('currentUser', account);
-                    redirect('home-screen')
+                    router.navigate('/home-screen')
                 } else {
                     this.setError('password', `Oops, you've just entered a password from another dimension.`)
                 }
@@ -110,7 +110,7 @@ class LoginScreen extends HTMLElement{
         
         })
         this._shadowRoot.getElementById('redirect').addEventListener('click', () => {
-            redirect('signup-screen')
+            router.navigate('/signup-screen')
         })
     }
 } 

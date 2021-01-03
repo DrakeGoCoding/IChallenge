@@ -1,4 +1,4 @@
-import { redirect } from "../index.js"
+// import { redirect } from "../index.js"
 import Account from "../model/Account.js"
 
 const style = `
@@ -123,7 +123,7 @@ class SignUp extends HTMLElement {
 
         })
         this._shadowRoot.getElementById('redirect').addEventListener('click', () => {
-            redirect('login-screen')
+            router.navigate('/login-screen')
         })
     }
     // setError(id, message) {
