@@ -27,7 +27,7 @@ const style = `
         text-shadow:3px 3px 0 #69C9D0,-3px -3px 0 #EE1D52;
     }
 
-    @media only screen and (max-width: 768px){
+    @media only screen and (max-width: 817px){
         .add-question-btn{
             display: none;
         }

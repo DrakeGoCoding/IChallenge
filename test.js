@@ -11,7 +11,7 @@ const admin = new Account("admin", "123456");
 // admin.pushToFireBase()
 
 // on login
-getAccountDocByUserName("admin").then(async(doc) => {
+// getAccountDocByUserName("admin").then(async(doc) => {
     // ...
     // check password here before redirecting
     // ... 
@@ -19,9 +19,9 @@ getAccountDocByUserName("admin").then(async(doc) => {
     // on redirecting
     // use this static method "parseDocument()" to parse account document on database back to Account object
     // WARNING: this "parseDocument()" method returns a promise => need ".then()" or "async"/"await" keyword
-    const account = await Account.parseDocument(doc);
-    console.log(account);
-})
+    // const account = await Account.parseDocument(doc);
+    // console.log(account);
+// })
 
 // on creating a new Quiz Set
 const quizSet = new QuizSet("Math", "Here is a description");

@@ -1,38 +1,3 @@
-const style = `
-<style>
-    .preview-column{
-        position: fixed;
-        overflow-y: auto;
-        width: 280px;
-        height: 100vh;
-        background-color:#252525;
-        color: #fff;
-        font-family: 'JetBrains Mono', monospace;
-        height: calc(100% - 100px);
-        flex-direction: column;
-    }
-
-    .preview-item-list{
-        display: flex;
-        flex-direction: column;
-    }
-
-    @media only screen and (max-width: 768px){
-        .preview-item-list{
-            flex-direction: row;
-        }
-        .preview-column{
-            width: 100%;
-            height: 120px;
-            bottom: 0;
-            overflow-x: auto;
-            display: flex;
-            flex-direction: row;
-        }    
-    }
-</style>
-`
-
 class PreviewColumn extends HTMLElement {
     previewItemCount = 1;
 
@@ -58,7 +23,6 @@ class PreviewColumn extends HTMLElement {
         newQuestionBtn.addEventListener('click', (e) => {
             e.preventDefault();
 
-            // TO DO: create a new quiz platform
             previewItemList.innerHTML += `<preview-item count=${++this.previewItemCount}></preview-item>`;
             newQuestionBtn.scrollIntoView({ behavior: "smooth", block: "center" });
         })
@@ -66,3 +30,58 @@ class PreviewColumn extends HTMLElement {
 }
 
 window.customElements.define('preview-column', PreviewColumn)
+
+const style = `
+<style>
+    .preview-column{
+        position: fixed;
+        overflow-y: auto;
+        width: 280px;
+        height: 100vh;
+        background-color:#252525;
+        color: #fff;
+        font-family: 'JetBrains Mono', monospace;
+        height: calc(100% - 100px);
+        flex-direction: column;
+    }
+
+    .preview-item-list{
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+    width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+    background: #888; 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+    }
+
+    @media only screen and (max-width: 817px){
+        .preview-item-list{
+            flex-direction: row;
+        }
+        .preview-column{
+            width: 100%;
+            height: 120px;
+            bottom: 0;
+            overflow-x: auto;
+            display: flex;
+            flex-direction: row;
+        }    
+    }
+</style>
+`

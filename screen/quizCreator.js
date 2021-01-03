@@ -13,15 +13,16 @@ class QuizCreator extends HTMLElement {
         super()
         this._shadowDom = this.attachShadow({ mode: 'open' })
     }
+
     connectedCallback() {
         this._shadowDom.innerHTML = `
             ${style}
             <creator-header></creator-header>
             <div class='main'>
                 <preview-column></preview-column>
-                <quiz-input></quiz-input>
+                <quiz-input count=1></quiz-input>
             </div>
-        `
+        `       
     }
 }
 

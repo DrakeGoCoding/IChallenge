@@ -1,3 +1,84 @@
+class PreviewItem extends HTMLElement {
+    constructor() {
+        super()
+        this._shadowDom = this.attachShadow({ mode: 'open' })
+    }
+
+    connectedCallback() {
+        this.questionCount = this.getAttribute('count') || '';
+        this.questionContent = this.getAttribute('content') || ''
+        this.answer1 = this.getAttribute('answer1') || '';
+        this.answer2 = this.getAttribute('answer2') || '';
+        this.answer3 = this.getAttribute('answer3') || '';
+        this.answer4 = this.getAttribute('answer4') || '';
+        this.check1 = this.getAttribute('check1') || '';
+        this.check2 = this.getAttribute('check2') || '';
+        this.check3 = this.getAttribute('check3') || '';
+        this.check4 = this.getAttribute('check4') || '';
+
+        this._shadowDom.innerHTML = `
+            ${style}
+            <div class="preview-question">
+                <div class="question-count">Question ${this.questionCount}:</div>
+                <div class="question-row">
+                    <div class="question-window">
+                        <div class="question-box">${this.questionContent}</div>
+                        <div class="ans-row">
+                            <div class="ans-box"></div>
+                            <div class="ans-box"></div>
+                        </div>
+                        <div class="ans-row">
+                            <div class="ans-box"></div>
+                            <div class="ans-box"></div>
+                        </div>
+                    </div>
+                    <div id="delete-btn"> <i class="fa fa-trash"></i> </div>
+                </div>
+            </div>
+        `
+
+        const previewItemList = this.parentElement;
+        const questionWindow = this._shadowDom.querySelector('.question-window');
+        const deletePreviewItem = this._shadowDom.querySelector('#delete-btn');
+
+        questionWindow.addEventListener('click', e => {
+            this.displayQuestion();
+        })
+
+        deletePreviewItem.addEventListener('click', e => {
+            previewItemList.removeChild(this);
+            console.log(`Delete question ${this.questionCount}`);
+        })
+    }
+
+    displayQuestion() {
+        const quizInput = this.getRootNode().host.parentElement.querySelector('quiz-input');
+        quizInput.setAttribute('count', this.getAttribute('count'));
+        quizInput.setAttribute('content', this.getAttribute('content'));
+        quizInput.setAttribute('answer1', this.getAttribute('answer1'));
+        quizInput.setAttribute('answer2', this.getAttribute('answer2'));
+        quizInput.setAttribute('answer3', this.getAttribute('answer3'));
+        quizInput.setAttribute('answer4', this.getAttribute('answer4'));
+        quizInput.setAttribute('check1', this.getAttribute('check1'));
+        quizInput.setAttribute('check2', this.getAttribute('check2'));
+        quizInput.setAttribute('check3', this.getAttribute('check3'));
+        quizInput.setAttribute('check4', this.getAttribute('check4'));
+    }
+
+    static get observedAttributes() {
+        return ['count', 'content', 'answer1', 'answer2', 'answer3', 'answer4', 'check1', 'check2', 'check3', 'check4'];
+    }
+
+    attributeChangedCallback(attribute, oldValue, newValue) {
+        if (attribute === 'content'){
+            console.log(oldValue, newValue);
+            this._shadowDom.querySelector('.question-box').innerHTML = newValue;
+        }
+    }
+}
+
+window.customElements.define('preview-item', PreviewItem)
+
 const style = `
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -70,7 +151,7 @@ const style = `
         box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
     }
 
-    @media only screen and (max-width: 768px){
+    @media only screen and (max-width: 817px){
         .preview-question{
             height: 100px;
         }   
@@ -115,43 +196,3 @@ const style = `
     }
 </style>
 `
-
-class PreviewItem extends HTMLElement {
-    constructor() {
-        super()
-        this._shadowDom = this.attachShadow({ mode: 'open' })
-    }
-
-    connectedCallback() {
-        this.questionCount = this.getAttribute('count') || '?';
-        this._shadowDom.innerHTML = `
-            ${style}
-            <div class="preview-question">
-                <div class="question-order">Question ${this.questionCount}:</div>
-                <div class="question-row">
-                    <div class="question-window">
-                        <div class="question-box"></div>
-                        <div class="ans-row">
-                            <div class="ans-box"></div>
-                            <div class="ans-box"></div>
-                        </div>
-                        <div class="ans-row">
-                            <div class="ans-box"></div>
-                            <div class="ans-box"></div>
-                        </div>
-                    </div>
-                    <div id="delete-btn"> <i class="fa fa-trash"></i> </div>
-                </div>
-            </div>
-        `
-
-        const deletePreviewItem = this._shadowDom.querySelector('#delete-btn');
-        deletePreviewItem.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            console.log(`Delete question ${this.questionCount}`);
-        })
-    }
-}
-
-window.customElements.define('preview-item', PreviewItem)
