@@ -9,9 +9,8 @@
     --clr-light- : ;
 
     --ff-title: 'Source Sans Pro', sans-serif;
-    --ff-content: 'Yanone Kaffeesatz', sans-serif;
+    --ff-content: 'JetBrains Mono', monospace;
 }
-
 
 .section {
     position: relative;
@@ -22,7 +21,6 @@
     justify-content: center;
     overflow: hidden;
     background: var(--clr-acce);
-    /* z-index: -1; */
 }
 
 
@@ -80,7 +78,7 @@ body {
     border-bottom: 3px solid var(--clr-dark-blue);
     background: none;
     color: var(--clr-dark-blue);
-    font-family: var(--ff-title);
+    font-family: var(--ff-content);
     font-weight: 600;
     font-size: 1.2rem;
 }
@@ -121,6 +119,7 @@ body {
     color: #5c5c5c;
     transition: .5s;
     pointer-events: none;
+    font-family: var(--ff-content);
 }
 
 .box input:focus ~ label
@@ -246,3 +245,28 @@ body {
 		opacity: 0;
 	}
 }
+
+.register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--ff-content);
+}
+
+.register h3 {
+    padding: 20px 0;
+    color: var(--clr-dark-grey);
+}
+
+.register h3 a {
+    text-decoration: none;
+    color: var(--clr-dark-blue);
+    transition: .2s;
+}
+
+.register h3 a:hover {
+    text-decoration: underline;
+    color: var(--clr-dark-red);
+    transition: .2s;
+}
+
