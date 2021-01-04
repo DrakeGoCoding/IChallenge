@@ -1,4 +1,4 @@
-import { redirect } from "../index.js"
+// import { redirect } from "../index.js"
 import Account from "../model/Account.js"
 
 const style = `
@@ -350,8 +350,9 @@ class SignUp extends HTMLElement {
             // }
             const account = new Account(userName, password)
             account.pushToFireBase()
-
-            const check = await this.checkUserNameExist(userName)
+            const check = await this.checkUserNameExist('userName')
+            alert('Account registered successfully!')
+            router.navigate('/login-screen')
             // if (check) {
             //     alert('User name exist, try something unique')
             // } else {
@@ -362,7 +363,7 @@ class SignUp extends HTMLElement {
 
         })
         this._shadowRoot.getElementById('redirect').addEventListener('click', () => {
-            redirect('login-screen')
+            router.navigate('login-screen')
         })
     }
     // setError(id, message) {
