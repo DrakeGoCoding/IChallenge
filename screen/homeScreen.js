@@ -15,6 +15,7 @@ class HomeScreen extends HTMLElement {
                 </div> 
             </div>
         `
+
     }
 }
 
@@ -23,8 +24,8 @@ window.customElements.define('home-screen', HomeScreen)
 const style = `
 <style>
     .main{
-        margin-top: 8vw;
-        margin-bottom: 8vw;
+        margin-top: 150px;
+        margin-bottom: 150vw;
     }
 
     @media only screen and (max-width: 786px){

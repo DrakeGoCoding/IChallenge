@@ -25,53 +25,44 @@
             box-sizing: border-box;
             font-family: 'JetBrains Mono', monospace;
             color: #fff;
-            font-size: 14px;
-        }
-        .quiz-name{
-            font-size: 40px;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        .greeting{
             font-size: 20px;
-            text-align: center;
-            margin-bottom: 60px;
-            
         }
-        .name-input{
+        .name-input, .description-input{
             display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            flex-direction: column;
+            justify-content: left;
+            margin-bottom: 30px;
         }
-        .name-input textarea{   
+        .name-input textarea, .description-input textarea{   
             color: #fff;
-            width: 300px;
+            width: 100%;
             height: 50px;
             line-height: 50px;
-            text-align: center;
             padding: 0 15px;
             box-sizing: border-box;
-            font-size: 25px;
+            font-size: 20px;
             background-color: transparent;
             border: 2px solid #fff;
             border-radius: 10px;
             outline: none;
         }
-        .start-btn{
-            color: #000;
-            padding: 0 15px;
-            box-sizing: border-box;
-            text-align: center;
+        .description-input textarea{
+            height: 300px;
             line-height: 50px;
-            width: fit-content;
-            height: 50px;
-            background-color: #fff;
-            font-size: 18px;
-            border-radius: 10px;
-            margin: 30px auto 0;
         }
-        .start-btn:hover{
+        .btn-row{
+            display: flex;
+            justify-content: flex-end;
+        }
+        #confirm-btn, #cancel-btn{
+            width: fit-content;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+            border-radius: 10px;
+            margin-left: 15px;
+        }
+        #confirm-btn:hover, #cancel-btn:hover{
             box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
             cursor: pointer;
         }
@@ -80,16 +71,25 @@
 <body>
     <div class="container">
         <div class="record-container">
-            <div class="quiz-name">Name of the Quiz</div>
-            <div class="greeting">Are you ready?</div>
+            
             <div class="name-input">
-                <textarea placeholder="Enter your name"></textarea>
+                <div>Enter your Quiz's name</div>
+                <textarea placeholder="Sample Quiz"></textarea>
             </div>
             
-            <div class="start-btn"> <i class="fa fa-play"></i> Start the Quiz</div>
+            <div class="description-input">
+                <div>Enter your Quiz's description</div>
+                <textarea placeholder="This quiz is about..."></textarea>
+            </div>
+            <div class="btn-row">
+                <div id='confirm-btn'>Confirm</div>
+                <div id='cancel-btn'>Cancel</div>
+            </div>
+            
+            
         </div>
 
-        <button class='summit-btn'></button>
+        
 
     </div>
     </div>

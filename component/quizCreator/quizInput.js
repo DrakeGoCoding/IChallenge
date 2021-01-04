@@ -94,19 +94,18 @@ export default class QuizInput extends HTMLElement {
             })
         }
 
-        summitBtn.addEventListener('click', async (e) => {
+        summitBtn.addEventListener('click', async(e) => {
             const previewItemList = this.parentElement.querySelector('preview-column').shadowRoot.querySelector('.preview-item-list');
             for (const previewItem of previewItemList.children) {
                 if (previewItem.isValidPreviewItem()) {
                     // TO DO: update firebase and redirect to home screen
                     previewItem.shadowRoot.querySelector('.question-count').style.color = '#69C9D0';
-                }
-                else previewItem.shadowRoot.querySelector('.question-count').style.color = '#EE1D52';
+                } else previewItem.shadowRoot.querySelector('.question-count').style.color = '#EE1D52';
             }
             console.log("submit");
         })
 
-        cancelBtn.addEventListener('click', async (e) => {
+        cancelBtn.addEventListener('click', async(e) => {
             // TO DO: Redirect to home screen
             console.log("redirect to home screen");
         })
@@ -262,22 +261,22 @@ const style = `
 
     /* width */
     ::-webkit-scrollbar {
-    width: 10px;
+        width: 10px;
     }
 
     /* Track */
     ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+        background: #f1f1f1; 
     }
     
     /* Handle */
     ::-webkit-scrollbar-thumb {
-    background: #888; 
+        background: #888;
     }
 
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+        background: #555; 
     }
 
     @media only screen and (max-width: 817px){

@@ -21,7 +21,8 @@ import './component/quizDisplay/recordContainer.js'
 import './screen/quizStarter.js'
 import './component/quizDisplay/starterContainer.js'
 
-import "./test.js"
+//import "./test.js"
+import "./navigo.js"
 
 export function redirect(screenName) {
     if (screenName === 'home-screen') {

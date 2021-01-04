@@ -75,7 +75,7 @@ export default class QuizSet {
         const newRecord = {
             'player': player,
             'score': score,
-            'tỉmeAchieved': new Date().toISOString()
+            'timeAchieved': new Date().toISOString()
         }
         // If highscoreList has not reached maximum, just push newHighScore
         if (this.highScoreList.length < MAX_HIGHSCORE_LIST) {

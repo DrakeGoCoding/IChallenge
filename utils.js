@@ -75,7 +75,7 @@ export async function addQuizSetDocument(quizSet) {
     const quizRefList = [];
     const quizPromiseList = [];
     quizSet.quizList.forEach(quiz => quizPromiseList.push(addQuizDocument(quiz)));
-    return Promise.all(quizPromiseList).then(async (values) => {
+    return Promise.all(quizPromiseList).then(async(values) => {
         for (const item of values) {
             quizRefList.push(db.doc('Quizs/' + item.id));
         }
@@ -110,4 +110,23 @@ export async function addQuizDocument(quiz) {
     }
     const res = await db.collection('Quizs').add(quizDoc);
     return res;
+}
+
+
+/**
+ * 
+ * @param {Date} dateStr 
+ */
+export function convertDate(dateStr) {
+    const date = new Date(dateStr)
+    const day = validateNiceNumber(date.getDate())
+    const month = validateNiceNumber(date.getMonth() + 1)
+    const year = date.getFullYear()
+    const hour = validateNiceNumber(date.getHours())
+    const minutes = validateNiceNumber(date.getMinutes())
+    return `${day}/${month}/${year} ${hour}:${minutes}`
+}
+
+function validateNiceNumber(number) {
+    return (number < 10) ? ('0' + number) : (number)
 }
