@@ -1,18 +1,3 @@
-const style = `
-<style>
-    .main{
-        margin-top: 8vw;
-        margin-bottom: 8vw;
-    }
-
-    @media only screen and (max-width: 786px){
-        .main{
-            margin-top: 100px;
-        }
-    }
-</style>
-`
-
 class HomeScreen extends HTMLElement {
     constructor() {
         super()
@@ -34,3 +19,18 @@ class HomeScreen extends HTMLElement {
 }
 
 window.customElements.define('home-screen', HomeScreen)
+
+const style = `
+<style>
+    .main{
+        margin-top: 8vw;
+        margin-bottom: 8vw;
+    }
+
+    @media only screen and (max-width: 786px){
+        .main{
+            margin-top: 100px;
+        }
+    }
+</style>
+`
