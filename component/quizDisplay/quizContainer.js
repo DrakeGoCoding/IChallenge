@@ -1,5 +1,5 @@
 import QuizSet from "../../model/QuizSet.js";
-import { getItemFromLocalStorage, getQuizSetDocByID, getDataFromDoc } from "/utils.js";
+import { getItemFromLocalStorage, getQuizSetDocByID } from "/utils.js";
 
 const style = `
 .quiz-container{
@@ -162,7 +162,7 @@ class QuizContainer extends HTMLElement {
                 getNewQuestion(this.questionCounter);
                 this.questionCounter += 1;
             } else console.log("quiz over");
-            
+
         })
 
         //print out the quiz
@@ -171,8 +171,8 @@ class QuizContainer extends HTMLElement {
             console.log(quiz);
 
             for (let i = 0; i < answer.length; i++) {
-                answer[i].classList.remove('already-answered');   
-                answer[i].style.backgroundColor='#333';
+                answer[i].classList.remove('already-answered');
+                answer[i].style.backgroundColor = '#333';
             }
 
             questionNumber.innerHTML = `Question ${counter + 1} of ${quizList.length}`
@@ -181,30 +181,30 @@ class QuizContainer extends HTMLElement {
             ans2.innerHTML = `${quiz.answers[1].content}`
             ans3.innerHTML = `${quiz.answers[2].content}`
             ans4.innerHTML = `${quiz.answers[3].content}`
-            
+
             ans1.addEventListener('click', () => {
-                getResult(ans1,0)
+                getResult(ans1, 0)
             })
             ans2.addEventListener('click', () => {
-                getResult(ans2,1)
+                getResult(ans2, 1)
             })
             ans3.addEventListener('click', () => {
-                getResult(ans3,2)
+                getResult(ans3, 2)
             })
             ans4.addEventListener('click', () => {
-                getResult(ans4,3)
+                getResult(ans4, 3)
             })
 
-            function getResult(ans, id){
-                if(quiz.answers[id].isCorrect === true){
-                    ans.style.backgroundColor='#69C9D0'
-                } else{
-                    ans.style.backgroundColor='#EE1D52'
+            function getResult(ans, id) {
+                if (quiz.answers[id].isCorrect === true) {
+                    ans.style.backgroundColor = '#69C9D0'
+                } else {
+                    ans.style.backgroundColor = '#EE1D52'
                     console.log(answer[1].innerHTML);
                     //color blue the correct answer
                     for (let i = 0; i < answer.length; i++) {
-                        if(quiz.answers[i].isCorrect === true && quiz.answers[i].content===answer[i].innerHTML){
-                            answer[i].style.backgroundColor='#69C9D0'
+                        if (quiz.answers[i].isCorrect === true && quiz.answers[i].content === answer[i].innerHTML) {
+                            answer[i].style.backgroundColor = '#69C9D0'
                             console.log(quiz.answers[0]);
                         }
                     }
@@ -213,7 +213,7 @@ class QuizContainer extends HTMLElement {
                 //make other options unclickable
                 for (let i = 0; i < answer.length; i++) {
                     answer[i].classList.add('already-answered')
-                    
+
                 }
             }
 

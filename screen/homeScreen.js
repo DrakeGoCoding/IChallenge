@@ -25,12 +25,13 @@ const style = `
 <style>
     .main{
         margin-top: 150px;
-        margin-bottom: 150vw;
+        margin-bottom: 150px;
     }
 
     @media only screen and (max-width: 786px){
         .main{
             margin-top: 100px;
+            margin-bottom: 100px;
         }
     }
 </style>
