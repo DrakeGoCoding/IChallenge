@@ -2,47 +2,51 @@ var root = null;
 var useHash = true; // Defaults to: false
 var hash = '#!'; // Defaults to: '#'
 var router = new Navigo(root, useHash, hash);
-import { getAccountDocByUserName } from './utils.js'
+import { getItemFromLocalStorage } from './utils.js'
+
 router
-  .on({
-    'login-screen': function () {
-      redirect('login-screen')
-    },
-    'signup-screen': function () {
-      redirect('signup-screen')
-    },
-    'home-screen': async function(){
-        const check = await checkAuthen()
-        if (check){
-            redirect('home-screen')
-        } else {
+    .on({
+        'login-screen': function () {
             redirect('login-screen')
+        },
+        'signup-screen': function () {
+            redirect('signup-screen')
+        },
+        'home-screen': async function () {
+            const check = await checkAuthen()
+            console.log(check);
+            if (check) {
+                redirect('home-screen')
+            } else {
+                router.navigate('login-screen')
+            }
+        },
+        '*': function () {
+            router.navigate('home-screen')
+        },
+        'homepage-screen' : function (){
+            redirect ('homepage-screen')
         }
-    },
-    '*': function () {
-      redirect('login-screen')
-    },
-    
-    
-    
-  })
-  .resolve();
+
+
+    })
+    .resolve();
 function redirect(screenName) {
     if (screenName === 'home-screen') {
-        document.getElementById('container').innerHTML =`
+        document.getElementById('container').innerHTML = `
         <home-screen></home-screen>
         `
-    } else if (screenName === 'signup-screen'){
-        document.getElementById('container').innerHTML =`
+    } else if (screenName === 'signup-screen') {
+        document.getElementById('container').innerHTML = `
         <signUp-screen></signUp-screen>
         `
     }
-     else if (screenName === 'login-screen'){
-        document.getElementById('container').innerHTML =`
+    else if (screenName === 'login-screen') {
+        document.getElementById('container').innerHTML = `
         <login-screen></login-screen>
         `
     }
-     else if (screenName === 'quiz-creator') {
+    else if (screenName === 'quiz-creator') {
         document.getElementById('container').innerHTML = `
         <quiz-creator></quiz-creator>
         `
@@ -58,19 +62,39 @@ function redirect(screenName) {
         document.getElementById('container').innerHTML = `
         <quiz-record></quiz-record>
         `
+    } else if (screenName == 'homepage-screen') {
+        document.getElementById('container').innerHTML =`
+        <homepage-screen></homepage-screen>
+        `
     }
 }
-async function checkAuthen(){
-    const accountDoc = await getAccountDocByUserName(userName)
-            if(accountDoc){
-                if(CryptoJS.MD5(password).toString(CryptoJS.enc.Hex) === accountDoc.password){
-                    const account = await Account.parseDocument(accountDoc);
-                    writeToLocalStorage('currentUser', account);
-                    router.navigate('home-screen')
-                } else {
-                    this.setError('password', `Oops, you've just entered a password from another dimension.`)
-                }
-                
-            }
+async function checkAuthen() {
+    const user = getItemFromLocalStorage('currentUser');
+    console.log(user.userName, user.password);
+
+    if (user) {
+        const res = await firebase.firestore()
+            .collection('Accounts')
+            .where('userName', '==', user.userName)
+            .where('password', '==', user.password)
+            .get()
+        if (res.empty) return false;
+        return true;
+    }
+    return false;
 }
+
+// async function checkAuthen(){
+//     const accountDoc = await getAccountDocByUserName()
+//             if(accountDoc){
+//                 if(CryptoJS.MD5(password).toString(CryptoJS.enc.Hex) === accountDoc.password){
+//                     const account = await Account.parseDocument(accountDoc);
+//                     writeToLocalStorage('currentUser', account);
+//                     router.navigate('home-screen')
+//                 } else {
+//                     this.setError('password', `Oops, you've just entered a password from another dimension.`)
+//                 }
+
+//             }
+// }
 window.router = router
