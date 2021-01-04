@@ -9,11 +9,11 @@ class QuizInfolist extends HTMLElement {
 
     connectedCallback() {
         this._shadowDom.innerHTML = `
-        <quiz-info-item></quiz-info-item>
-        <quiz-info-item></quiz-info-item>
-        <quiz-info-item></quiz-info-item>
-        <quiz-info-item></quiz-info-item>
-        <quiz-info-item></quiz-info-item>
+            <quiz-info-item></quiz-info-item>
+            <quiz-info-item></quiz-info-item>
+            <quiz-info-item></quiz-info-item>
+            <quiz-info-item></quiz-info-item>
+            <quiz-info-item></quiz-info-item>
         `
     }
 }
