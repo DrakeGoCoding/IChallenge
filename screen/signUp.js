@@ -293,7 +293,7 @@ class SignUp extends HTMLElement {
      <div class="section">
      <div class="box">
          <div class="img-container">
-             <img src="../img/Logo.png" alt="Queazy-Logo">
+             <img src="./img/Logo.png" alt="Queazy-Logo">
          </div>
          <h2>Sign up</h2>
          <form id="signup-form">

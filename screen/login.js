@@ -299,7 +299,7 @@ class LoginScreen extends HTMLElement{
         <div class="section">
             <div class="box">
                 <div class="img-container">
-                    <img src="../img/Logo.png" alt="Queazy-Logo">
+                    <img src="./img/Logo.png" alt="Queazy-Logo">
                 </div>
                 <h2>Log in</h2>
                 <form id="login-form">

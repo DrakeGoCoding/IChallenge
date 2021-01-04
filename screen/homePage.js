@@ -629,8 +629,10 @@ class HomePage extends HTMLElement {
     }
     connectedCallback(){
         this._shadowRoot.innerHTML = `
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
         <style>
             ${style}
         </style>
@@ -638,7 +640,7 @@ class HomePage extends HTMLElement {
         <div class="container-all">
             <section class="master-header">
                 <header>
-                    <a href="#"><img src="../img/Logo.png" class="logo" alt="logo"></a>
+                    <a href="#"><img src="./img/Logo.png" class="logo" alt="logo"></a>
                     <input type="checkbox" id="check">
                     <label for="check" class="check-btn">
                         <i class="fa fa-bars"></i>
@@ -656,7 +658,7 @@ class HomePage extends HTMLElement {
                 <section class="slider-container">
                     <div class="slider">
                         <div class="slide active">
-                            <img src="../img/Welcome_.png" alt="img">
+                            <img src="./img/Welcome_.png" alt="img">
                             <div class="content">
                                 <h2>Welcome to <span>Queazy</span></h2>
                                 <p>Modern Quiz maker for everyone</p>
@@ -665,7 +667,7 @@ class HomePage extends HTMLElement {
                             </div>
                         </div>
                         <div class="slide">
-                            <img src="../img/Easy_.png" alt="img">
+                            <img src="./img/Easy_.png" alt="img">
                             <div class="content">
                                 <h2>Queazy is <span>Easy</span></h2>
                                 <p>Queazy offer you a simple tool to create and share quizzes</p>
@@ -674,7 +676,7 @@ class HomePage extends HTMLElement {
                             </div>
                         </div>
                         <div class="slide">
-                            <img src="../img/Fun_.png" alt="img">
+                            <img src="./img/Fun_.png" alt="img">
                             <div class="content">
                                 <h2>Queazy is <span>Fun</span></h2>
                                 <p>Queazy make your quizzes look funnier and friendlier</p>
@@ -683,7 +685,7 @@ class HomePage extends HTMLElement {
                             </div>
                         </div>
                         <div class="slide">
-                            <img src="../img/Free_.png" alt="img">
+                            <img src="./img/Free_.png" alt="img">
                             <div class="content">
                                 <h2>Queazy is <span>Free</span></h2>
                                 <p>Queazy is totally free for everyone</p>
