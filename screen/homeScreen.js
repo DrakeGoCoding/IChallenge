@@ -1,6 +1,6 @@
 const style = `
 .home-container{
-    width: 100vw;
+
 }
 .main{
     margin-top: 8vw;
@@ -12,7 +12,6 @@ const style = `
         margin-top: 100px;
     }
 }
-    
 `
 
 class HomeScreen extends HTMLElement{

@@ -1,14 +1,14 @@
 const style = `
-
+    
 `
-class QuizInfolist extends HTMLElement{
-    constructor(){
+class QuizInfolist extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
 
-    connectedCallback(){
-        this._shadowDom.innerHTML= `
+    connectedCallback() {
+        this._shadowDom.innerHTML = `
         <quiz-info-item></quiz-info-item>
         <quiz-info-item></quiz-info-item>
         <quiz-info-item></quiz-info-item>

@@ -3,7 +3,9 @@ const style = `
     position: fixed;
     top: 0;
     width: 100%;
-    height: 80px;
+    height: 100px;
+    padding: 5px 0;
+    border-bottom: 1px groove white;
     background-color: #010101;
     display: flex;
     justify-content: space-between;
@@ -83,22 +85,18 @@ const style = `
         font-size: 28px;
     }
     .search-box{
-        padding: 5px;
-        font-size: 18px;
-    }
-    .search-box input{
-        font-size: 10px;
+        display: none;
     }
 }
 `
 
-class HomeHeader extends HTMLElement{
-    constructor(){
+class HomeHeader extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
 
-    connectedCallback(){
+    connectedCallback() {
         this._shadowDom.innerHTML = `
        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

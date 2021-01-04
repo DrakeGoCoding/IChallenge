@@ -47,4 +47,4 @@ export function redirect(screenName) {
     }
 }
 
-redirect('quiz-creator')
+redirect('home-screen')

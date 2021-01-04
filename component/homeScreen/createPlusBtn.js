@@ -14,23 +14,22 @@ const style = `
     .create-btn{
         font-size: 50px;
         left: 92vw;
-        top:85vh;
     }
 }
 @media only screen and (max-width: 400px){
     .create-btn{
-        left: 88vw;
+        left: 80vw;
     }
 }
 `
-class CreatePlusBtn extends HTMLElement{
-    constructor(){
+class CreatePlusBtn extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
 
-    connectedCallback(){
-        this._shadowDom.innerHTML=`
+    connectedCallback() {
+        this._shadowDom.innerHTML = `
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
         ${style}

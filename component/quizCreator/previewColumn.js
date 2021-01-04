@@ -52,22 +52,23 @@ const style = `
 
     /* width */
     ::-webkit-scrollbar {
-    width: 10px;
+        width: 10px;
     }
 
     /* Track */
     ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+        background: #f1f1f1; 
     }
     
     /* Handle */
     ::-webkit-scrollbar-thumb {
-    background: #888; 
+        background: #888;
+        border-radius: 5px;
     }
 
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+        background: #555; 
     }
 
     @media only screen and (max-width: 817px){
