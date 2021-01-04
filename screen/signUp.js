@@ -302,7 +302,7 @@ class SignUp extends HTMLElement {
      <div class="section">
      <div class="box">
          <div class="img-container">
-             <img src="Logo.png" alt="Queazy-Logo">
+             <img src="./img/Logo.png" alt="Queazy-Logo">
          </div>
          <h2>Sign up</h2>
          <form id="signup-form">
@@ -312,7 +312,7 @@ class SignUp extends HTMLElement {
              <button type="submit" id="submit">Sign up</button>
          </form>
          <div class="register">
-             <h3>Already have an account? <a id="redirect">Login</a></h3>
+             <h3>Already have an account? <a id="redirect">Log in</a></h3>
          </div>
      </div>
      <div class="animation-area">
