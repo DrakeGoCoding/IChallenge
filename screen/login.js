@@ -1,6 +1,6 @@
 // import { redirect } from '../index.js'
 import Account from '../model/Account.js'
-import { getAccountDocByUserName, getDataFromDocs, writeToLocalStorage } from '../utils.js'
+import { getAccountDocByUserName, writeToLocalStorage } from '../utils.js'
 
 const style = `
     :root {

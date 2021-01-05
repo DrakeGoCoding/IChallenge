@@ -101,4 +101,4 @@ async function checkAuthen() {
 //             }
 // }
 window.router = router;
-window.quizSetId = router._lastRouteResolved.params.id;
+// window.quizSetId = router._lastRouteResolved.params.id;

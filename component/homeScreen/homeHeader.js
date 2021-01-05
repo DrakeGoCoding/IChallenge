@@ -27,16 +27,25 @@ const style = `
     flex-direction: row-reverse;
 }
 #user-icon{
-    margin-right: 4vw;
+    margin-right: 6.5vw;
     color: #fff;
     font-size: 40px;
+}
+#logout-btn{
+    margin-right: -7vw;
+    color: #fff;
+    font-size: 35px;
+}
+#logout-btn:hover{
+    cursor: pointer;
+    text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }
 #user-icon:hover{
     cursor: pointer;
     text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }
 .search-box{
-    margin-right: 2vw;
+    margin-right: 8vw;
     display: flex;
     color: white;
     align-items: center;
@@ -65,8 +74,10 @@ const style = `
         font-size: 50px;
     }
     #user-icon{
-        font-size: 35px;
+        font-size: 30px;
     }
+    #logout-btn{
+        font-size: 30px;
     .search-box{
         font-size: 20px;
     }
@@ -83,6 +94,11 @@ const style = `
     }
     #user-icon{
         font-size: 28px;
+        margin-right:10vh;
+    }
+    #logout-btn{
+        font-size: 28px;
+        margin-right:-10vh;
     }
     .search-box{
         display: none;
@@ -90,6 +106,7 @@ const style = `
 }
 `
 
+// import { removeItemFromLocalStorage } from ''
 class HomeHeader extends HTMLElement {
     constructor() {
         super()
@@ -109,6 +126,7 @@ class HomeHeader extends HTMLElement {
             <div class="logo">Queazy</div>
             <div class="header-right-bar">
                 <div id="user-icon"><i class="fa fa-user"></i></div>
+                <div id="logout-btn"><i class="fa fa-sign-out" aria-hidden="true"></i></div>
                 <div class="search-box">
                     <div class="search-icon"><i class="fa fa-search"></i></div>
                     <input type="text" placeholder="Search quizzes' title">
@@ -117,8 +135,14 @@ class HomeHeader extends HTMLElement {
             </div>
         </div>
         `
+        this._shadowDom.getElementById('logout-btn').addEventListener('click', () => {
+            removeItemFromLocalStorage('currentUser')
+            router.navigate('login-screen')
+        })
     }
 
 }
-
+function removeItemFromLocalStorage(key) {
+    localStorage.removeItem(key)
+}
 window.customElements.define('home-header', HomeHeader)
