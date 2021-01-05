@@ -1,6 +1,5 @@
 import Account from "../../model/Account.js";
-import { getItemFromLocalStorage } from "../../utils.js";
-import { getAccountDocByUserName } from "/utils.js";
+import { getItemFromLocalStorage, getAccountDocByUserName } from "../../utils.js";
 
 class QuizInfolist extends HTMLElement {
     constructor() {
