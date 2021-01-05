@@ -16,6 +16,9 @@ router
         'signup-screen': function() {
             redirect('signup-screen')
         },
+        '/quizset/:id': function() {
+            redirect('quiz-starter')
+        },
         'home-screen': async function() {
             const check = await checkAuthen()
             console.log(check);
@@ -53,6 +56,7 @@ function redirect(screenName) {
         document.getElementById('container').innerHTML = `
             <quiz-starter></quiz-starter>
         `
+
     } else if (screenName == 'quiz-display') {
         document.getElementById('container').innerHTML = `
             <quiz-display></quiz-display>
@@ -83,3 +87,4 @@ async function checkAuthen() {
 }
 
 window.router = router
+window.quizSetId = router._lastRouteResolved.params.id

@@ -1,4 +1,4 @@
-import { getItemFromLocalStorage, getQuizSetDocByID } from "../../utils.js";
+import { getQuizSetDocByID } from "../../utils.js";
 
 const style = `
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -17,12 +17,17 @@ const style = `
     .quiz-name{
         font-size: 5rem;
         text-align: center;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
+    }
+    .quiz-description{
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 60px;
     }
     .greeting{
         font-size: 1.5rem;
         text-align: center;
-        margin-bottom: 60px;
+        margin-bottom: 30px;
     }
     .name-input textarea{   
         color: #fff;
@@ -66,15 +71,13 @@ class StarterContainer extends HTMLElement {
     }
 
     async connectedCallback() {
-        let quizSetId = getItemFromLocalStorage("currentQuiz");
-
         const quizSet = await getQuizSetDocByID(quizSetId);
-        console.log(quizSet);
 
         this._shadowDom.innerHTML = `
             ${style}
             <div class="starter-container">
                 <div class="quiz-name">${quizSet.title}</div>
+                <div class="quiz-description">${quizSet.description}</div>
                 <div class="greeting">Are you ready?</div>
                 <div class="name-input">
                     <textarea placeholder="Enter your name"></textarea>

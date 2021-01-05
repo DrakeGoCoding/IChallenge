@@ -4,6 +4,7 @@ import './component/homeScreen/createPlusBtn.js'
 import './component/homeScreen/quizInfoList.js'
 import './component/homeScreen/quizInfoItem.js'
 
+import "./navigo.js"
 import './screen/quizCreator.js'
 import './component/quizCreator/creatorHeader.js'
 import './component/quizCreator/previewColumn.js'
