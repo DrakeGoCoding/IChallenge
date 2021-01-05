@@ -61,6 +61,35 @@ const style = `
         box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
         cursor: pointer;
     }
+    @media only screen and (max-width: 768px){
+        .starter-container{
+            width: 400px;
+        }
+        .quiz-name{
+            font-size: 4rem;
+        }
+        .name-input textarea{
+        width: 350px;
+        }
+        .quiz-description{
+            font-size: 1.5rem;
+        }
+    }
+    @media only screen and (max-width: 400px){
+        .starter-container{
+            width: 90vw;
+            font-size: 12px;
+            padding: 20px;
+        }
+        .quiz-name{
+            font-size: 3.5rem;
+        }
+        .name-input textarea{
+            width: 80vw;
+            }
+            .quiz-description{
+                font-size: 1.2rem;
+        }
 </style>
 `
 
