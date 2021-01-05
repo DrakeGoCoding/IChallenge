@@ -83,7 +83,7 @@ body {
     font-size: 1.2rem;
 }
 
-.box input[type="submit"] {
+.box button{
     display: block;
     margin: auto;
     border-bottom: 4px solid #4be2c4;
@@ -92,15 +92,19 @@ body {
     background: var(--clr-dark-blue);
     width: 60%;
     color: var(--clr-dark-white);
-    font-weight: 600;
+    font-family: var(--ff-content);
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-transform: bold;
     box-shadow: 0px 5px 0 #218f79;
     margin-bottom: 0;
     outline: none;
     text-transform: uppercase;
     transition: .2s;
+    padding: 10px 0;
 }
 
-.box input[type="submit"]:active {
+.box button:active {
     box-shadow: none;
     transform: translateY(5px);
     transition: .2s;
