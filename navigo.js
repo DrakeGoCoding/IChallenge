@@ -8,7 +8,7 @@ router
     'home-screen': function () {
       redirect('home-screen')
     },
-    'quiz-starter': function () {
+    '/quizset/:id': function () {
       redirect('quiz-starter')
     },
     'story': async function () {
@@ -20,7 +20,7 @@ router
       }
     },
     '*': function () {
-      router.navigate('login')
+      router.navigate('home-screen')
     }
   })
   .resolve();

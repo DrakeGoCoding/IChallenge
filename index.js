@@ -24,28 +24,28 @@ import './component/quizDisplay/starterContainer.js'
 //import "./test.js"
 import "./navigo.js"
 
-export function redirect(screenName) {
-    if (screenName === 'home-screen') {
-        document.getElementById('container').innerHTML = `
-        <home-screen></home-screen>
-        `
-    } else if (screenName === 'quiz-creator') {
-        document.getElementById('container').innerHTML = `
-        <quiz-creator></quiz-creator>
-        `
-    } else if (screenName == 'quiz-starter') {
-        document.getElementById('container').innerHTML = `
-        <quiz-starter></quiz-starter>
-        `
-    } else if (screenName == 'quiz-display') {
-        document.getElementById('container').innerHTML = `
-        <quiz-display></quiz-display>
-        `
-    } else if (screenName == 'quiz-record') {
-        document.getElementById('container').innerHTML = `
-        <quiz-record></quiz-record>
-        `
-    }
-}
+// export function redirect(screenName) {
+//     if (screenName === 'home-screen') {
+//         document.getElementById('container').innerHTML = `
+//         <home-screen></home-screen>
+//         `
+//     } else if (screenName === 'quiz-creator') {
+//         document.getElementById('container').innerHTML = `
+//         <quiz-creator></quiz-creator>
+//         `
+//     } else if (screenName == 'quiz-starter') {
+//         document.getElementById('container').innerHTML = `
+//         <quiz-starter></quiz-starter>
+//         `
+//     } else if (screenName == 'quiz-display') {
+//         document.getElementById('container').innerHTML = `
+//         <quiz-display></quiz-display>
+//         `
+//     } else if (screenName == 'quiz-record') {
+//         document.getElementById('container').innerHTML = `
+//         <quiz-record></quiz-record>
+//         `
+//     }
+// }
 
-redirect('quiz-starter')
+// redirect('home-screen')
