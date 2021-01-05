@@ -1,4 +1,4 @@
-import { getItemFromLocalStorage, getQuizSetDocByID } from "../../utils.js";
+import { getQuizSetDocByID } from "../../utils.js";
 
 const style = `
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -71,9 +71,8 @@ class StarterContainer extends HTMLElement {
     }
 
     async connectedCallback() {
-        //let quizSetId = getItemFromLocalStorage("currentQuiz");
-        const quizSet = await getQuizSetDocByID(quizSetId);
-
+        this.id = this.getAttribute('id');
+        const quizSet = await getQuizSetDocByID(this.id);
         this._shadowDom.innerHTML = `
             ${style}
             <div class="starter-container">
@@ -87,6 +86,13 @@ class StarterContainer extends HTMLElement {
                 <div class="start-btn"> <i class="fa fa-play"></i> Start the Quiz</div>
             </div>
         `
+
+        const startBtn = this._shadowDom.querySelector('.start-btn');
+        const nameInput = this._shadowDom.querySelector('.name-input textarea');
+        startBtn.addEventListener('click', e => {
+            const name = nameInput.value.trim();
+            if (name !== '') router.navigate(`#!quiz-display/${this.id}/${name}`);
+        })
     }
 }
 

@@ -115,10 +115,12 @@ class QuizContainer extends HTMLElement {
     }
     async connectedCallback() {
         this.questionCounter = 0;
-        let quizSetId = getItemFromLocalStorage("currentQuiz")
+        this.id = this.getAttribute('id');
+        this.player = this.getAttribute('player');
 
-        const quizSetDoc = await getQuizSetDocByID(quizSetId);
+        const quizSetDoc = await getQuizSetDocByID(this.id);
         const quizSet = await QuizSet.parseDocument(quizSetDoc)
+
         let quizList = quizSet.quizList
 
         this._shadowDom.innerHTML = `
@@ -146,7 +148,7 @@ class QuizContainer extends HTMLElement {
         const questionNumber = this._shadowDom.querySelector('.question-no')
         const question = this._shadowDom.querySelector('.question')
         const answer = this._shadowDom.querySelectorAll('.answer')
-        console.log(answer);
+            // console.log(answer);
         const ans1 = this._shadowDom.getElementById('0')
         const ans2 = this._shadowDom.getElementById('1')
         const ans3 = this._shadowDom.getElementById('2')
@@ -168,7 +170,7 @@ class QuizContainer extends HTMLElement {
         //print out the quiz
         function getNewQuestion(counter) {
             let quiz = quizList[counter]
-            console.log(quiz);
+                // console.log(quiz);
 
             for (let i = 0; i < answer.length; i++) {
                 answer[i].classList.remove('already-answered');
@@ -200,12 +202,12 @@ class QuizContainer extends HTMLElement {
                     ans.style.backgroundColor = '#69C9D0'
                 } else {
                     ans.style.backgroundColor = '#EE1D52'
-                    console.log(answer[1].innerHTML);
-                    //color blue the correct answer
+                        // console.log(answer[1].innerHTML);
+                        //color blue the correct answer
                     for (let i = 0; i < answer.length; i++) {
                         if (quiz.answers[i].isCorrect === true && quiz.answers[i].content === answer[i].innerHTML) {
                             answer[i].style.backgroundColor = '#69C9D0'
-                            console.log(quiz.answers[0]);
+                                // console.log(quiz.answers[0]);
                         }
                     }
                 }
