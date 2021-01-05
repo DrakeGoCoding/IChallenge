@@ -34,7 +34,7 @@ class QuizInfolist extends HTMLElement {
 
         this._shadowDom.innerHTML = `
             ${style}
-            ${quizInfoListHtml}
+            <div class="quiz-info-list">${quizInfoListHtml}</div>
         `
     }
 
