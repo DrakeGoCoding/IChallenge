@@ -1,4 +1,5 @@
 import Account from "../../model/Account.js";
+import { getItemFromLocalStorage } from "../../utils.js";
 import { getAccountDocByUserName } from "/utils.js";
 
 class QuizInfolist extends HTMLElement {
@@ -8,13 +9,15 @@ class QuizInfolist extends HTMLElement {
     }
 
     async connectedCallback() {
-        const accountDoc = await getAccountDocByUserName('admin');
-        console.log('fix lai func getAccountDocByUserName theo localStorage!!');
+        const currentUser = getItemFromLocalStorage('currentUser');
+        const accountDoc = await getAccountDocByUserName(currentUser.userName);
         const account = await Account.parseDocument(accountDoc);
+        const quizCollection = account.quizCollection;
 
-        let quizCollection = account.quizCollection;
+        let quizInfoListHtml = '';
+
         quizCollection.forEach(quizSet => {
-            this._shadowDom.innerHTML = `
+            quizInfoListHtml += `
                 <quiz-info-item 
                     title="${quizSet.title}"
                     time="${quizSet.createdDate}"
@@ -25,6 +28,11 @@ class QuizInfolist extends HTMLElement {
                 </quiz-info-item>
                 `
         })
+
+        this._shadowDom.innerHTML = `
+            ${style}
+            ${quizInfoListHtml}
+        `
     }
 }
 

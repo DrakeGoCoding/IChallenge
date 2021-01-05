@@ -16,8 +16,11 @@ router
         'signup-screen': function() {
             redirect('signup-screen')
         },
-        '/quizset/:id': function() {
-            redirect('quiz-starter')
+        'quiz-display/:id/:player': function({ id, player }) {
+            redirect('quiz-display', id, player)
+        },
+        'quiz-starter/:id': function({ id }) {
+            redirect('quiz-starter', id)
         },
         'home-screen': async function() {
             const check = await checkAuthen()
@@ -30,11 +33,10 @@ router
         '*': function() {
             router.navigate('home-screen')
         },
-
     })
     .resolve();
 
-function redirect(screenName) {
+function redirect(screenName, id, player) {
     if (screenName === 'home-screen') {
         document.getElementById('container').innerHTML = `
             <home-screen></home-screen>
@@ -53,12 +55,11 @@ function redirect(screenName) {
         `
     } else if (screenName == 'quiz-starter') {
         document.getElementById('container').innerHTML = `
-            <quiz-starter></quiz-starter>
+            <quiz-starter id=${id}></quiz-starter>
         `
-
     } else if (screenName == 'quiz-display') {
         document.getElementById('container').innerHTML = `
-            <quiz-display></quiz-display>
+            <quiz-display id=${id} player=${player}></quiz-display>
         `
     } else if (screenName == 'quiz-record') {
         document.getElementById('container').innerHTML = `
@@ -86,4 +87,3 @@ async function checkAuthen() {
 }
 
 window.router = router
-window.quizSetId = router._lastRouteResolved.params.id
