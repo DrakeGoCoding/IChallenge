@@ -1,4 +1,3 @@
-// import { redirect } from "../index.js"
 import Account from "../model/Account.js"
 
 const style = `
@@ -449,7 +448,7 @@ class SignUp extends HTMLElement {
  </div>   
         `
         const signUpForm = this._shadowRoot.getElementById('signup-form')
-        signUpForm.addEventListener('submit', async (e) => {
+        signUpForm.addEventListener('submit', async(e) => {
             e.preventDefault()
             const userName = this._shadowRoot.getElementById('userName').value
             const password = this._shadowRoot.getElementById('password').value
@@ -473,32 +472,20 @@ class SignUp extends HTMLElement {
             if (!isValid) {
                 return
             }
-            // const user = {
-            //     fullName: `${firstName} ${lastName}`,
-            //     userName: `${userName}`,
-            //     password: `${CryptoJS.MD5(password).toString()}`
-            // }
-            const account = new Account(userName, password)
-            account.pushToFireBase()
-            const check = await this.checkUserNameExist('userName')
+
+            const check = await this.checkUserNameExist('userName');
+            if (check) {
+                const account = new Account(userName, password)
+                account.pushToFireBase()
+            }
             alert('Account registered successfully!')
             router.navigate('/login-screen')
-            // if (check) {
-            //     alert('User name exist, try something unique')
-            // } else {
-            //     firebase.firestore().collection('Accounts').add(user)
-            //     alert ("Register successfully")
-            //     redirect('login-screen')
-            // }
-
         })
         this._shadowRoot.getElementById('redirect').addEventListener('click', () => {
             router.navigate('login-screen')
         })
     }
-    // setError(id, message) {
-    //     this._shadowRoot.getElementById(id).setAttribute('error', message)
-    // }
+
     async checkUserNameExist(userName) {
         const res = await firebase.firestore().collection('Accounts').where('userName', '==', userName).get()
         return !res.empty

@@ -1,6 +1,4 @@
-// import { redirect } from '../index.js'
-import Account from '../model/Account.js'
-import { getAccountDocByUserName, getDataFromDocs, writeToLocalStorage } from '../utils.js'
+import { getAccountDocByUserName, writeToLocalStorage } from '../utils.js'
 
 const style = `
     :root {
@@ -504,8 +502,6 @@ class LoginScreen extends HTMLElement {
             const accountDoc = await getAccountDocByUserName(userName)
             if (accountDoc) {
                 if (CryptoJS.MD5(password).toString(CryptoJS.enc.Hex) === accountDoc.password) {
-                    // const account = await Account.parseDocument(accountDoc);
-                    // writeToLocalStorage('currentUser', account);
                     writeToLocalStorage('currentUser', {
                         'userName': accountDoc.userName,
                         'password': accountDoc.password
