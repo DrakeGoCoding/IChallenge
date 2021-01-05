@@ -40,7 +40,7 @@ class QuizInfoItem extends HTMLElement {
         `
         this._shadowDom.getElementById('play-btn').addEventListener('click', () => {
             writeToLocalStorage('currentQuiz', this.id)
-            window.open(`#!/quizset/${this.id}`, '_blank')
+            window.open(`#!/quizset/starter/${this.id}`, '_blank')
             
         })
     }

@@ -8,8 +8,11 @@ router
     'home-screen': function () {
       redirect('home-screen')
     },
-    '/quizset/:id': function () {
+    '/quizset/starter/:id': function () {
       redirect('quiz-starter')
+    },
+    '/quizset/display/:id': function () {
+      redirect('quiz-display')
     },
     '*': function () {
       router.navigate('home-screen')
