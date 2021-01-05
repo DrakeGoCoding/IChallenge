@@ -6,6 +6,7 @@ const style = `
 
 .input-wrapper{
     margin-bottom: 10px;
+    transition: .5s;
 }
 .input-wrapper input {
     padding: 10px 0;
@@ -60,6 +61,100 @@ const style = `
     color: #1fceab;
     font-size: 1rem;
     padding: 10px;
+}
+
+@media (max-width: 1000px) {
+    .input-wrapper{
+        margin-bottom: 1px;
+    }
+    .input-wrapper input {
+        padding: 10px 0;
+        margin-bottom: 35px;
+    }
+    
+    .input-wrapper input {
+        font-size: 1.2rem;
+    }
+    
+    .input-wrapper label {
+        font-size: 20px;
+        top: -100px;
+        transition: .5s;
+    }
+    
+    .input-wrapper input:focus ~ .placeholder
+    {
+        top: -100px;
+        font-size: 18px;
+    }
+    
+    .input-wrapper .error {
+        font-size: .8rem;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 700px) {
+    .input-wrapper{
+        margin-bottom: -10px;
+        transition: .5s;
+    }
+    .input-wrapper input {
+        padding: 7px 0;
+        margin-bottom: 35px;
+    }
+    
+    .input-wrapper input {
+        font-size: 1rem;
+    }
+    
+    .input-wrapper label {
+        font-size: 18px;
+        top: -100px;
+        transition: .5s;
+    }
+    
+    .input-wrapper input:focus ~ .placeholder
+    {
+        top: -100px;
+        font-size: 16px;
+    }
+    
+    .input-wrapper .error {
+        font-size: .8rem;
+        padding: 8px;
+    }
+}
+@media (max-width: 500px) {
+    .input-wrapper{
+        margin-bottom: -10px;
+        transition: .5s;
+    }
+    .input-wrapper input {
+        padding: 7px 0;
+        margin-bottom: 35px;
+    }
+    
+    .input-wrapper input {
+        font-size: .8rem;
+    }
+    
+    .input-wrapper label {
+        font-size: 17px;
+        top: -87px;
+        transition: .5s;
+    }
+    
+    .input-wrapper input:focus ~ .placeholder
+    {
+        top: -91px;
+        font-size: 15px;
+    }
+    
+    .input-wrapper .error {
+        font-size: .62rem;
+        padding: 8px;
+    }
 }
 
 `

@@ -41,7 +41,8 @@ body {
     box-sizing: border-box;
     border: 3px solid var(--clr-accent);
     border-radius: 10px;
-    box-shadow: 10px 10px #1fceab, -10px -10px #c20440 ;
+    box-shadow: 10px 10px #1fceab, -10px -10px #c20440;
+    transition: .5s;
 }
 
 .img-container {
@@ -52,14 +53,16 @@ body {
 .section .box .img-container img {
     width: 300px;
     margin: auto;
+    transition: .5s;
 }
+
 .box h2{
     font-size: 4rem;
     margin: 0 0 40px;
     padding: 0;
+    transition: .5s;
     color: #fefdff;
     font-family: 'Source Sans Pro', sans-serif;
-
 }
 
 .box input {
@@ -79,9 +82,6 @@ body {
     font-family: 'JetBrains Mono', monospace;
     font-weight: 600;
     font-size: 1.2rem;
-}
-html {
-
 }
 
 .box button {
@@ -111,36 +111,6 @@ html {
     transition: .2s;
 
 }
-
-.box form div {
-    position: relative;
-}
-
-.box form div label {
-    position: relative;
-    font-size: 30px;
-    top: -110px;
-    left: 0;
-    color: #5c5c5c;
-    transition: .5s;
-    pointer-events: none;
-    font-family: 'JetBrains Mono', monospace;
-}
-
-.box input:focus ~ label
-{
-    top: -110px;
-    left: 0;
-    color: #c20440;
-    font-size: 25px;
-    font-weight: bold;
-}
-
-.box input:focus
-{
-    border-bottom: 2px solid #c20440;
-}
-
 
 * {
     margin: 0;
@@ -261,6 +231,7 @@ body {
 .register h3 {
     padding: 20px 0;
     color: #575557;
+    transition: .5s;
 }
 
 .register h3 a {
@@ -282,6 +253,156 @@ body {
     .section .box .img-container img{
         width: 250px;
         margin: auto;
+    }
+}
+
+@media (max-width: 1000px) {
+    .section .box .img-container img {
+        width: 250px;
+        margin: auto;
+        transition: .5s; 
+    }
+    .box {
+        width: 500px;
+        transition: .5s;
+    }
+    .box h2{
+        font-size: 3rem;
+        margin: 0 0 30px;
+        transition: .5s;
+    }
+    .box input {
+        padding: 10px 0;
+        margin-bottom: 35px;
+    }
+    
+    .box input {
+        border-bottom: 2px solid #1fceab;
+        font-size: 1rem;
+    }
+    
+    .box button {
+        cursor: pointer;
+        border-radius: 15px;
+        width: 50%;
+        font-size: 1.3rem;
+        transition: .1s;
+        padding: 8px 0;
+    }
+    
+    .box button:active {
+        box-shadow: none;
+        transform: translateY(5px);
+        transition: .1s;
+    }
+}
+
+@media (max-width: 700px) {
+    .section .box .img-container img {
+        width: 200px;
+        margin: auto;
+        transition: .5s; 
+    }
+    .box {
+        width: 450px;
+        transition: .5s;
+        padding: 30px;
+    }
+    .box h2{
+        font-size: 2.7rem;
+        margin: 0 0 30px;
+        transition: .5s;
+    }
+    
+    .box button {
+        cursor: pointer;
+        border-radius: 15px;
+        width: 50%;
+        font-size: 1.3rem;
+        transition: .1s;
+        padding: 8px 0;
+    }
+    
+    .box button:active {
+        box-shadow: none;
+        transform: translateY(5px);
+        transition: .1s;
+    }
+    .register h3 {
+        font-size: 1rem;
+        transition: .5s;
+    }
+}
+@media (max-width: 500px) {
+    .section .box .img-container img {
+        width: 200px;
+        margin: auto;
+        transition: .5s; 
+    }
+    .box {
+        width: 400px;
+        transition: .5s;
+        padding: 20px;
+    }
+    .box h2{
+        font-size: 2.5rem;
+        margin: 0 0 30px;
+        transition: .5s;
+    }
+    
+    .box button {
+        cursor: pointer;
+        border-radius: 15px;
+        width: 40%;
+        font-size: 1rem;
+        transition: .1s;
+        padding: 5px 0;
+    }
+    
+    .box button:active {
+        box-shadow: none;
+        transform: translateY(5px);
+        transition: .1s;
+    }
+    .register h3 {
+        font-size: 1rem;
+        transition: .5s;
+    }
+}
+@media (max-width: 430px) {
+    .section .box .img-container img {
+        width: 200px;
+        margin: auto;
+        transition: .5s; 
+    }
+    .box {
+        width: 370px;
+        transition: .5s;
+        padding: 20px;
+    }
+    .box h2{
+        font-size: 2.5rem;
+        margin: 0 0 30px;
+        transition: .5s;
+    }
+    
+    .box button {
+        cursor: pointer;
+        border-radius: 15px;
+        width: 40%;
+        font-size: 1rem;
+        transition: .1s;
+        padding: 5px 0;
+    }
+    
+    .box button:active {
+        box-shadow: none;
+        transform: translateY(5px);
+        transition: .1s;
+    }
+    .register h3 {
+        font-size: 1rem;
+        transition: .5s;
     }
 }
 

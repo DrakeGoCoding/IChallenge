@@ -54,7 +54,9 @@ body {
 .section .box .img-container img {
     width: 300px;
     margin: auto;
+    transition: .5s;
 }
+
 .box h2{
     font-size: 4rem;
     margin: 0 0 40px;
@@ -275,3 +277,10 @@ body {
     transition: .2s;
 }
 
+@media (max-width: 1000px) {
+    .section .box .img-container img {
+        width: 250px;
+        margin: auto;
+        transition: .5s; 
+    }
+}

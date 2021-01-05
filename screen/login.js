@@ -290,6 +290,156 @@ const style = `
         }
     }
 
+    @media (max-width: 1000px) {
+        .section .box .img-container img {
+            width: 250px;
+            margin: auto;
+            transition: .5s; 
+        }
+        .box {
+            width: 500px;
+            transition: .5s;
+        }
+        .box h2{
+            font-size: 3rem;
+            margin: 0 0 30px;
+            transition: .5s;
+        }
+        .box input {
+            padding: 10px 0;
+            margin-bottom: 35px;
+        }
+        
+        .box input {
+            border-bottom: 2px solid #1fceab;
+            font-size: 1rem;
+        }
+        
+        .box button {
+            cursor: pointer;
+            border-radius: 15px;
+            width: 50%;
+            font-size: 1.3rem;
+            transition: .1s;
+            padding: 8px 0;
+        }
+        
+        .box button:active {
+            box-shadow: none;
+            transform: translateY(5px);
+            transition: .1s;
+        }
+    }
+    
+    @media (max-width: 700px) {
+        .section .box .img-container img {
+            width: 200px;
+            margin: auto;
+            transition: .5s; 
+        }
+        .box {
+            width: 450px;
+            transition: .5s;
+            padding: 30px;
+        }
+        .box h2{
+            font-size: 2.7rem;
+            margin: 0 0 30px;
+            transition: .5s;
+        }
+        
+        .box button {
+            cursor: pointer;
+            border-radius: 15px;
+            width: 50%;
+            font-size: 1.3rem;
+            transition: .1s;
+            padding: 8px 0;
+        }
+        
+        .box button:active {
+            box-shadow: none;
+            transform: translateY(5px);
+            transition: .1s;
+        }
+        .register h3 {
+            font-size: 1rem;
+            transition: .5s;
+        }
+    }
+    @media (max-width: 500px) {
+        .section .box .img-container img {
+            width: 200px;
+            margin: auto;
+            transition: .5s; 
+        }
+        .box {
+            width: 400px;
+            transition: .5s;
+            padding: 20px;
+        }
+        .box h2{
+            font-size: 2.5rem;
+            margin: 0 0 30px;
+            transition: .5s;
+        }
+        
+        .box button {
+            cursor: pointer;
+            border-radius: 15px;
+            width: 40%;
+            font-size: 1rem;
+            transition: .1s;
+            padding: 5px 0;
+        }
+        
+        .box button:active {
+            box-shadow: none;
+            transform: translateY(5px);
+            transition: .1s;
+        }
+        .register h3 {
+            font-size: 1rem;
+            transition: .5s;
+        }
+    }
+    @media (max-width: 430px) {
+        .section .box .img-container img {
+            width: 200px;
+            margin: auto;
+            transition: .5s; 
+        }
+        .box {
+            width: 370px;
+            transition: .5s;
+            padding: 20px;
+        }
+        .box h2{
+            font-size: 2.5rem;
+            margin: 0 0 30px;
+            transition: .5s;
+        }
+        
+        .box button {
+            cursor: pointer;
+            border-radius: 15px;
+            width: 40%;
+            font-size: 1rem;
+            transition: .1s;
+            padding: 5px 0;
+        }
+        
+        .box button:active {
+            box-shadow: none;
+            transform: translateY(5px);
+            transition: .1s;
+        }
+        .register h3 {
+            font-size: 1rem;
+            transition: .5s;
+        }
+    }
+
 `
 class LoginScreen extends HTMLElement{
     constructor(){
