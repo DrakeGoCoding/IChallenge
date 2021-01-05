@@ -1,5 +1,3 @@
-// import { redirect } from '../index.js'
-
 const style = `
 
     html {
@@ -627,7 +625,7 @@ class HomePage extends HTMLElement {
         super()
         this._shadowRoot = this.attachShadow({ mode: 'open' })
     }
-    connectedCallback(){
+    connectedCallback() {
         this._shadowRoot.innerHTML = `
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -764,11 +762,11 @@ class HomePage extends HTMLElement {
         var slides = this._shadowRoot.querySelectorAll('.slider-container .slider .slide');
         var btns = this._shadowRoot.querySelectorAll('.navigation .btn');
         let currentSlide = 1;
-        
+
         var manualNav = function(manual) {
             slides.forEach((slide) => {
                 slide.classList.remove('active');
-                
+
                 btns.forEach((btn) => {
                     btn.classList.remove('active');
                 })
@@ -776,7 +774,7 @@ class HomePage extends HTMLElement {
             slides[manual].classList.add('active');
             btns[manual].classList.add('active');
         }
-        
+
         btns.forEach((btn, i) => {
             btn.addEventListener('click', () => {
                 manualNav(i);
@@ -791,7 +789,7 @@ class HomePage extends HTMLElement {
             redirect('signup-screen')
         })
     }
-    
+
 }
 
 window.customElements.define("homepage-screen", HomePage)
