@@ -21,7 +21,6 @@ router
         },
         'home-screen': async function() {
             const check = await checkAuthen()
-            console.log(check);
             if (check) {
                 redirect('home-screen')
             } else {
