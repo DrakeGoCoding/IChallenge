@@ -11,14 +11,6 @@ router
     '/quizset/:id': function () {
       redirect('quiz-starter')
     },
-    'story': async function () {
-      const check = await checkAuthen()
-      if (check) {
-        redirect('story')
-      } else {
-        router.navigate('login')
-      }
-    },
     '*': function () {
       router.navigate('home-screen')
     }
@@ -32,12 +24,13 @@ router
         `
     } else if (screenName === 'quiz-creator') {
         document.getElementById('container').innerHTML = `
-        <quiz-creator></quiz-creator>
+        <quiz-creator></quiz-creator> 
         `
     } else if (screenName == 'quiz-starter') {
         document.getElementById('container').innerHTML = `
         <quiz-starter></quiz-starter>
         `
+
     } else if (screenName == 'quiz-display') {
         document.getElementById('container').innerHTML = `
         <quiz-display></quiz-display>
@@ -68,3 +61,4 @@ router
 // }
 
 window.router = router
+window.quizSetId = router._lastRouteResolved.params.id

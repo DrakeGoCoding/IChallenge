@@ -71,10 +71,8 @@ class StarterContainer extends HTMLElement {
     }
 
     async connectedCallback() {
-        let quizSetId = getItemFromLocalStorage("currentQuiz");
-
+        //let quizSetId = getItemFromLocalStorage("currentQuiz");
         const quizSet = await getQuizSetDocByID(quizSetId);
-        console.log(quizSet);
 
         this._shadowDom.innerHTML = `
             ${style}
