@@ -1,4 +1,5 @@
 import Account from "../model/Account.js"
+import { getAccountDocByUserName } from "../utils.js"
 
 const style = `
 :root {
@@ -416,53 +417,48 @@ class SignUp extends HTMLElement {
     }
     connectedCallback() {
         this._shadowRoot.innerHTML = `
-        <style>${style}</style>
+            <style>${style}</style>
 
-
-     <div class="section">
-     <div class="box">
-         <div class="img-container">
-             <img src="./img/Logo.png" alt="Queazy-Logo">
-         </div>
-         <h2>Sign up</h2>
-         <form id="signup-form">
-         <input-wrapper id="userName" type="text" placeholder="User name">User name</input-wrapper>
-         <input-wrapper id="password" type="password" placeholder="Password"></input-wrapper>
-         <input-wrapper id="confirm-password" type="password" placeholder="Confirm password"></input-wrapper>
-             <button type="submit" id="submit">Sign up</button>
-         </form>
-         <div class="register">
-             <h3>Already have an account? <a id="redirect">Log in</a></h3>
-         </div>
-     </div>
-     <div class="animation-area">
-         <ul class="box-area">
-             <li></li>
-             <li></li>
-             <li></li>
-             <li></li>
-             <li></li>
-             <li></li>
-         </ul>
-     </div>
- </div>   
+            <div class="section">
+                <div class="box">
+                    <div class="img-container">
+                        <img src="./img/Logo.png" alt="Queazy-Logo">
+                    </div>
+                    <h2>Sign up</h2>
+                    <form id="signup-form">
+                    <input-wrapper id="userName" type="text" placeholder="User name">User name</input-wrapper>
+                    <input-wrapper id="password" type="password" placeholder="Password"></input-wrapper>
+                    <input-wrapper id="confirm-password" type="password" placeholder="Confirm password"></input-wrapper>
+                        <button type="submit" id="submit">Sign up</button>
+                    </form>
+                    <div class="register">
+                        <h3>Already have an account? <a id="redirect">Log in</a></h3>
+                    </div>
+                </div>
+                <div class="animation-area">
+                    <ul class="box-area">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>   
         `
         const signUpForm = this._shadowRoot.getElementById('signup-form')
         signUpForm.addEventListener('submit', async(e) => {
             e.preventDefault()
-            const userName = this._shadowRoot.getElementById('userName').value
+            const userName = this._shadowRoot.getElementById('userName').value.trim();
             const password = this._shadowRoot.getElementById('password').value
             const confirmPassword = this._shadowRoot.getElementById('confirm-password').value
             let isValid = true
-            if (
-                userName.trim() === ''
-            ) {
+            if (userName.trim() === '') {
                 isValid = false
                 this.setError('userName', 'Please input your user name')
             }
-            if (
-                password.trim() === ''
-            ) {
+            if (password.trim() === '') {
                 isValid = false
                 this.setError('password', 'Please input some security letters')
             }
@@ -473,14 +469,16 @@ class SignUp extends HTMLElement {
                 return
             }
 
-            const check = await this.checkUserNameExist('userName');
-            if (check) {
+            const check = await this.checkUserNameExist(userName);
+            if (!check) {
                 const account = new Account(userName, password)
                 account.pushToFireBase()
+                router.navigate('login-screen')
+            } else {
+                this.setError('userName', 'Username already exists')
             }
-            alert('Account registered successfully!')
-            router.navigate('/login-screen')
         })
+
         this._shadowRoot.getElementById('redirect').addEventListener('click', () => {
             router.navigate('login-screen')
         })

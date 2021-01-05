@@ -65,3 +65,32 @@
 // const player = ...?
 // const score = ...?
 // quizSet.addNewRecord(player, score)
+
+// const quizSet = new QuizSet('Technology', 'Another description');
+
+// const quiz1 = new Quiz("Why is Big Data important?");
+// quiz1.addAnswer(new Answer("Because it is structured", false));
+// quiz1.addAnswer(new Answer("Because it may be analyzed to reveal patterns and trends", true));
+// quiz1.addAnswer(new Answer("Because of its complexity", false));
+// quiz1.addAnswer(new Answer("Because of its size", false));
+
+// const quiz2 = new Quiz("Which computer language is the most widely used?");
+// quiz2.addAnswer(new Answer("C#", false));
+// quiz2.addAnswer(new Answer("Swift", false));
+// quiz2.addAnswer(new Answer("PHP", false));
+// quiz2.addAnswer(new Answer("Java", true));
+
+// const quiz3 = new Quiz("What was the first cross-platform PDF software?");
+// quiz3.addAnswer(new Answer("Adobe Acrobat", false));
+// quiz3.addAnswer(new Answer("Foxit PhantomPDF", false));
+// quiz3.addAnswer(new Answer("Nitro Pro", false));
+// quiz3.addAnswer(new Answer("Able2Extract Professional", true));
+
+// quizSet.addQuiz(quiz1);
+// quizSet.addQuiz(quiz2);
+// quizSet.addQuiz(quiz3);
+
+// getAccountDocByUserName("admin").then(async(doc) => {
+//     const account = await Account.parseDocument(doc);
+//     account.addQuizSet(quizSet);
+// })

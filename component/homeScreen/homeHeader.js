@@ -111,14 +111,19 @@ class HomeHeader extends HTMLElement {
                 <div id="user-icon"><i class="fa fa-user"></i></div>
                 <div class="search-box">
                     <div class="search-icon"><i class="fa fa-search"></i></div>
-                    <input type="text" placeholder="Search quizzes' title">
+                    <input id="input-title" type="text" placeholder="Enter quiz title">
                 </div>
                 <div class="theme-toggle"></div>
             </div>
         </div>
         `
-    }
 
+        const inputTitle = this._shadowDom.querySelector('#input-title');
+        inputTitle.addEventListener('keyup', e => {
+            const title = inputTitle.value.trim();
+            console.log(title);
+        })
+    }
 }
 
 window.customElements.define('home-header', HomeHeader)

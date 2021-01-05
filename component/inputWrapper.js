@@ -58,7 +58,7 @@ const style = `
 }
 
 .input-wrapper .error {
-    color: #1fceab;
+    color: #EE1D52;
     font-size: 1rem;
     padding: 10px;
 }
@@ -182,11 +182,11 @@ class InputWrapper extends HTMLElement {
         
     `
     }
-    static get observedAttributes(){
+    static get observedAttributes() {
         return ['error']
     }
-    attributeChangedCallback(name, oldValue, newValue){
-        if (name === 'error'){
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'error') {
             this._shadowRoot.querySelector('.error').innerHTML = newValue
         }
     }
