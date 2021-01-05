@@ -1,6 +1,8 @@
 const style = `
 .main{
     margin-top: 150px;
+    position: fixed;
+    width: 100%;
 }
 `
 
@@ -18,9 +20,9 @@ class QuizStarter extends HTMLElement{
         <div class='main'>
             <starter-container></starter-container>
         </div>
-        
         `
     }
+
 }
 
 window.customElements.define('quiz-starter', QuizStarter)

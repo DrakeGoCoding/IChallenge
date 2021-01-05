@@ -1,41 +1,35 @@
 const style = `
-.create-btn{
-    position: fixed;
-    color: #fff;
-    font-size: 60px;
-    left: 90vw;
-    top: 80vh;
-}
-.create-btn:hover{
-    cursor: pointer;
-    text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
-}
-@media only screen and (max-width: 768px){
-    .create-btn{
-        font-size: 50px;
-        left: 92vw;
-        top:85vh;
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    #create-btn{
+        position: fixed;
+        color: #fff;
+        font-size: 60px;
+        left: 90vw;
+        top: 80vh;
     }
-}
-@media only screen and (max-width: 400px){
-    .create-btn{
-        left: 88vw;
+    #create-btn:hover{
+        cursor: pointer;
+        text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
     }
-}
+    @media only screen and (max-width: 768px){
+        #create-btn{
+            font-size: 50px;
+            left: 80vw;
+        }
+    }
+</style>
 `
-class CreatePlusBtn extends HTMLElement{
-    constructor(){
+class CreatePlusBtn extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
 
-    connectedCallback(){
-        this._shadowDom.innerHTML=`
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <style>
+    connectedCallback() {
+        this._shadowDom.innerHTML = `
         ${style}
-        </style>
-        <div class="create-btn"> <i class="fa fa-plus-circle"></i> </div>
+        <div id="create-btn"> <i class="fa fa-plus-circle"></i> </div>
         `
     }
 }

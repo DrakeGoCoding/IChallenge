@@ -3,7 +3,9 @@ const style = `
     position: fixed;
     top: 0;
     width: 100%;
-    height: 80px;
+    height: 100px;
+    padding: 5px 0;
+    border-bottom: 1px groove white;
     background-color: #010101;
     display: flex;
     justify-content: space-between;
@@ -24,12 +26,12 @@ const style = `
     align-items: center;
     flex-direction: row-reverse;
 }
-.user-icon{
+#user-icon{
     margin-right: 4vw;
     color: #fff;
     font-size: 40px;
 }
-.user-icon:hover{
+#user-icon:hover{
     cursor: pointer;
     text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }
@@ -55,14 +57,14 @@ const style = `
     outline: none;
     color: #fff;
 }
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 786px){
     .main-header{
         height: 70px;
     }
     .logo{
         font-size: 50px;
     }
-    .user-icon{
+    #user-icon{
         font-size: 35px;
     }
     .search-box{
@@ -79,26 +81,22 @@ const style = `
     .logo{
         font-size: 40px;
     }
-    .user-icon{
+    #user-icon{
         font-size: 28px;
     }
     .search-box{
-        padding: 5px;
-        font-size: 18px;
-    }
-    .search-box input{
-        font-size: 10px;
+        display: none;
     }
 }
 `
 
-class HomeHeader extends HTMLElement{
-    constructor(){
+class HomeHeader extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
 
-    connectedCallback(){
+    connectedCallback() {
         this._shadowDom.innerHTML = `
        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -110,7 +108,7 @@ class HomeHeader extends HTMLElement{
         <div class="main-header">
             <div class="logo">Queazy</div>
             <div class="header-right-bar">
-                <div class="user-icon"><i class="fa fa-user"></i></div>
+                <div id="user-icon"><i class="fa fa-user"></i></div>
                 <div class="search-box">
                     <div class="search-icon"><i class="fa fa-search"></i></div>
                     <input type="text" placeholder="Search quizzes' title">
@@ -120,6 +118,7 @@ class HomeHeader extends HTMLElement{
         </div>
         `
     }
+
 }
 
 window.customElements.define('home-header', HomeHeader)

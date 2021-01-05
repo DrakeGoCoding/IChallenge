@@ -11,18 +11,17 @@ const admin = new Account("admin", "123456");
 // admin.pushToFireBase()
 
 // on login
-getAccountDocByUserName("admin").then(doc => {
+// getAccountDocByUserName("admin").then(async(doc) => {
     // ...
     // check password here before redirecting
     // ... 
 
     // on redirecting
     // use this static method "parseDocument()" to parse account document on database back to Account object
-    // WARNING: this "parseDocument()" method returns a promise => need ".then()" or "async"/"await" keyword 
-    Account.parseDocument(doc).then(account => {
-        console.log(account);
-    })
-})
+    // WARNING: this "parseDocument()" method returns a promise => need ".then()" or "async"/"await" keyword
+    // const account = await Account.parseDocument(doc);
+    // console.log(account);
+// })
 
 // on creating a new Quiz Set
 const quizSet = new QuizSet("Math", "Here is a description");
@@ -63,6 +62,6 @@ quizSet.addQuiz(quiz2);
 
 // in order to add new high score to quizSet
 // "addNewRecord()" method will also update database
-// const playerId = ...?
+// const player = ...?
 // const score = ...?
-// quizSet.addNewRecord(playerId, score)
+// quizSet.addNewRecord(player, score)

@@ -26,7 +26,10 @@ router
         },
         'homepage-screen' : function (){
             redirect ('homepage-screen')
-        }
+        },
+        '/quizset/:id': function () {
+            redirect('quiz-starter')
+          },
 
 
     })
@@ -97,4 +100,5 @@ async function checkAuthen() {
 
 //             }
 // }
-window.router = router
+window.router = router;
+window.quizSetId = router._lastRouteResolved.params.id;
