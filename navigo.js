@@ -4,6 +4,7 @@ var root = null;
 var useHash = true; // Defaults to: false
 var hash = '#!'; // Defaults to: '#'
 var router = new Navigo(root, useHash, hash);
+import { getItemFromLocalStorage } from './utils.js'
 
 router
     .on({
@@ -15,15 +16,21 @@ router
         },
         'home-screen': async function() {
             const check = await checkAuthen()
+            console.log(check);
             if (check) {
                 redirect('home-screen')
             } else {
-                redirect('login-screen')
+                router.navigate('login-screen')
             }
         },
         '*': function() {
-            redirect('login-screen')
+            router.navigate('home-screen')
         },
+        'homepage-screen': function() {
+            redirect('homepage-screen')
+        }
+
+
     })
     .resolve();
 
@@ -56,19 +63,25 @@ function redirect(screenName) {
         document.getElementById('container').innerHTML = `
         <quiz-record></quiz-record>
         `
+    } else if (screenName == 'homepage-screen') {
+        document.getElementById('container').innerHTML = `
+        <homepage-screen></homepage-screen>
+        `
     }
 }
 async function checkAuthen() {
-    const accountDoc = await getAccountDocByUserName(userName)
-    if (accountDoc) {
-        if (CryptoJS.MD5(password).toString(CryptoJS.enc.Hex) === accountDoc.password) {
-            const account = await Account.parseDocument(accountDoc);
-            writeToLocalStorage('currentUser', account);
-            router.navigate('home-screen')
-        } else {
-            this.setError('password', `Oops, you've just entered a password from another dimension.`)
-        }
+    const user = getItemFromLocalStorage('currentUser');
 
+    if (user) {
+        const res = await firebase.firestore()
+            .collection('Accounts')
+            .where('userName', '==', user.userName)
+            .where('password', '==', user.password)
+            .get()
+        if (res.empty) return false;
+        return true;
     }
+    return false;
 }
+
 window.router = router

@@ -246,6 +246,15 @@ body {
     color: #c20440;
     transition: .2s;
 }
+@media only screen and (max-width: 786px){
+    .box{
+        width: 90%;
+    }
+    .section .box .img-container img{
+        width: 250px;
+        margin: auto;
+    }
+}
 
 @media (max-width: 1000px) {
     .section .box .img-container img {

@@ -24,3 +24,4 @@ import './screen/signUp.js'
 import './component/inputWrapper.js'
 import './component/quizDisplay/starterContainer.js'
 import "./test.js"
+import './screen/homePage.js'
