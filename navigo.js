@@ -1,34 +1,44 @@
+import { getAccountDocByUserName } from './utils.js'
+
 var root = null;
 var useHash = true; // Defaults to: false
 var hash = '#!'; // Defaults to: '#'
 var router = new Navigo(root, useHash, hash);
 
 router
-  .on({
-    'home-screen': function () {
-      redirect('home-screen')
-    },
-    'quiz-starter': function () {
-      redirect('quiz-starter')
-    },
-    'story': async function () {
-      const check = await checkAuthen()
-      if (check) {
-        redirect('story')
-      } else {
-        router.navigate('login')
-      }
-    },
-    '*': function () {
-      router.navigate('login')
-    }
-  })
-  .resolve();
+    .on({
+        'login-screen': function() {
+            redirect('login-screen')
+        },
+        'signup-screen': function() {
+            redirect('signup-screen')
+        },
+        'home-screen': async function() {
+            const check = await checkAuthen()
+            if (check) {
+                redirect('home-screen')
+            } else {
+                redirect('login-screen')
+            }
+        },
+        '*': function() {
+            redirect('login-screen')
+        },
+    })
+    .resolve();
 
-  function redirect(screenName) {
+function redirect(screenName) {
     if (screenName === 'home-screen') {
         document.getElementById('container').innerHTML = `
         <home-screen></home-screen>
+        `
+    } else if (screenName === 'signup-screen') {
+        document.getElementById('container').innerHTML = `
+        <signUp-screen></signUp-screen>
+        `
+    } else if (screenName === 'login-screen') {
+        document.getElementById('container').innerHTML = `
+        <login-screen></login-screen>
         `
     } else if (screenName === 'quiz-creator') {
         document.getElementById('container').innerHTML = `
@@ -48,23 +58,17 @@ router
         `
     }
 }
+async function checkAuthen() {
+    const accountDoc = await getAccountDocByUserName(userName)
+    if (accountDoc) {
+        if (CryptoJS.MD5(password).toString(CryptoJS.enc.Hex) === accountDoc.password) {
+            const account = await Account.parseDocument(accountDoc);
+            writeToLocalStorage('currentUser', account);
+            router.navigate('home-screen')
+        } else {
+            this.setError('password', `Oops, you've just entered a password from another dimension.`)
+        }
 
-// async function checkAuthen() {
-//   const user = getItemLocalStorage('currentUser')
-//   if (user) {
-//     const res = await firebase.firestore()
-//     .collection('users')
-//     .where('email', '==', user.email)
-//     .where('password', '==', user.password)
-//     .get()
-//     if(res.empty) {
-//       return false
-//     } else {
-//       return true
-//     }
-//   } else {
-//     return false
-//   }
-// }
-
+    }
+}
 window.router = router
