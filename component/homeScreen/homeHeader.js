@@ -119,9 +119,13 @@ class HomeHeader extends HTMLElement {
         `
 
         const inputTitle = this._shadowDom.querySelector('#input-title');
+        const quizInfoList = this.parentNode.getRootNode()
+            .querySelector('.main')
+            .querySelector('quiz-info-list');
+
         inputTitle.addEventListener('keyup', e => {
             const title = inputTitle.value.trim();
-            console.log(title);
+            quizInfoList.setAttribute('filter', title);
         })
     }
 }

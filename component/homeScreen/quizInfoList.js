@@ -8,23 +8,27 @@ class QuizInfolist extends HTMLElement {
     }
 
     async connectedCallback() {
+        this.filterTitle = this.getAttribute('filter') || '';
+
         const currentUser = getItemFromLocalStorage('currentUser');
         const accountDoc = await getAccountDocByUserName(currentUser.userName);
         const account = await Account.parseDocument(accountDoc);
-        const quizCollection = account.quizCollection;
+
+        this.quizCollection = account.quizCollection;
 
         let quizInfoListHtml = '';
 
-        quizCollection.forEach(quizSet => {
-            quizInfoListHtml += `
-                <quiz-info-item 
-                    title="${quizSet.title}"
-                    time="${quizSet.createdDate}"
-                    question-no="${quizSet.quizList.length}"
-                    record-count="${quizSet.recordCount}"
-                    description="${quizSet.description}"
-                    id=${quizSet.id}>
-                </quiz-info-item>
+        this.quizCollection.forEach(quizSet => {
+            if (quizSet.title.includes(this.filterTitle))
+                quizInfoListHtml += `
+                    <quiz-info-item 
+                        title="${quizSet.title}"
+                        time="${quizSet.createdDate}"
+                        question-no="${quizSet.quizList.length}"
+                        record-count="${quizSet.recordCount}"
+                        description="${quizSet.description}"
+                        id=${quizSet.id}>
+                    </quiz-info-item>
                 `
         })
 
@@ -32,6 +36,35 @@ class QuizInfolist extends HTMLElement {
             ${style}
             ${quizInfoListHtml}
         `
+    }
+
+    static get observedAttributes() {
+        return ['filter'];
+    }
+
+    attributeChangedCallback(attribute, oldValue, newValue) {
+        if (attribute === 'filter') {
+            let quizInfoListHtml = '';
+
+            this.quizCollection.forEach(quizSet => {
+                if (quizSet.title.includes(newValue))
+                    quizInfoListHtml += `
+                        <quiz-info-item 
+                            title="${quizSet.title}"
+                            time="${quizSet.createdDate}"
+                            question-no="${quizSet.quizList.length}"
+                            record-count="${quizSet.recordCount}"
+                            description="${quizSet.description}"
+                            id=${quizSet.id}>
+                        </quiz-info-item>
+                    `
+            })
+
+            this._shadowDom.innerHTML = `
+                ${style}
+                ${quizInfoListHtml}
+            `
+        }
     }
 }
 
