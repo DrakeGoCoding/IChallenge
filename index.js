@@ -48,4 +48,4 @@ export function redirect(screenName) {
     }
 }
 
-redirect('quiz-creator')
+redirect('quiz-starter')
