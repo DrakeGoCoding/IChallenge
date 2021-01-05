@@ -1,5 +1,5 @@
 import QuizSet from "../../model/QuizSet.js";
-import { getItemFromLocalStorage, getQuizSetDocByID } from "/utils.js";
+import { getItemFromLocalStorage, getQuizSetDocByID } from "../../utils.js";
 
 const style = `
 .quiz-container{
