@@ -1,5 +1,5 @@
 import QuizSet from "../../model/QuizSet.js";
-import { convertDate, getQuizSetDocByID } from "../../utils.js";
+import { convertDate, getQuizSetDocByID, sortRank } from "../../utils.js";
 
 const style = `
 .record-container{
@@ -104,9 +104,7 @@ class RecordContainer extends HTMLElement{
         this.id = this.getAttribute('id');
         const quizSetDoc = await getQuizSetDocByID(this.id);
         const quizSet = await QuizSet.parseDocument(quizSetDoc)
-        console.log(quizSet);
-        const highScoreList = quizSet.highScoreList;
-        console.log(quizSet.highScoreList);
+        const highScoreList = sortRank(quizSet.highScoreList);
 
         this._shadowDom.innerHTML = `
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
