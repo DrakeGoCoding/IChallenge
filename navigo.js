@@ -10,8 +10,13 @@ router
         'homepage-screen': function() {
             redirect('homepage-screen')
         },
-        'login-screen': function() {
-            redirect('login-screen')
+        'login-screen': async function() {
+            const check = await checkAuthen()
+            if (check) {
+                router.navigate('home-screen')
+            } else {
+                redirect('login-screen')
+            }
         },
         'signup-screen': function() {
             redirect('signup-screen')
@@ -29,15 +34,10 @@ router
             redirect('quiz-record', id)
         },
         'home-screen': async function() {
-            const check = await checkAuthen()
-            if (check) {
-                redirect('home-screen')
-            } else {
-                router.navigate('homepage-screen')
-            }
+            redirect('home-screen')
         },
         '*': function() {
-            router.navigate('home-screen')
+            router.navigate('homepage-screen')
         },
     })
     .resolve();

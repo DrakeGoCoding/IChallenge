@@ -763,8 +763,8 @@ class HomePage extends HTMLElement {
                             <div class="content">
                                 <h2>Welcome to <span>Queazy</span></h2>
                                 <p>Modern Quiz maker for everyone</p>
-                                <button ><a id="redirect">Log in</a></button>
-                                <button ><a id="redirect2">Sign up</a></button>
+                                <button><a class="redirect">Login</a></button>
+                                <button><a class="redirect2">Sign up</a></button>
                             </div>
                         </div>
                         <div class="slide">
@@ -772,8 +772,8 @@ class HomePage extends HTMLElement {
                             <div class="content">
                                 <h2>Queazy is <span>Easy</span></h2>
                                 <p>Queazy offer you a simple tool to create and share quizzes</p>
-                                <button><a href="#">Login in</a></button>
-                                <button><a href="#">Sign up</a></button>
+                                <button><a class="redirect">Login</a></button>
+                                <button><a class="redirect2">Sign up</a></button>
                             </div>
                         </div>
                         <div class="slide">
@@ -781,8 +781,8 @@ class HomePage extends HTMLElement {
                             <div class="content">
                                 <h2>Queazy is <span>Fun</span></h2>
                                 <p>Queazy make your quizzes look funnier and friendlier</p>
-                                <button><a href="#">Login in</a></button>
-                                <button><a href="#">Sign up</a></button>
+                                <button><a class="redirect">Login</a></button>
+                                <button><a class="redirect2">Sign up</a></button>
                             </div>
                         </div>
                         <div class="slide">
@@ -790,8 +790,8 @@ class HomePage extends HTMLElement {
                             <div class="content">
                                 <h2>Queazy is <span>Free</span></h2>
                                 <p>Queazy is totally free for everyone</p>
-                                <button><a href="#">Login in</a></button>
-                                <button><a href="#">Sign up</a></button>
+                                <button><a class="redirect">Login</a></button>
+                                <button><a class="redirect2">Sign up</a></button>
                             </div>
                         </div>
                         <div class="navigation">
@@ -884,11 +884,15 @@ class HomePage extends HTMLElement {
                 currentSlide = 1
             })
         })
-        this._shadowRoot.getElementById('redirect').addEventListener('click', () => {
-            router.navigate('login-screen');
+        this._shadowRoot.querySelectorAll('.redirect').forEach(btn => {
+            btn.addEventListener('click', () => {
+                router.navigate('login-screen');
+            })
         })
-        this._shadowRoot.getElementById('redirect2').addEventListener('click', () => {
-            router.navigate('signup-screen');
+        this._shadowRoot.querySelectorAll('.redirect2').forEach(btn => {
+            btn.addEventListener('click', () => {
+                router.navigate('signup-screen');
+            })
         })
     }
 
