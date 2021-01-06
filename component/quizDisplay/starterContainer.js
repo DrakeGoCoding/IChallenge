@@ -7,11 +7,13 @@ const style = `
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
         margin: auto;
         width: 800px;
-        background-color:#010101;
+        height: 100vh;
+        background-color:rgba(1, 1, 1, 0);
         border-radius: 20px;
-        padding: 40px;
+        padding: 0px;
         box-sizing: border-box;
         font-family: 'JetBrains Mono', monospace;
         color: #fff;
@@ -36,6 +38,7 @@ const style = `
     }
     .name-input{
         padding: 0 120px;
+        z-index: 5;
     }
     .name-input textarea{   
         color: #fff;
@@ -65,10 +68,14 @@ const style = `
         font-size: 18px;
         border-radius: 10px;
         margin: 30px auto 0;
+        z-index: 5;
+        transition: .5s;
     }
     .start-btn:hover{
         box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
         cursor: pointer;
+        height: 52px;
+        transition: .5s;
     }
     /* width */
     ::-webkit-scrollbar {

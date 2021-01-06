@@ -8,11 +8,12 @@ const style = `
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 6;
 }
 .logo{
     margin-left: 4vw;
     font-family: 'Rowdies', cursive;
-    font-size: 65px;
+    font-size: 60px;
     color: #fff;
     text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }

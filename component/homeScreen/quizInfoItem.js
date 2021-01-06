@@ -73,6 +73,7 @@ const style = `
         display: flex;
         margin-bottom: 5vh;
         padding: 2rem;
+        
     }
     .quiz-info-left{
         margin-right: 2rem;

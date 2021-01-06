@@ -3,6 +3,7 @@ const style = `
     .main{
         margin-top: 150px;
         margin-bottom: 150px;
+        background: rgba (1,1,1,0)
     }
 
     @media only screen and (max-width: 786px){

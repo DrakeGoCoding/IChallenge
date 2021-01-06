@@ -3,6 +3,7 @@ const style = `
     margin-top: 100px;
     position: fixed;
     width: 100%;
+    height: 100%;
 }
 `
 
@@ -22,6 +23,7 @@ class QuizDisplay extends HTMLElement {
         <div class='main'>
             <quiz-container id=${this.id} player=${this.player}></quiz-container>
         </div>
+        <animation-bg></animation-bg>
         
         `
     }

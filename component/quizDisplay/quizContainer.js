@@ -11,6 +11,8 @@ const style = `
     box-sizing: border-box;
     font-family: 'JetBrains Mono', monospace;
     color: #fff;
+    z-index: 5;
+    
 }
 .question-no{
     font-size: 15px;
@@ -28,6 +30,7 @@ const style = `
 .answer-option{
     height: 200px;
     width: 100%;  
+    z-index: 5;
 }
 .answer{
     padding: 0 20px;
@@ -40,6 +43,7 @@ const style = `
     opacity: 0;
     animation: fadeIn 1s ease forwards;
     overflow: auto;
+    z-index: 5;
 }
 @keyframes fadeIn{
     0%{
@@ -64,6 +68,7 @@ const style = `
     color: #000;
     border-radius: 10px;
     text-align: center;
+    z-index: ;
     
 }
 .next-btn:hover{
