@@ -113,7 +113,7 @@ class RecordContainer extends HTMLElement{
         </style>
         <div class="record-container">
             <div class="quiz-name">${quizSet.title}</div>
-            <div class="high-score">High Scores</div>
+            <div class="high-score">Score Records</div>
             <div class="record-table">
                 <table id='record-table'>
                     <tr>
