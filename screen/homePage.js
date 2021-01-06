@@ -107,7 +107,7 @@ transition: .6s;
         position: fixed;
         width: 100%;
         height: 100vh;
-        background: var(--clr-darker-background);
+        background: #0d0d0e;
         top: 80px;
         left: -200%;
         text-align: center;
@@ -399,6 +399,9 @@ height: 190%;
         padding: 10px 20px;
         font-size: 20px;
     }
+    #check:checked ~ ul{
+        left: -7%;
+    } 
 }
 @media (max-width: 620px) {
     header {
@@ -432,6 +435,9 @@ height: 190%;
         padding: 10px 10px;
         font-size: 20px;
     }
+    #check:checked ~ ul{
+        left: -8%;
+    } 
 }
 @media (max-width: 480px) {
     header {
@@ -468,6 +474,9 @@ height: 190%;
         padding: 10px 50px;
         font-size: 20px;
     }
+    #check:checked ~ ul{
+        left: -11%;
+    } 
 }
 @media (max-width: 400px) {
     header {
@@ -505,6 +514,9 @@ height: 190%;
         font-size: 15px;
         transition: .5s;
     }
+    #check:checked ~ ul{
+        left: -12%;
+    } 
 }
 /* Footer */
 footer {
@@ -516,7 +528,7 @@ font-family: 'JetBrains Mono', monospace;
 box-sizing: border-box;
 bottom: 0px;
 width: 100%;
-background: var(--clr-darker-background);
+background: #0d0d0e;
 }
 .main-content {
 display: flex;
@@ -805,7 +817,7 @@ class HomePage extends HTMLElement {
             </main>
         
             <footer>
-                <div class="main-content" id="section@" >
+                <div class="main-content" id="section@">
                     <div class="left box">
                         <h2>What is Queazy?</h2>
                         <div class="content">
