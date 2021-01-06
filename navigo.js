@@ -11,12 +11,7 @@ router
             redirect('homepage-screen')
         },
         'login-screen': async function() {
-            const check = await checkAuthen()
-            if (check) {
-                router.navigate('home-screen')
-            } else {
-                redirect('login-screen')
-            }
+            redirect('login-screen')
         },
         'signup-screen': function() {
             redirect('signup-screen')
@@ -34,7 +29,12 @@ router
             redirect('quiz-record', id)
         },
         'home-screen': async function() {
-            redirect('home-screen')
+            const check = await checkAuthen()
+            if (check) {
+                redirect('home-screen')
+            } else {
+                router.navigate('login-screen')
+            }
         },
         '*': function() {
             router.navigate('homepage-screen')

@@ -114,10 +114,6 @@ export default class PreviewItem extends HTMLElement {
             this._shadowDom.querySelector('.question-box').innerHTML = (newValue !== 'null' ? newValue : '');
         }
     }
-
-    disconnectedCallback() {
-        console.log(`Delete question ${this.questionCount}`);
-    }
 }
 
 window.customElements.define('preview-item', PreviewItem)
