@@ -74,7 +74,7 @@ const style = `
         font-size: 12px;
     }
 }
-@media only screen and (max-width: 400px){
+@media only screen and (max-width: 425px){
     .main-header{
         height: 80px
     }
