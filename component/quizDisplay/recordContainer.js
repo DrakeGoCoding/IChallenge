@@ -1,3 +1,6 @@
+import QuizSet from "../../model/QuizSet.js";
+import { convertDate, getQuizSetDocByID } from "../../utils.js";
+
 const style = `
 .record-container{
     margin: auto;
@@ -11,6 +14,11 @@ const style = `
     font-size: 14px;
 }
 .quiz-name{
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.high-score{
     font-size: 30px;
     text-align: center;
     margin-bottom: 15px;
@@ -55,7 +63,7 @@ const style = `
     justify-content: flex-end;
 
 }
-.quiz-btn, .home-btn{
+.quiz-btn{
     color: #000;
     width: fit-content;
     background-color: #fff;
@@ -65,7 +73,7 @@ const style = `
     padding: 0 10px;
     margin-left: 25px;
 }
-.quiz-btn:hover, .home-btn:hover{
+.quiz-btn:hover{
     box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
     cursor: pointer;
 }
@@ -92,10 +100,13 @@ class RecordContainer extends HTMLElement{
         super()
         this._shadowDom = this.attachShadow({mode: 'open'})
     }
-    connectedCallback(){
+    async connectedCallback(){
         this.id = this.getAttribute('id');
-        this.player = this.getAttribute('player');
-        
+        const quizSetDoc = await getQuizSetDocByID(this.id);
+        const quizSet = await QuizSet.parseDocument(quizSetDoc)
+        console.log(quizSet);
+        const highScoreList = quizSet.highScoreList;
+        console.log(quizSet.highScoreList);
 
         this._shadowDom.innerHTML = `
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -103,42 +114,47 @@ class RecordContainer extends HTMLElement{
         ${style}
         </style>
         <div class="record-container">
-            <div class="quiz-name">Name of the Quiz</div>
+            <div class="quiz-name">${quizSet.title}</div>
+            <div class="high-score">High Scores</div>
             <div class="record-table">
-                <table>
+                <table id='record-table'>
                     <tr>
                       <th>Player</th>
                       <th>Score</th>
                       <th>Time achieved</th>
                     </tr>
-                    <tr>
-                      <td>Moomin</td>
-                      <td>5/5</td>
-                      <td>10:05 23/11/2020</td>
-                    </tr>
-                    
-                    <tr>
-                        <td>Babo</td>
-                        <td>3/5</td>
-                        <td>9:25 22/11/2020</td>
-                    </tr>
-                    <tr>
-                        <td>Babooooooooooooooooooo</td>
-                        <td>3/5</td>
-                        <td>9:25 22/11/2020</td>
-                    </tr>
-                    
+                     
                   </table>
             </div>
             <div class="btn-row">
                 <div class="quiz-btn"> <i class="fa fa-repeat"></i> Try Again</div>
-                <div class="home-btn"> <i class="fa fa-home"></i> Go back Home</div>
             </div>
-            
-
         </div>
         `
+        for (let i = 0; i < highScoreList.length; i++) {
+            var item = highScoreList[i];
+            var player = item['player']
+            var score = item['score']
+            var timeAchieved = item['timeAchieved']
+            timeAchieved = convertDate(timeAchieved)
+           
+            //var dateString = formatDate(dateOfBirth);
+            var trHTML = `<tr>
+                            <td>${player}</td>
+                            <td>${score} /${quizSet.quizList.length}</td>
+                            <td>${timeAchieved}</td> 
+                        </tr>`
+            let tableRef = this._shadowDom.querySelector('#record-table').getElementsByTagName('tbody')[0]
+            var newRow = tableRef.insertRow(tableRef.rows.length);
+            newRow.innerHTML = trHTML;
+        }
+
+        const tryBtn = this._shadowDom.querySelector('.quiz-btn');
+        tryBtn.addEventListener('click', e => {
+            router.navigate(`#!quiz-starter/${this.id}`);
+        })
     }
 }
+
 
 window.customElements.define('record-container', RecordContainer)

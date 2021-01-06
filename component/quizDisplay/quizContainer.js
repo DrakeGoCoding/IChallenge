@@ -1,5 +1,5 @@
 import QuizSet from "../../model/QuizSet.js";
-import { getItemFromLocalStorage, getQuizSetDocByID } from "../../utils.js";
+import { getQuizSetDocByID } from "../../utils.js";
 
 const style = `
 .quiz-container{
@@ -168,10 +168,9 @@ class QuizContainer extends HTMLElement {
                 getNewQuestion(this.questionCounter);
                 this.questionCounter += 1;
             } else {
-                console.log("quiz over");
-                console.log(correctCount);
-                console.log(this.player);
                 quizSet.addNewRecord(this.player, correctCount)
+                alert(`Congrats ${this.player}! This is the end of the quiz. You have got ${correctCount} points!`)
+                router.navigate(`#!quiz-record/${this.id}`)
             }
         })
 

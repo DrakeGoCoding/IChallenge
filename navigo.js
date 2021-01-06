@@ -22,6 +22,9 @@ router
         'quiz-starter/:id': function({ id }) {
             redirect('quiz-starter', id)
         },
+        'quiz-record/:id': function({ id }){
+            redirect('quiz-record', id)
+        },
         'home-screen': async function() {
             const check = await checkAuthen()
             if (check) {
@@ -63,7 +66,7 @@ function redirect(screenName, id, player) {
         `
     } else if (screenName == 'quiz-record') {
         document.getElementById('container').innerHTML = `
-            <quiz-record></quiz-record>
+            <quiz-record id=${id}></quiz-record>
         `
     } else if (screenName == 'homepage-screen') {
         document.getElementById('container').innerHTML = `

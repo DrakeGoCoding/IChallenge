@@ -130,3 +130,4 @@ export function convertDate(dateStr) {
 function validateNiceNumber(number) {
     return (number < 10) ? ('0' + number) : (number)
 }
+
