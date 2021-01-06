@@ -25,3 +25,5 @@ import './screen/signUp.js'
 import './component/inputWrapper.js'
 
 import './navigo.js'
+
+import './component/animationBG.js'
