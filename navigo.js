@@ -6,6 +6,9 @@ import { getItemFromLocalStorage } from './utils.js'
 
 router
     .on({
+        'homepage-screen': function () {
+            redirect('homepage-screen')
+        },
         'login-screen': function () {
             redirect('login-screen')
         },
@@ -30,10 +33,9 @@ router
         '/quizset/:id': function () {
             redirect('quiz-starter')
           },
-
-
     })
     .resolve();
+
 function redirect(screenName) {
     if (screenName === 'home-screen') {
         document.getElementById('container').innerHTML = `
