@@ -20,7 +20,7 @@ header {
     left: 0;
     height: 100px;
     width: 100%;
-    padding: 10px 100px;
+    padding: 10px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -90,7 +90,7 @@ transition: .6s;
 }
 @media (max-width: 1345px) {
     header .logo {
-        padding-left: 50px;
+        padding-left: 25px;
     }
     .cool-link {
         font-size: 1.2rem;
@@ -369,7 +369,7 @@ height: 190%;
 }
 @media (max-width: 720px) {
     header {
-        padding: 10px 60px;
+        padding: 10px 0;
         transition: .5s;
     }
     
@@ -402,7 +402,7 @@ height: 190%;
 }
 @media (max-width: 620px) {
     header {
-        padding: 10px 30px;
+        padding: 10px 0;
         transition: .5s;
     }
     
@@ -435,7 +435,7 @@ height: 190%;
 }
 @media (max-width: 480px) {
     header {
-        padding: 10px 30px;
+        padding: 10px 0;
         transition: .5s;
     }
     
@@ -749,7 +749,7 @@ class HomePage extends HTMLElement {
                     <ul>
                         <li><a href="#" class="cool-link">Home</a></li>
                         <li><a href="#" class="cool-link">About Us</a></li>
-                        <li><a href="#" class="cool-link">Create Quiz</a></li>
+                        <li><a href="#" class="cool-link">Explore</a></li>
                         <li><a href="#section@" class="cool-link">Feedback</a></li>
                     </ul>
                 </header>
