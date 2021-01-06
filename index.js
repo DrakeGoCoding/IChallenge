@@ -20,13 +20,17 @@ import './component/quizDisplay/recordContainer.js'
 
 import './screen/quizStarter.js'
 import './component/quizDisplay/starterContainer.js'
-
+import './screen/homePage.js'
 import "./test.js"
 
 export function redirect(screenName) {
     if (screenName === 'home-screen') {
         document.getElementById('container').innerHTML = `
         <home-screen></home-screen>
+        `
+    } else if (screenName === 'homepage-screen') {
+        document.getElementById('container').innerHTML = `
+        <homepage-screen></homepage-screen>
         `
     } else if (screenName === 'quiz-creator') {
         document.getElementById('container').innerHTML = `
@@ -47,4 +51,4 @@ export function redirect(screenName) {
     }
 }
 
-redirect('quiz-record')
+redirect('homepage-screen')

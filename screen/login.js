@@ -1,4 +1,6 @@
+// import { redirect } from '../index.js'
 import Account from '../model/Account.js'
+import { getAccountDocByUserName, getDataFromDocs, writeToLocalStorage } from '../utils.js'
 
 const style = `
     :root {
@@ -8,8 +10,6 @@ const style = `
         --clr-dark-blue: #1fceab;
         --clr-dark-white: #fefdff;
         --clr-dark-grey: #575557;
-
-        --clr-light- : ;
 
         --ff-title: 'Source Sans Pro', sans-serif;
         --ff-content: 'JetBrains Mono', monospace;
@@ -28,7 +28,7 @@ const style = `
 
 
     body {
-        font-family: var(--ff-content);
+        font-family: 'JetBrains Mono', monospace;
     }
     .box {
         display: block;
@@ -46,7 +46,7 @@ const style = `
         box-sizing: border-box;
         border: 3px solid var(--clr-accent);
         border-radius: 10px;
-        box-shadow: 10px 10px var(--clr-dark-blue), -10px -10px var(--clr-dark-red) ;
+        box-shadow: 10px 10px #1fceab, -10px -10px #c20440 ;
     }
 
     .img-container {
@@ -62,8 +62,8 @@ const style = `
         font-size: 4rem;
         margin: 0 0 40px;
         padding: 0;
-        color: var(--clr-dark-white);
-        font-family: var(--ff-title);
+        color: #fefdff;
+        font-family: 'Source Sans Pro', sans-serif;
 
     }
 
@@ -78,32 +78,39 @@ const style = `
         box-shadow: none;
         outline: none;
         border: none;
-        border-bottom: 3px solid var(--clr-dark-blue);
+        border-bottom: 3px solid #1fceab;
         background: none;
-        color: var(--clr-dark-blue);
-        font-family: var(--ff-content);
+        color: #1fceab;
+        font-family: 'JetBrains Mono', monospace;
         font-weight: 600;
         font-size: 1.2rem;
     }
+    html {
 
-    .box input[type="submit"] {
+    }
+
+    .box button {
         display: block;
         margin: auto;
         border-bottom: 4px solid #4be2c4;
         cursor: pointer;
         border-radius: 20px;
-        background: var(--clr-dark-blue);
+        background: #1fceab;
         width: 60%;
-        color: var(--clr-dark-white);
-        font-weight: 600;
+        color: #fefdff;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.3rem;
+        font-weight: 800;
+        text-transform: bold;
         box-shadow: 0px 5px 0 #218f79;
         margin-bottom: 0;
         outline: none;
         text-transform: uppercase;
         transition: .2s;
+        padding: 10px 0;
     }
 
-    .box input[type="submit"]:active {
+    .box button:active {
         box-shadow: none;
         transform: translateY(5px);
         transition: .2s;
@@ -122,21 +129,21 @@ const style = `
         color: #5c5c5c;
         transition: .5s;
         pointer-events: none;
-        font-family: var(--ff-content);
+        font-family: 'JetBrains Mono', monospace;
     }
 
     .box input:focus ~ label
     {
         top: -110px;
         left: 0;
-        color: var(--clr-dark-red);
+        color: #c20440;
         font-size: 25px;
         font-weight: bold;
     }
 
     .box input:focus
     {
-        border-bottom: 2px solid var(--clr-dark-red);
+        border-bottom: 2px solid #c20440;
     }
 
 
@@ -248,5 +255,119 @@ const style = `
             opacity: 0;
         }
     }
-`
 
+    .register {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    .register h3 {
+        padding: 20px 0;
+        color: #575557;
+    }
+
+    .register h3 a {
+        text-decoration: none;
+        color: #1fceab;
+        transition: .2s;
+        cursor: pointer;
+    }
+
+    .register h3 a:hover {
+        text-decoration: underline;
+        color: #c20440;
+        transition: .2s;
+    }
+
+`
+class LoginScreen extends HTMLElement{
+    constructor(){
+        super()
+        this._shadowRoot = this.attachShadow ({mode: 'open'})
+    }
+    setError(id, message) {
+        this._shadowRoot.getElementById(id).setAttribute('error', message)
+    }
+    connectedCallback(){
+        this._shadowRoot.innerHTML=`
+        <style>
+            ${style}
+        </style>
+
+        <div class="section">
+            <div class="box">
+                <div class="img-container">
+                    <img src="./img/Logo.png" alt="Queazy-Logo">
+                </div>
+                <h2>Log in</h2>
+                <form id="login-form">
+                <input-wrapper id="userName" type="text" placeholder="User name">User name</input-wrapper>
+                <input-wrapper id="password" type="password" placeholder="Password"></input-wrapper>
+                    <button type="submit" id="submit">Log in</button>
+                </form>
+                <div class="register">
+                    <h3>Don't have an account? <a id="redirect">Sign up</a></h3>
+                </div>
+            </div>
+            <div class="animation-area">
+                <ul class="box-area">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+        `
+        const loginForm = this._shadowRoot.getElementById('login-form')
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const userName = this._shadowRoot.getElementById('userName').value
+            const password = this._shadowRoot.getElementById('password').value
+            let isValid = true
+
+            if (userName.trim() === ''){
+                isValid = false
+                this.setError('userName', 'Please input your user name')
+            }
+            if (password.trim() ===''){
+                isValid = false
+                this.setError('password', 'Please input password')
+            }
+            if (!isValid){
+                return
+            }
+            // const user = await firebase.firestore()
+            // .collection('Accounts')
+            // .where('userName', '==', userName)
+            // .where('password', '==', CryptoJS.MD5(password).toString())
+            // .get()
+            // if (user.empty) {
+            //     alert('User name or password is wrong, try again')
+            // } else {
+            //     writeToLocalStorage('currentUser', getDataFromDocs(user)[0])
+            //     redirect('home-screen')
+            // }
+            const accountDoc = await getAccountDocByUserName(userName)
+            if(accountDoc){
+                if(CryptoJS.MD5(password).toString(CryptoJS.enc.Hex) === accountDoc.password){
+                    const account = await Account.parseDocument(accountDoc);
+                    writeToLocalStorage('currentUser', account);
+                    router.navigate('home-screen')
+                } else {
+                    this.setError('password', `Oops, you've just entered a password from another dimension.`)
+                }
+                
+            }
+        
+        })
+        this._shadowRoot.querySelector('.register h3 a').addEventListener('click', () => {
+            router.navigate('signup-screen')
+        })
+    }
+} 
+window.customElements.define('login-screen', LoginScreen)
