@@ -9,10 +9,10 @@ export default class QuizCreator extends HTMLElement {
             ${style}
             <creator-header></creator-header>
             <div class='main'>
-                <animation-bg></animation-bg>
                 <preview-column></preview-column>
                 <quiz-input count=1></quiz-input>
             </div>
+            <animation-bg></animation-bg>
         `
     }
 }

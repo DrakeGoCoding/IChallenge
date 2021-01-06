@@ -7,6 +7,7 @@ const style = `
 }
 .box-area {
     position: absolute;
+    padding-left: 0;
     top: 0;
     left: 0;
     width: 100%;

@@ -18,9 +18,9 @@ export default class CreatorHeader extends HTMLElement {
         const logo = this._shadowDom.querySelector('.logo');
         const userBtn = this._shadowDom.querySelector('.user-icon');
 
-        logo.addEventListener('click', e => {
-            router.navigate('home-screen');
-        })
+        // logo.addEventListener('click', e => {
+        //     router.navigate('home-screen');
+        // })
         userBtn.addEventListener('click', e => {
             // TO UPDATE
         })

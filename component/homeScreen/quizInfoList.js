@@ -71,7 +71,7 @@ class QuizInfolist extends HTMLElement {
 window.customElements.define('quiz-info-list', QuizInfolist)
 
 const style = `
-    .quiz-info-list {
-        background: rgba(1,1,1,0);
-    }
+<style>
+
+</style>
 `

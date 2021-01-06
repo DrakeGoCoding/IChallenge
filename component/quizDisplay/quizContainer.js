@@ -24,22 +24,21 @@ const style = `
 .question{
     margin: 15px 0 30px;
     font-size: 20px;
-    height: 22px;
+    height: auto;
     overflow: auto;
 }
 .answer-option{
-    height: 200px;
     width: 100%;  
     z-index: 5;
 }
 .answer{
     padding: 0 20px;
     box-sizing: border-box;
-    height: 50px;
+    height: auto;
     margin: 10px 0;
     background-color: #333;
     border-radius: 10px;
-    line-height: 50px;
+    line-height: 40px;
     opacity: 0;
     animation: fadeIn 1s ease forwards;
     overflow: auto;
@@ -97,10 +96,31 @@ const style = `
 .wrong-ans{
     background-color: #EE1D52;
 }
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+    
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
 @media only screen and (max-width: 768px){
     .quiz-container{
         width: 400px;
+    }
+    .answer{
+        line-height: 25px;
     }
 }
 
@@ -174,7 +194,7 @@ class QuizContainer extends HTMLElement {
                 this.questionCounter += 1;
             } else {
                 quizSet.addNewRecord(this.player, correctCount)
-                alert(`Congrats ${this.player}! This is the end of the quiz. You have got ${correctCount} points!`)
+                    // alert(`Congrats ${this.player}! This is the end of the quiz. You have got ${correctCount} points!`)
                 router.navigate(`#!quiz-record/${this.id}`)
             }
         })

@@ -3,7 +3,6 @@ const style = `
     .main{
         margin-top: 150px;
         margin-bottom: 150px;
-        background: rgba (1,1,1,0)
     }
 
     @media only screen and (max-width: 786px){
@@ -26,8 +25,8 @@ class HomeScreen extends HTMLElement {
             ${style}       
             <div class='home-container'> 
                 <home-header></home-header>
+                <animation-bg></animation-bg>
                 <div class='main'> 
-                    <animation-bg></animation-bg>
                     <quiz-info-list></quiz-info-list> 
                     <create-plus-btn></create-plus-btn>
                 </div> 
