@@ -30,7 +30,7 @@ router
             if (check) {
                 redirect('home-screen')
             } else {
-                router.navigate('login-screen')
+                router.navigate('homepage-screen')
             }
         },
         '*': function() {

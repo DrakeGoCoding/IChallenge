@@ -885,11 +885,10 @@ class HomePage extends HTMLElement {
             })
         })
         this._shadowRoot.getElementById('redirect').addEventListener('click', () => {
-            redirect('login-screen')
-            console.log('1234');
+            router.navigate('login-screen');
         })
         this._shadowRoot.getElementById('redirect2').addEventListener('click', () => {
-            redirect('signup-screen')
+            router.navigate('signup-screen');
         })
     }
 

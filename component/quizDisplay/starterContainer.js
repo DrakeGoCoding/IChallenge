@@ -4,6 +4,9 @@ const style = `
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
     .starter-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         margin: auto;
         width: 550px;
         background-color:#010101;
@@ -31,8 +34,8 @@ const style = `
     }
     .name-input textarea{   
         color: #fff;
-        width: 500px;
-        height: 60px;
+        width: 100%;
+        height: 65px;
         line-height: 60px;
         text-align: center;
         padding: 0 15px;
@@ -41,6 +44,7 @@ const style = `
         background-color: transparent;
         border: 2px solid #fff;
         border-radius: 10px;
+        border-sizing: border-box;
         outline: none;
         resize: none;
     }
@@ -61,15 +65,32 @@ const style = `
         box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
         cursor: pointer;
     }
+    /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+    }
     @media only screen and (max-width: 768px){
         .starter-container{
             width: 400px;
         }
         .quiz-name{
             font-size: 4rem;
-        }
-        .name-input textarea{
-        width: 350px;
         }
         .quiz-description{
             font-size: 1.5rem;
@@ -84,11 +105,8 @@ const style = `
         .quiz-name{
             font-size: 3.5rem;
         }
-        .name-input textarea{
-            width: 80vw;
-            }
-            .quiz-description{
-                font-size: 1.2rem;
+        .quiz-description{
+            font-size: 1.2rem;
         }
 </style>
 `
@@ -118,6 +136,9 @@ class StarterContainer extends HTMLElement {
 
         const startBtn = this._shadowDom.querySelector('.start-btn');
         const nameInput = this._shadowDom.querySelector('.name-input textarea');
+        nameInput.addEventListener('keyup', e => {
+            nameInput.scrollTop = nameInput.scrollHeight;
+        })
         startBtn.addEventListener('click', e => {
             const name = nameInput.value.trim();
             if (name !== '') router.navigate(`#!quiz-display/${this.id}/${name}`);
