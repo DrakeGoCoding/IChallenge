@@ -6,19 +6,20 @@ const style = `
 }
 `
 
-class QuizStarter extends HTMLElement{
-    constructor(){
+class QuizStarter extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
-    connectedCallback(){
-        this._shadowDom.innerHTML=`
+    connectedCallback() {
+        this.id = this.getAttribute('id');
+        this._shadowDom.innerHTML = `
         <style>
             ${style}
         </style>
         <quiz-header></quiz-header>
         <div class='main'>
-            <starter-container></starter-container>
+            <starter-container id=${this.id}></starter-container>
         </div>
         `
     }

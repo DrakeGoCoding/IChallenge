@@ -1,4 +1,4 @@
-import { convertDate, writeToLocalStorage } from '../../utils.js'
+import { convertDate } from '../../utils.js'
 
 class QuizInfoItem extends HTMLElement {
     constructor() {
@@ -38,10 +38,22 @@ class QuizInfoItem extends HTMLElement {
                 </div>
             </div>
         `
-        this._shadowDom.getElementById('play-btn').addEventListener('click', () => {
-            writeToLocalStorage('currentQuiz', this.id)
-            window.open(`#!/quizset/${this.id}`, '_blank')
-            
+
+        const playBtn = this._shadowDom.querySelector('#play-btn');
+        const viewBtn = this._shadowDom.querySelector('#view-btn');
+        const shareBtn = this._shadowDom.querySelector('#share-btn');
+
+        playBtn.addEventListener('click', e => {
+            window.open(`#!quiz-starter/${this.id}`, '_blank');
+        })
+
+        viewBtn.addEventListener('click', e => {
+            window.open(`#!quiz-record/${this.id}`, '_blank');
+        })
+
+        shareBtn.addEventListener('click', e => {
+            const url = `https://drakegocoding.github.io/Queazy/#!quiz-starter/${this.id}`;
+            console.log(url);
         })
     }
 }

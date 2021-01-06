@@ -1,5 +1,5 @@
 import QuizSet from "../../model/QuizSet.js";
-import { getItemFromLocalStorage, getQuizSetDocByID } from "/utils.js";
+import { getQuizSetDocByID } from "../../utils.js";
 
 const style = `
 .quiz-container{
@@ -22,6 +22,8 @@ const style = `
 .question{
     margin: 15px 0 30px;
     font-size: 20px;
+    height: 22px;
+    overflow: auto;
 }
 .answer-option{
     height: 200px;
@@ -37,6 +39,7 @@ const style = `
     line-height: 50px;
     opacity: 0;
     animation: fadeIn 1s ease forwards;
+    overflow: auto;
 }
 @keyframes fadeIn{
     0%{
@@ -115,10 +118,13 @@ class QuizContainer extends HTMLElement {
     }
     async connectedCallback() {
         this.questionCounter = 0;
-        let quizSetId = getItemFromLocalStorage("currentQuiz")
+        let correctCount = 0;
+        this.id = this.getAttribute('id');
+        this.player = this.getAttribute('player');
 
-        const quizSetDoc = await getQuizSetDocByID(quizSetId);
+        const quizSetDoc = await getQuizSetDocByID(this.id);
         const quizSet = await QuizSet.parseDocument(quizSetDoc)
+
         let quizList = quizSet.quizList
 
         this._shadowDom.innerHTML = `
@@ -146,7 +152,7 @@ class QuizContainer extends HTMLElement {
         const questionNumber = this._shadowDom.querySelector('.question-no')
         const question = this._shadowDom.querySelector('.question')
         const answer = this._shadowDom.querySelectorAll('.answer')
-        console.log(answer);
+            // console.log(answer);
         const ans1 = this._shadowDom.getElementById('0')
         const ans2 = this._shadowDom.getElementById('1')
         const ans3 = this._shadowDom.getElementById('2')
@@ -161,20 +167,25 @@ class QuizContainer extends HTMLElement {
             if (this.questionCounter + 1 <= quizList.length) {
                 getNewQuestion(this.questionCounter);
                 this.questionCounter += 1;
-            } else console.log("quiz over");
-
+            } else {
+                quizSet.addNewRecord(this.player, correctCount)
+                alert(`Congrats ${this.player}! This is the end of the quiz. You have got ${correctCount} points!`)
+                router.navigate(`#!quiz-record/${this.id}`)
+            }
         })
 
         //print out the quiz
         function getNewQuestion(counter) {
             let quiz = quizList[counter]
-            console.log(quiz);
 
+
+            // remove the highlighted color
             for (let i = 0; i < answer.length; i++) {
                 answer[i].classList.remove('already-answered');
                 answer[i].style.backgroundColor = '#333';
             }
 
+            //print out the question and answers from firebase
             questionNumber.innerHTML = `Question ${counter + 1} of ${quizList.length}`
             question.innerHTML = `${quiz.content}`
             ans1.innerHTML = `${quiz.answers[0].content}`
@@ -196,16 +207,17 @@ class QuizContainer extends HTMLElement {
             })
 
             function getResult(ans, id) {
-                if (quiz.answers[id].isCorrect === true) {
+                if (quiz.answers[id].isCorrect === true && quiz.answers[id].content === answer[id].innerHTML) {
                     ans.style.backgroundColor = '#69C9D0'
+                    correctCount++;
                 } else {
                     ans.style.backgroundColor = '#EE1D52'
-                    console.log(answer[1].innerHTML);
-                    //color blue the correct answer
+                        // console.log(answer[1].innerHTML);
+                        //color blue the correct answer
                     for (let i = 0; i < answer.length; i++) {
                         if (quiz.answers[i].isCorrect === true && quiz.answers[i].content === answer[i].innerHTML) {
                             answer[i].style.backgroundColor = '#69C9D0'
-                            console.log(quiz.answers[0]);
+                                // console.log(quiz.answers[0]);
                         }
                     }
                 }
