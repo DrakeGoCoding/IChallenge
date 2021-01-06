@@ -19,7 +19,7 @@ const style = `
     list-style: none;
     width: 25px;
     height: 25px;
-    border-radius: 10px;;
+    border-radius: 10px;
     background: rgba(87, 250, 215, 0.6);
     box-shadow: 10px 5px 5px rgba(223, 76, 88, 0.6);
     animation: animate 20s linear infinite;
@@ -80,10 +80,10 @@ const style = `
 class AnimationBackground extends HTMLElement {
     constructor() {
         super()
-        this._shadowRoot = this.attachShadow({mode: 'open'})
+        this._shadowRoot = this.attachShadow({ mode: 'open' })
     }
-    connectedCallback(){
-        this._shadowRoot.innerHTML =`
+    connectedCallback() {
+        this._shadowRoot.innerHTML = `
         <style>
             ${style}
         </style>
