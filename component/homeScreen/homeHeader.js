@@ -118,6 +118,7 @@ class HomeHeader extends HTMLElement {
         </div>
         `
 
+        const userBtn = this._shadowDom.querySelector('#user-icon');
         const inputTitle = this._shadowDom.querySelector('#input-title');
         const quizInfoList = this.parentNode.getRootNode()
             .querySelector('.main')
@@ -126,6 +127,11 @@ class HomeHeader extends HTMLElement {
         inputTitle.addEventListener('keyup', e => {
             const title = inputTitle.value.trim();
             quizInfoList.setAttribute('filter', title);
+        })
+
+        userBtn.addEventListener('click', e => {
+            localStorage.removeItem('currentUser');
+            router.navigate('homepage-screen');
         })
     }
 }
