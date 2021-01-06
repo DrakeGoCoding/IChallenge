@@ -139,5 +139,5 @@ export default class QuizSet {
     }
 }
 
-const MAX_HIGHSCORE_LIST = 5;
+const MAX_HIGHSCORE_LIST = 10;
 const db = firebase.firestore();
