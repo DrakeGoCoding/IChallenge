@@ -78,15 +78,12 @@ export default class QuizInput extends HTMLElement {
 
         for (let i = 0; i < answerList.length; i++) {
             const answer = answerList[i];
+            const check = checkList[i];
             answer.addEventListener('keyup', e => {
                 let content = answer.value.trim();
                 if (content === '') this.previewItem.removeAttribute(`answer${i + 1}`);
                 else this.previewItem.setAttribute(`answer${i + 1}`, content);
             })
-        }
-
-        for (let i = 0; i < checkList.length; i++) {
-            const check = checkList[i];
             check.addEventListener('click', e => {
                 const isChecked = check.checked;
                 if (isChecked) this.previewItem.setAttribute(`check${i + 1}`, 'checked');
@@ -95,19 +92,27 @@ export default class QuizInput extends HTMLElement {
         }
 
         summitBtn.addEventListener('click', async(e) => {
+            let check = true;
             const previewItemList = this.parentElement.querySelector('preview-column').shadowRoot.querySelector('.preview-item-list');
             for (const previewItem of previewItemList.children) {
-                if (previewItem.isValidPreviewItem()) {
-                    // TO DO: update firebase and redirect to home screen
-                    previewItem.shadowRoot.querySelector('.question-count').style.color = '#69C9D0';
-                } else previewItem.shadowRoot.querySelector('.question-count').style.color = '#EE1D52';
+                let questionCount = previewItem.shadowRoot.querySelector('.question-count');
+                const isValidQuiz = previewItem.isValidPreviewItem();
+                if (isValidQuiz) questionCount.style.color = '#69C9D0';
+                else questionCount.style.color = '#EE1D52';
+                check = check && isValidQuiz;
             }
-            console.log("submit");
+
+            if (check) {
+                for (const previewItem of previewItemList.children) {
+                    const quiz = previewItem.toQuiz();
+                    console.log(quiz);
+                    // TO DO: Push quizset to firebase;
+                }
+            }
         })
 
         cancelBtn.addEventListener('click', async(e) => {
-            // TO DO: Redirect to home screen
-            console.log("redirect to home screen");
+            router.navigate('home-screen');
         })
     }
 
@@ -303,6 +308,10 @@ const style = `
             font-size: 15px;
             width: 120px;
             height: 40px;
+        }
+        /* width */
+        ::-webkit-scrollbar {
+            width: 5px;
         }
     }
 </style>

@@ -82,7 +82,12 @@ const style = `
             overflow-x: auto;
             display: flex;
             flex-direction: row;
-        }    
+        }
+        /* width */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }  
     }
 </style>
 `

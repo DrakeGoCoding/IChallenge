@@ -1,3 +1,6 @@
+import Answer from "../../model/Answer.js";
+import Quiz from "../../model/Quiz.js";
+
 export default class PreviewItem extends HTMLElement {
     constructor() {
         super()
@@ -60,16 +63,28 @@ export default class PreviewItem extends HTMLElement {
         })
     }
 
+    /**
+     * @returns {Quiz}
+     */
+    toQuiz() {
+        const quiz = new Quiz(this.getAttribute('content'));
+        quiz.addAnswer(new Answer(this.getAttribute('answer1'), this.getAttribute('check1') === 'checked' ? true : false));
+        quiz.addAnswer(new Answer(this.getAttribute('answer2'), this.getAttribute('check2') === 'checked' ? true : false));
+        quiz.addAnswer(new Answer(this.getAttribute('answer3'), this.getAttribute('check3') === 'checked' ? true : false));
+        quiz.addAnswer(new Answer(this.getAttribute('answer4'), this.getAttribute('check4') === 'checked' ? true : false));
+        return quiz;
+    }
+
     isValidPreviewItem() {
-        return this.getAttribute('content') !== null
-            && this.getAttribute('answer1') !== null
-            && this.getAttribute('answer2') !== null
-            && this.getAttribute('answer3') !== null
-            && this.getAttribute('answer4') !== null
-            && (this.getAttribute('check1') === 'checked'
-                || this.getAttribute('check2') === 'checked'
-                || this.getAttribute('check3') === 'checked'
-                || this.getAttribute('check4') === 'checked')
+        return this.getAttribute('content') !== null &&
+            this.getAttribute('answer1') !== null &&
+            this.getAttribute('answer2') !== null &&
+            this.getAttribute('answer3') !== null &&
+            this.getAttribute('answer4') !== null &&
+            (this.getAttribute('check1') === 'checked' ||
+                this.getAttribute('check2') === 'checked' ||
+                this.getAttribute('check3') === 'checked' ||
+                this.getAttribute('check4') === 'checked')
     }
 
     displayQuestion() {

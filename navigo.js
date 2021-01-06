@@ -22,6 +22,9 @@ router
         'quiz-starter/:id': function({ id }) {
             redirect('quiz-starter', id)
         },
+        'quiz-creator': function() {
+            redirect('quiz-creator')
+        },
         'home-screen': async function() {
             const check = await checkAuthen()
             if (check) {
@@ -53,19 +56,19 @@ function redirect(screenName, id, player) {
         document.getElementById('container').innerHTML = `
             <quiz-creator></quiz-creator>
         `
-    } else if (screenName == 'quiz-starter') {
+    } else if (screenName === 'quiz-starter') {
         document.getElementById('container').innerHTML = `
             <quiz-starter id=${id}></quiz-starter>
         `
-    } else if (screenName == 'quiz-display') {
+    } else if (screenName === 'quiz-display') {
         document.getElementById('container').innerHTML = `
             <quiz-display id=${id} player=${player}></quiz-display>
         `
-    } else if (screenName == 'quiz-record') {
+    } else if (screenName === 'quiz-record') {
         document.getElementById('container').innerHTML = `
             <quiz-record></quiz-record>
         `
-    } else if (screenName == 'homepage-screen') {
+    } else if (screenName === 'homepage-screen') {
         document.getElementById('container').innerHTML = `
             <homepage-screen></homepage-screen>
         `
