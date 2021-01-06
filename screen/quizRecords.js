@@ -17,6 +17,7 @@ class QuizRecord extends HTMLElement{
         </style>
         <quiz-header></quiz-header>
         <div class='main'>
+            <animation-bg></animation-bg>
             <record-container id=${this.id}></record-container>
         </div>
         `

@@ -62,7 +62,7 @@ class QuizInfolist extends HTMLElement {
 
             this._shadowDom.innerHTML = `
                 ${style}
-                ${quizInfoListHtml}
+                <div class="quiz-info-list">${quizInfoListHtml}</div>
             `
         }
     }
@@ -71,5 +71,7 @@ class QuizInfolist extends HTMLElement {
 window.customElements.define('quiz-info-list', QuizInfolist)
 
 const style = `
-    
+    .quiz-info-list {
+        background: rgba(1,1,1,0);
+    }
 `

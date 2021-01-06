@@ -12,6 +12,7 @@ const style = `
     width: 100%;
     height: 100%;
     overflow: hidden;
+    z-index: -1;
 }
 .box-area li {
     position: absolute;
