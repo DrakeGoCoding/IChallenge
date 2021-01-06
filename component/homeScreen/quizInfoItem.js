@@ -84,8 +84,10 @@ const style = `
         font-size: 8vw;
         text-align: center;
         line-height: 12vw;
+        z-index: 3;
     }
     .quiz-info-right{
+        z-index: 3;
         width: 80%;
         color: #fff;
     }

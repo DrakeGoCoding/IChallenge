@@ -26,8 +26,8 @@ class HomeScreen extends HTMLElement {
             <div class='home-container'> 
                 <home-header></home-header>
                 <div class='main'> 
-                <animation-bg></animation-bg>
-                <quiz-info-list></quiz-info-list> 
+                    <animation-bg></animation-bg>
+                    <quiz-info-list></quiz-info-list> 
                     <create-plus-btn></create-plus-btn>
                 </div> 
             </div>
