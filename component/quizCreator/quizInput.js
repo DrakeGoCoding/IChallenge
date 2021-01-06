@@ -303,6 +303,9 @@ const style = `
             font-size: 18px;
             height: 60px;        
         }
+        .redirect-btns{
+            margin-top: 50px;
+        }
         #summit-btn, #cancel-btn{
             top: 75vh;
             font-size: 15px;
