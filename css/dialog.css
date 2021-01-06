@@ -1,0 +1,57 @@
+.ui-dialog .ui-dialog-titlebar, #ui-id-1{
+    background-color: #252525;
+    border: none;
+}
+
+
+#create-dialog{
+    background-color: #252525;
+    border: none;
+}
+.name-input, .description-input{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-bottom: 30px;
+    font-family: 'JetBrains Mono', monospace;
+    color: #fff;
+    font-size: 22px;
+    background-color: transparent;
+}
+.name-input div, .description-input div{
+    background-color: transparent;
+}
+.name-input textarea, .description-input textarea{   
+    color: #fff;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 15px;
+    box-sizing: border-box;
+    font-size: 20px;
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    outline: none;
+}
+.description-input textarea{
+    height: 300px;
+    line-height: 50px;
+}
+.btn-row{
+    display: flex;
+    justify-content: flex-end;
+    background-color: transparent;
+}
+#confirm-btn, #cancel-btn{
+    width: fit-content;
+    padding: 10px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    margin-left: 15px;
+}
+#confirm-btn:hover, #cancel-btn:hover{
+    box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+    cursor: pointer;
+}

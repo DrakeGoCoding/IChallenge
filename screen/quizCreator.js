@@ -1,28 +1,29 @@
-const style = `
-.main{
-    margin-top: 100px;
-    position: fixed;
-    width: 100%;
-}
-`
-
-class QuizCreator extends HTMLElement{
-    constructor(){
+export default class QuizCreator extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
-    connectedCallback(){
-        this._shadowDom.innerHTML= `
-        <style>
-        ${style}
-        </style>
-        <creator-header></creator-header>
-        <div class='main'>
-            <preview-column></preview-column>
-            <quiz-input></quiz-input>
-        </div>
+
+    connectedCallback() {
+        this._shadowDom.innerHTML = `
+            ${style}
+            <creator-header></creator-header>
+            <div class='main'>
+                <preview-column></preview-column>
+                <quiz-input count=1></quiz-input>
+            </div>
         `
     }
 }
 
 window.customElements.define('quiz-creator', QuizCreator)
+
+const style = `
+<style>
+    .main{
+        margin-top: 100px;
+        position: fixed;
+        width: 100%;
+    }
+</style>
+`

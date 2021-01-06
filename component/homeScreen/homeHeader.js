@@ -3,7 +3,9 @@ const style = `
     position: fixed;
     top: 0;
     width: 100%;
-    height: 80px;
+    height: 100px;
+    padding: 5px 0;
+    border-bottom: 1px groove white;
     background-color: #010101;
     display: flex;
     justify-content: space-between;
@@ -24,17 +26,26 @@ const style = `
     align-items: center;
     flex-direction: row-reverse;
 }
-.user-icon{
-    margin-right: 4vw;
+#user-icon{
+    margin-right: 6.5vw;
     color: #fff;
     font-size: 40px;
 }
-.user-icon:hover{
+#logout-btn{
+    margin-right: -7vw;
+    color: #fff;
+    font-size: 35px;
+}
+#logout-btn:hover{
+    cursor: pointer;
+    text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+}
+#user-icon:hover{
     cursor: pointer;
     text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }
 .search-box{
-    margin-right: 2vw;
+    margin-right: 8vw;
     display: flex;
     color: white;
     align-items: center;
@@ -55,16 +66,18 @@ const style = `
     outline: none;
     color: #fff;
 }
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 786px){
     .main-header{
         height: 70px;
     }
     .logo{
         font-size: 50px;
     }
-    .user-icon{
-        font-size: 35px;
+    #user-icon{
+        font-size: 30px;
     }
+    #logout-btn{
+        font-size: 30px;
     .search-box{
         font-size: 20px;
     }
@@ -79,26 +92,28 @@ const style = `
     .logo{
         font-size: 40px;
     }
-    .user-icon{
+    #user-icon{
         font-size: 28px;
+        margin-right:10vh;
+    }
+    #logout-btn{
+        font-size: 28px;
+        margin-right:-10vh;
     }
     .search-box{
-        padding: 5px;
-        font-size: 18px;
-    }
-    .search-box input{
-        font-size: 10px;
+        display: none;
     }
 }
 `
 
-class HomeHeader extends HTMLElement{
-    constructor(){
+// import { removeItemFromLocalStorage } from ''
+class HomeHeader extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
 
-    connectedCallback(){
+    connectedCallback() {
         this._shadowDom.innerHTML = `
        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -110,7 +125,8 @@ class HomeHeader extends HTMLElement{
         <div class="main-header">
             <div class="logo">Queazy</div>
             <div class="header-right-bar">
-                <div class="user-icon"><i class="fa fa-user"></i></div>
+                <div id="user-icon"><i class="fa fa-user"></i></div>
+                <div id="logout-btn"><i class="fa fa-sign-out" aria-hidden="true"></i></div>
                 <div class="search-box">
                     <div class="search-icon"><i class="fa fa-search"></i></div>
                     <input type="text" placeholder="Search quizzes' title">
@@ -119,7 +135,14 @@ class HomeHeader extends HTMLElement{
             </div>
         </div>
         `
+        this._shadowDom.getElementById('logout-btn').addEventListener('click', () => {
+            removeItemFromLocalStorage('currentUser')
+            router.navigate('login-screen')
+        })
     }
-}
 
+}
+function removeItemFromLocalStorage(key) {
+    localStorage.removeItem(key)
+}
 window.customElements.define('home-header', HomeHeader)

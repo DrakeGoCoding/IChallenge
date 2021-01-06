@@ -1,165 +1,309 @@
-const style = `
-#question-create-box{
-    width: calc(100% - 400px);
-    margin-left: 350px;
-    font-family: 'JetBrains Mono', monospace;
-}
-#question-input textarea{     
-    height: 150px;
-    width: 100%;
-    background-color: #252525;
-    border: none;
-    outline: none;
-    color: #fff;
-    padding: 60px;
-    box-sizing: border-box;
-    font-size: 30px;
-    text-align: center;
-
-}
-.answer-input-row{
-    height: 120px;
-    background-color: wheat;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-}
-.answer{
-    background-color:#252525;
-    color: #fff;
-    font-size: 25px;
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-.answer textarea{  
-    background-color: #252525;
-    height: 70px;
-    width: 97%;
-    right: 0;
-    border: none;
-    outline: none;
-    color: #fff;
-    padding: 20px 10px;
-    box-sizing: border-box;
-    font-size: 25px;
-}
-.ans-decor{
-    width: 15px;
-    height: 40px;
-    border-radius: 30px;
-    margin-right: 20px;
-}
-.color-red{
-    background-color: #EE1D52;
-}
-.color-blue{
-    background-color: #69C9D0;
-}
-.correct-check{
-    height: 35px;
-    width: 35px;
-    margin-right: 15px;
-    
-    background: #666666;
-  color: #ffffff;
-}
-#summit-btn{
-    position: fixed;
-    font-family: 'JetBrains Mono', monospace;
-    width: 120px;
-    height: 40px;
-    background-color:#fff;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 30px;
-    top: 90vh;
-    right: 5vw;
-}
-#summit-btn:hover{
-    cursor: pointer;
-    box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
-}
-
-@media only screen and (max-width: 768px){
-    #question-create-box{
-        margin:auto;
-        width: 80vw;   
-    }
-    #question-input textarea{     
-        height: 100px;
-        width: 100%;
-        font-size: 20px;
-        padding: 50px 20px;
-    }
-    .answer{
-        font-size: 18px;
-    }
-    .answer textarea{  
-        font-size: 18px;
-        padding: 15px;
-        height: 50px;
-    }
-    #summit-btn{
-        top: 75vh;
-        font-size: 15px;
-        width: 80px;
-        height: 30px;
-    }
-}
-
-`
-
-class QuizInput extends HTMLElement{
-    constructor(){
+export default class QuizInput extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
-    connectedCallback(){
-        this._shadowDom.innerHTML=`
-        <style>
-        ${style}
-        </style>
-        <div id="question-create-box"> 
-            <div id="question-input"><textarea placeholder='Type your question'></textarea></div>
-            <div class="answer-input">        
-                <div class="answer"> <div class='ans-decor color-red'></div> <input type="checkbox" class="correct-check"> A. <textarea id='ans1' placeholder='Add Answer'></textarea></div>
-                <div class="answer" id='ans2'> <div class='ans-decor color-blue'></div> <input type="checkbox" class="correct-check" > B. <textarea placeholder='Add Answer'></textarea></div>
-                <div class="answer" id='ans3'> <div class='ans-decor color-red'></div> <input type="checkbox" class="correct-check" > C. <textarea placeholder='Add Answer'></textarea></div>
-                <div class="answer" id='ans4'> <div class='ans-decor color-blue'></div> <input type="checkbox" class="correct-check" > D. <textarea placeholder='Add Answer'></textarea></div>
-            </div>
-        </div>
 
-        <div id='summit-btn'>Done</div>
+    connectedCallback() {
+        this.questionCount = this.getAttribute('count') || '';
+        this.questionContent = this.getAttribute('content') || '';
+        this.answer1 = this.getAttribute('answer1') || '';
+        this.answer2 = this.getAttribute('answer2') || '';
+        this.answer3 = this.getAttribute('answer3') || '';
+        this.answer4 = this.getAttribute('answer4') || '';
+        this.check1 = this.getAttribute('check1') || '';
+        this.check2 = this.getAttribute('check2') || '';
+        this.check3 = this.getAttribute('check3') || '';
+        this.check4 = this.getAttribute('check4') || '';
+        this.previewItem = this.parentElement.querySelector('preview-column').shadowRoot
+            .querySelector(`[count='${this.getAttribute('count')}']`);
+
+        this._shadowDom.innerHTML = `
+            ${style}
+            <div id="question-create-box"> 
+                <div id="question">
+                    <textarea id="question-input" placeholder='Type your question'>${this.questionContent}</textarea>
+                </div>
+                <div class="answer-input">        
+                    <div class="answer"> 
+                        <div class='ans-decor color-red'></div> 
+                        <input id='check1' type="radio" name="correct" class="correct-check" ${this.check1}> A. 
+                        <textarea id='ans1' placeholder='Add Answer'>${this.answer1}</textarea>
+                    </div>
+                    <div class="answer"> 
+                        <div class='ans-decor color-blue'></div> 
+                        <input id='check2' type="radio" name="correct" class="correct-check" ${this.check2}> B. 
+                        <textarea id='ans2' placeholder='Add Answer'>${this.answer2}</textarea>
+                    </div>
+                    <div class="answer"> 
+                        <div class='ans-decor color-red'></div> 
+                        <input id='check3' type="radio" name="correct" class="correct-check" ${this.check3}> C. 
+                        <textarea id='ans3' placeholder='Add Answer'>${this.answer3}</textarea>
+                    </div>
+                    <div class="answer"> 
+                        <div class='ans-decor color-blue'></div> 
+                        <input id='check4' type="radio" name="correct" class="correct-check" ${this.check4}> D. 
+                        <textarea id='ans4' placeholder='Add Answer'>${this.answer4}</textarea>
+                    </div>
+                </div>
+                <div class="redirect-btns">
+                    <button id='summit-btn'>Done</button>
+                    <button id='cancel-btn'>Cancel</button>
+                </div>
+            </div>
         `
 
-        const quizCreateForm = this._shadowDom.getElementById('question-create-box')
+        const questionContent = this._shadowDom.getElementById('question-input');
+
+        const answer1 = this._shadowDom.getElementById('ans1');
+        const answer2 = this._shadowDom.getElementById('ans2');
+        const answer3 = this._shadowDom.getElementById('ans3');
+        const answer4 = this._shadowDom.getElementById('ans4');
+        const answerList = [answer1, answer2, answer3, answer4];
+
+        const check1 = this._shadowDom.getElementById('check1');
+        const check2 = this._shadowDom.getElementById('check2');
+        const check3 = this._shadowDom.getElementById('check3');
+        const check4 = this._shadowDom.getElementById('check4');
+        const checkList = [check1, check2, check3, check4];
+
         const summitBtn = this._shadowDom.getElementById('summit-btn')
+        const cancelBtn = this._shadowDom.getElementById('cancel-btn')
 
-        summitBtn.addEventListener('click', async (e) => {
-            e.preventDefault()
+        questionContent.addEventListener('keyup', e => {
+            let content = questionContent.value.trim();
+            if (content === '') this.previewItem.removeAttribute('content');
+            else this.previewItem.setAttribute('content', content);
+        })
 
-            let question = this._shadowDom.getElementById('question-input').value
-            let ans1 = this._shadowDom.getElementById('ans1').value
-            let ans2 = this._shadowDom.getElementById('ans2').value
-            let ans3 = this._shadowDom.getElementById('ans3').value
-            let ans4 = this._shadowDom.getElementById('ans4').value
+        for (let i = 0; i < answerList.length; i++) {
+            const answer = answerList[i];
+            answer.addEventListener('keyup', e => {
+                let content = answer.value.trim();
+                if (content === '') this.previewItem.removeAttribute(`answer${i + 1}`);
+                else this.previewItem.setAttribute(`answer${i + 1}`, content);
+            })
+        }
 
-            console.log(ans1);
+        for (let i = 0; i < checkList.length; i++) {
+            const check = checkList[i];
+            check.addEventListener('click', e => {
+                const isChecked = check.checked;
+                if (isChecked) this.previewItem.setAttribute(`check${i + 1}`, 'checked');
+                else this.previewItem.removeAttribute(`check${i + 1}`);
+            })
+        }
 
-            if (question && ans1 && ans2 && ans3 && ans4){
-                const quiz = {
-                    question: question,
-                }
-                console.log(quiz);
+        summitBtn.addEventListener('click', async(e) => {
+            const previewItemList = this.parentElement.querySelector('preview-column').shadowRoot.querySelector('.preview-item-list');
+            for (const previewItem of previewItemList.children) {
+                if (previewItem.isValidPreviewItem()) {
+                    // TO DO: update firebase and redirect to home screen
+                    previewItem.shadowRoot.querySelector('.question-count').style.color = '#69C9D0';
+                } else previewItem.shadowRoot.querySelector('.question-count').style.color = '#EE1D52';
             }
-            
+            console.log("submit");
+        })
+
+        cancelBtn.addEventListener('click', async(e) => {
+            // TO DO: Redirect to home screen
+            console.log("redirect to home screen");
         })
     }
-    
+
+    static get observedAttributes() {
+        return ['count', 'content', 'answer1', 'answer2', 'answer3', 'answer4', 'check1', 'check2', 'check3', 'check4'];
+    }
+
+    attributeChangedCallback(attribute, oldValue, newValue) {
+        if (attribute === 'count') {
+            this.questionCount = newValue;
+            this.previewItem = this.parentElement.querySelector('preview-column').shadowRoot
+                .querySelector(`[count='${newValue}']`);
+        }
+
+        if (attribute === 'content') {
+            this._shadowDom.querySelector('#question-input').value = (newValue === 'null' ? '' : newValue);
+        }
+
+        if (attribute === 'answer1') {
+            this._shadowDom.querySelector('#ans1').value = (newValue === 'null' ? '' : newValue);
+        }
+
+        if (attribute === 'answer2') {
+            this._shadowDom.querySelector('#ans2').value = (newValue === 'null' ? '' : newValue);
+        }
+
+        if (attribute === 'answer3') {
+            this._shadowDom.querySelector('#ans3').value = (newValue === 'null' ? '' : newValue);
+        }
+
+        if (attribute === 'answer4') {
+            this._shadowDom.querySelector('#ans4').value = (newValue === 'null' ? '' : newValue);
+        }
+
+        if (attribute === 'check1') {
+            this._shadowDom.querySelector('#check1').checked = (newValue === 'checked' ? true : false);
+        }
+
+        if (attribute === 'check2') {
+            this._shadowDom.querySelector('#check2').checked = (newValue === 'checked' ? true : false);
+        }
+
+        if (attribute === 'check3') {
+            this._shadowDom.querySelector('#check3').checked = (newValue === 'checked' ? true : false);
+        }
+
+        if (attribute === 'check4') {
+            this._shadowDom.querySelector('#check4').checked = (newValue === 'checked' ? true : false);
+        }
+    }
 }
 
 window.customElements.define('quiz-input', QuizInput)
+
+const style = `
+<style>
+    #question-create-box{
+        width: calc(100% - 400px);
+        margin-left: 350px;
+        font-family: 'JetBrains Mono', monospace;
+    }
+    #question-input{     
+        height: 160px;
+        width: 100%;
+        background-color: #252525;
+        border: none;
+        outline: none;
+        color: #fff;
+        padding: 60px;
+        box-sizing: border-box;
+        font-size: 30px;
+        text-align: center;
+    }
+    .answer-input-row{
+        height: 120px;
+        background-color: wheat;
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .answer{
+        background-color:#252525;
+        color: #fff;
+        font-size: 25px;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        margin-top: 10px;
+    }
+    .answer textarea{  
+        background-color: #252525;
+        height: 70px;
+        width: 97%;
+        right: 0;
+        border: none;
+        outline: none;
+        color: #fff;
+        padding: 20px 10px;
+        box-sizing: border-box;
+        font-size: 25px;
+    }
+    .ans-decor{
+        width: 15px;
+        height: 40px;
+        border-radius: 30px;
+        margin-right: 20px;
+    }
+    .color-red{
+        background-color: #EE1D52;
+    }
+    .color-blue{
+        background-color: #69C9D0;
+    }
+    .correct-check{
+        height: 35px;
+        width: 35px;
+        margin-right: 15px;
+        background: #666666;
+        color: #ffffff;
+    }
+    .redirect-btns{
+        display: flex;
+        float: right; 
+        margin-top: 100px;
+    }
+    #summit-btn, #cancel-btn{
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1rem;
+        width: 150px;
+        height: 40px;
+        background-color:#fff;
+        border: none;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+        margin-left: 3vw;
+        right: 5vw;
+    }
+    #summit-btn:hover, #cancel-btn:hover{
+        cursor: pointer;
+        box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+    }
+
+    textarea{
+        border-sizing: border-box;
+        resize: none;
+        overflow: auto;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+    }
+
+    @media only screen and (max-width: 817px){
+        #question-create-box{
+            margin: auto;
+            width: 80vw;
+        }
+        #question-input{     
+            height: 125px;
+            width: 100%;
+            font-size: 20px;
+            padding: 50px 20px;
+        }
+        .answer{
+            font-size: 18px;
+            height: 60px;
+        }
+        .answer textarea{  
+            font-size: 18px;
+            height: 60px;        
+        }
+        #summit-btn, #cancel-btn{
+            top: 75vh;
+            font-size: 15px;
+            width: 120px;
+            height: 40px;
+        }
+    }
+</style>
+`
