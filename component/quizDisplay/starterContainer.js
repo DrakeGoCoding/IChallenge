@@ -8,7 +8,7 @@ const style = `
         flex-direction: column;
         justify-content: center;
         margin: auto;
-        width: 550px;
+        width: 800px;
         background-color:#010101;
         border-radius: 20px;
         padding: 40px;
@@ -18,19 +18,24 @@ const style = `
         font-size: 14px;
     }
     .quiz-name{
-        font-size: 5rem;
+        font-size: 4.5rem;
         text-align: center;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
     .quiz-description{
-        font-size: 2rem;
+        font-size: 1.5rem;
         text-align: center;
-        margin-bottom: 60px;
+        margin-bottom: 30px;
+        overflow: auto;
+        height: 80px;
     }
     .greeting{
         font-size: 1.5rem;
         text-align: center;
         margin-bottom: 30px;
+    }
+    .name-input{
+        padding: 0 120px;
     }
     .name-input textarea{   
         color: #fff;
@@ -91,6 +96,9 @@ const style = `
         }
         .quiz-name{
             font-size: 4rem;
+        }
+        .name-input{
+            padding: 0;
         }
         .quiz-description{
             font-size: 1.5rem;

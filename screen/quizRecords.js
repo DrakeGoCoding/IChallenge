@@ -10,13 +10,14 @@ class QuizRecord extends HTMLElement{
         this._shadowDom = this.attachShadow({mode: 'open'})
     }
     connectedCallback(){
+        this.id = this.getAttribute('id');
         this._shadowDom.innerHTML=`
         <style>
             ${style}
         </style>
         <quiz-header></quiz-header>
         <div class='main'>
-            <record-container></record-container>
+            <record-container id=${this.id}></record-container>
         </div>
         `
     }
