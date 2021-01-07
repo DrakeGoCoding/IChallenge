@@ -37,6 +37,7 @@ export default class QuizCreator extends HTMLElement {
         cancelButton.addEventListener('click', () => {
             const container = this._shadowDom.querySelector('.container');
             container.style.display = "none";
+            container.style.transition = '.5s';
 
         })
     }
