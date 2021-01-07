@@ -101,8 +101,8 @@ export default class QuizInput extends HTMLElement {
             for (const previewItem of previewItemList.children) {
                 let questionCount = previewItem.shadowRoot.querySelector('.question-count');
                 const isValidQuiz = previewItem.isValidPreviewItem();
-                if (isValidQuiz) questionCount.style.color = '#69C9D0';
-                else questionCount.style.color = '#EE1D52';
+                if (isValidQuiz) questionCount.style.color = '#c20440';
+                else questionCount.style.color = '#1fceab';
                 check = check && isValidQuiz;
             }
 
@@ -230,10 +230,10 @@ const style = `
         margin-right: 20px;
     }
     .color-red{
-        background-color: #EE1D52;
+        background-color: #1fceab;
     }
     .color-blue{
-        background-color: #69C9D0;
+        background-color: #c20440;
     }
     .correct-check{
         height: 35px;
@@ -261,10 +261,12 @@ const style = `
         border-radius: 30px;
         margin-left: 3vw;
         right: 5vw;
+        transition: .5s;
     }
     #summit-btn:hover, #cancel-btn:hover{
         cursor: pointer;
-        box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+        box-shadow: 4px 4px 0 #c20440,-4px -4px 0 #1fceab;
+        transition: .5s;
     }
 
     textarea{

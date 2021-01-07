@@ -11,15 +11,15 @@ const style = `
     justify-content: space-between;
     align-items: center;
 }
-.logo{
+.logo img{
     margin-left: 4vw;
-    font-family: 'Rowdies', cursive;
-    font-size: 65px;
-    color: #fff;
-    text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+    max-width: 190px;
+    transition: .5s;
 }
-.logo:hover{
+.logo img:hover{
     cursor:pointer;
+    max-width: 200px;
+    transition: .5s;
 }
 .header-right-bar{
     display: flex;
@@ -30,10 +30,12 @@ const style = `
     margin-right: 4vw;
     color: #fff;
     font-size: 40px;
+    transition: .5s;
 }
 #user-icon:hover{
     cursor: pointer;
-    text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+    text-shadow: 3px 3px 0 #c20440,-3px -3px 0 #1fceab;
+    transition: .5s;
 }
 .search-box{
     margin-right: 2vw;
@@ -44,9 +46,11 @@ const style = `
     border-radius: 50px;
     padding: 0 1vw;
     background-color: #252525;
+    transition: .5s;
 }
 .search-box:hover{
-    box-shadow: 3px 3px 0 #69C9D0,-3px -3px 0 #EE1D52;
+    box-shadow: 3px 3px 0 #c20440,-3px -3px 0 #1fceab;
+    transition: .5s;
 }
 .search-box input{
     height: 2.5vw;
@@ -61,8 +65,14 @@ const style = `
     .main-header{
         height: 70px;
     }
-    .logo{
-        font-size: 50px;
+    .logo img{
+        margin-left: 3vw;
+        max-width: 150px;
+        transition: .5s;
+    }
+    .logo img:hover{
+        max-width: 160px;
+        transition: .5s;
     }
     #user-icon{
         font-size: 35px;
@@ -78,8 +88,14 @@ const style = `
     .main-header{
         height: 80px
     }
-    .logo{
-        font-size: 40px;
+    .logo img{
+        margin-left: 2vw;
+        max-width: 100px;
+        transition: .5s;
+    }
+    .logo img:hover{
+        max-width: 110px;
+        transition: .5s;
     }
     #user-icon{
         font-size: 28px;
@@ -106,7 +122,7 @@ class HomeHeader extends HTMLElement {
             ${style} 
          </style>
         <div class="main-header">
-            <div class="logo">Queazy</div>
+            <div class="logo"><img src="../img/Logo.png" class="logo" alt="logo"></div>
             <div class="header-right-bar">
                 <div id="user-icon"><i class="fa fa-sign-out"></i></div>
                 <div class="search-box">

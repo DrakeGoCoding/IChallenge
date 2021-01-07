@@ -68,11 +68,13 @@ const style = `
     border-radius: 10px;
     text-align: center;
     z-index: ;
+    transition: .5s;
     
 }
 .next-btn:hover{
     cursor: pointer;
-    box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+    box-shadow: 4px 4px 0 #c20440,-4px -4px 0 #1fceab;
+    transition: .5s;
 }
 .status-bar{
     display: flex;
@@ -91,10 +93,10 @@ const style = `
     font-size: 20px;
 }
 .right-ans{
-    background-color: #69C9D0;
+    background-color: #c20440;
 }
 .wrong-ans{
-    background-color: #EE1D52;
+    background-color: #1fceab;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -233,15 +235,15 @@ class QuizContainer extends HTMLElement {
 
             function getResult(ans, id) {
                 if (quiz.answers[id].isCorrect === true && quiz.answers[id].content === answer[id].innerHTML) {
-                    ans.style.backgroundColor = '#69C9D0'
+                    ans.style.backgroundColor = '#1fceab'
                     correctCount++;
                 } else {
-                    ans.style.backgroundColor = '#EE1D52'
+                    ans.style.backgroundColor = '#c20440'
                         // console.log(answer[1].innerHTML);
                         //color blue the correct answer
                     for (let i = 0; i < answer.length; i++) {
                         if (quiz.answers[i].isCorrect === true && quiz.answers[i].content === answer[i].innerHTML) {
-                            answer[i].style.backgroundColor = '#69C9D0'
+                            answer[i].style.backgroundColor = '#1fceab'
                                 // console.log(quiz.answers[0]);
                         }
                     }

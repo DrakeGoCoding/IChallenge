@@ -72,7 +72,7 @@ const style = `
         transition: .5s;
     }
     .start-btn:hover{
-        box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+        box-shadow: 4px 4px 0 #c20440,-4px -4px 0 #1fceab;
         cursor: pointer;
         height: 52px;
         transition: .5s;

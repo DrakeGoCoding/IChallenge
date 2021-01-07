@@ -122,12 +122,14 @@ const style = `
         float: right;
         font-size: 28px;
         font-weight: bold;
+        transition: .5s;
     }
       
     .close:hover, .close:focus {
         color: #828282;
         text-decoration: none;
         cursor: pointer;
+        transition: .5s;
     }
       
     .modal-header {
