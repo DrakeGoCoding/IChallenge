@@ -81,7 +81,7 @@ class QuizHeader extends HTMLElement {
          </style>
          
         <div class="main-header">
-            <div class="logo"><img src="../../img/Logo.png" class="logo" alt="logo"></div>
+            <div class="logo"><img src="../../../img/Logo.png" class="logo" alt="logo"></div>
             <div class="header-right-bar">
                 <div class="theme-toggle"></div>
             </div>
