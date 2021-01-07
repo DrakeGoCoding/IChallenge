@@ -2,14 +2,11 @@ const style = `
 <style>
     .main{
         margin-top: 150px;
-        margin-bottom: 150px;
-        background: rgba (1,1,1,0)
     }
 
     @media only screen and (max-width: 786px){
         .main{
             margin-top: 100px;
-            margin-bottom: 100px;
         }
     }
 </style>
@@ -22,12 +19,13 @@ class HomeScreen extends HTMLElement {
     }
 
     connectedCallback() {
+        this.quizSetUrl = this.getAttribute('url') || '';
+
         this._shadowDom.innerHTML = `
             ${style}       
             <div class='home-container'> 
                 <home-header></home-header>
                 <div class='main'> 
-                    <animation-bg></animation-bg>
                     <quiz-info-list></quiz-info-list> 
                     <create-plus-btn></create-plus-btn>
                 </div> 
@@ -36,9 +34,9 @@ class HomeScreen extends HTMLElement {
 
         const createQuizSetBtn = this._shadowDom.querySelector('create-plus-btn');
         createQuizSetBtn.addEventListener('click', e => {
-            router.navigate('quiz-creator')
-                // TO DO: open a modal for quizset initialization
+            router.navigate('quiz-creator');
         })
+
     }
 }
 

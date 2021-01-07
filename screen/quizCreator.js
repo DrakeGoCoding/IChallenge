@@ -1,3 +1,7 @@
+import Account from "../model/Account.js";
+import QuizSet from "../model/QuizSet.js";
+import { getAccountDocByUserName, getItemFromLocalStorage } from "../utils.js";
+
 export default class QuizCreator extends HTMLElement {
     constructor() {
         super()
@@ -9,39 +13,65 @@ export default class QuizCreator extends HTMLElement {
             ${style}
             <creator-header></creator-header>
             <div class='main'>
-                <animation-bg></animation-bg>
                 <preview-column></preview-column>
                 <quiz-input count=1></quiz-input>
             </div>
-                <div class="container">
-                    <div class="record-container">       
-                        <div class="name-input">
-                            <div>Enter your Quiz's name</div>
-                            <br>
-                            <textarea placeholder="Sample Quiz"></textarea>
-                        </div>
-                        
-                        <div class="description-input">
-                            <div>Enter your Quiz's description</div>
-                            <br>
-                            <textarea placeholder="This quiz is about..."></textarea>
-                        </div>
-                        <div class="btn-row">
-                            <button id='confirm-btn'>Confirm</button>
-                            <button id='cancel-btn'>Back</button>
-                        </div>     
+            <div class="container">
+                <div class="record-container">       
+                    <div class="name-input">
+                        <div>Title</div> <br>
+                        <textarea placeholder="Enter quizset's title"></textarea>
                     </div>
+                        
+                    <div class="description-input">
+                        <div>Description</div><br>
+                        <textarea placeholder="This quizset is about..."></textarea>
+                    </div>
+                    
+                    <div class="btn-row">
+                        <button id='confirm-btn'>Confirm</button>
+                        <button id='cancel-btn'>Back</button>
+                    </div>     
                 </div>
+            </div>
+            <animation-bg></animation-bg>
         `
         const cancelButton = this._shadowDom.getElementById('cancel-btn')
         cancelButton.addEventListener('click', () => {
             const container = this._shadowDom.querySelector('.container');
             container.style.display = "none";
-            container.style.transition = '.5s';
+        })
 
+        const confirmBtn = this._shadowDom.querySelector('#confirm-btn');
+        confirmBtn.addEventListener('click', async(e) => {
+            let check = true;
+            const title = this._shadowDom.querySelector('.name-input textarea').value.trim();
+            const description = this._shadowDom.querySelector('.description-input textarea').value.trim();
+
+            if (title === '') this._shadowDom.querySelector('.name-input div').style.color = '#EE1D52'
+            else this._shadowDom.querySelector('.name-input div').style.color = '#69C9D0'
+            check = check && (title === '') ? false : true;
+
+            if (description === '') this._shadowDom.querySelector('.description-input div').style.color = '#EE1D52'
+            else this._shadowDom.querySelector('.description-input div').style.color = '#69C9D0'
+            check = check && (description === '') ? false : true;
+
+            if (check) {
+                const quizSet = new QuizSet(title, description);
+                const quizList = getItemFromLocalStorage('currentQuizList');
+                quizList.forEach(quiz => quizSet.addQuiz(quiz));
+
+                localStorage.removeItem('currentQuizList');
+                const currentUser = getItemFromLocalStorage('currentUser');
+                const accountDoc = await getAccountDocByUserName(currentUser.userName);
+                const account = await Account.parseDocument(accountDoc);
+                account.addQuizSet(quizSet).then(() => {
+                    router.navigate('home-screen');
+                });
+            }
         })
     }
-        
+
 }
 
 window.customElements.define('quiz-creator', QuizCreator);
@@ -62,13 +92,22 @@ const style = `
     }
     .container{
         background-color: rgba(0, 0, 0, 0.6);
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
         position: fixed;
+        padding-top: 120px;
         top: 0;
         left: 0;
-        transition: 1s;
+        animation-name: animatetop;
+        animation-duration: 0.5s;
+        display: none;
     }
+
+    @keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+
     .record-container{
         margin-top: 50px;
         transform: translate(50%);
@@ -80,8 +119,8 @@ const style = `
         font-family: 'JetBrains Mono', monospace;
         color: #fff;
         font-size: 20px;
-        transition: all 1s;
     }
+
     .name-input, .description-input{
         display: flex;
         flex-direction: column;
@@ -100,10 +139,12 @@ const style = `
         border: 2px solid #fff;
         border-radius: 10px;
         outline: none;
+        resize: none;
     }
     .description-input textarea{
         height: 300px;
         line-height: 50px;
+        resize: none;
     }
     .btn-row{
         display: flex;
@@ -120,6 +161,27 @@ const style = `
     #confirm-btn:hover, #cancel-btn:hover{
         box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
         cursor: pointer;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 10px;    
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
     }
 </style>
 `

@@ -35,7 +35,21 @@ class QuizInfolist extends HTMLElement {
         this._shadowDom.innerHTML = `
             ${style}
             <div class="quiz-info-list">${quizInfoListHtml}</div>
+            <div id="quizset-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times;</span>
+                        <h2>Copy url complete. Time to challenge your friends!</h2>
+                    </div>
+                </div>
+            </div>
         `
+
+        const quizSetModal = this._shadowDom.querySelector('#quizset-modal');
+        const closeModalBtn = this._shadowDom.querySelector('.close');
+        closeModalBtn.addEventListener('click', e => {
+            quizSetModal.style.display = 'none';
+        })
     }
 
     static get observedAttributes() {
@@ -47,7 +61,7 @@ class QuizInfolist extends HTMLElement {
             let quizInfoListHtml = '';
 
             this.quizCollection.forEach(quizSet => {
-                if (quizSet.title.includes(newValue))
+                if (quizSet.title.toLowerCase().includes(newValue))
                     quizInfoListHtml += `
                         <quiz-info-item 
                             title="${quizSet.title}"
@@ -60,10 +74,7 @@ class QuizInfolist extends HTMLElement {
                     `
             })
 
-            this._shadowDom.innerHTML = `
-                ${style}
-                <div class="quiz-info-list">${quizInfoListHtml}</div>
-            `
+            this._shadowDom.querySelector('.quiz-info-list').innerHTML = quizInfoListHtml;
         }
     }
 }
@@ -71,7 +82,72 @@ class QuizInfolist extends HTMLElement {
 window.customElements.define('quiz-info-list', QuizInfolist)
 
 const style = `
-    .quiz-info-list {
-        background: rgba(1,1,1,0);
+<style>
+    .quiz-info-list{
+        background: rgba(1, 1, 1, 0);
     }
+
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 400px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; 
+        height: 100%; 
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        font-family: 'Rowdies', cursive;
+        margin: auto;
+        padding: 0;
+        width: 50%;
+        border-radius: 10px;
+        animation-name: animatetop;
+        animation-duration: 0.5s;
+    }
+
+    @keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+
+    .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+      
+    .close:hover, .close:focus {
+        color: #828282;
+        text-decoration: none;
+        cursor: pointer;
+    }
+      
+    .modal-header {
+        padding: 2px 16px;
+        background-color: #252525;
+        color: white;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    @media only screen and (max-width: 1024px){
+        .modal{
+            padding-top: 350px;
+        }
+    }
+
+    @media only screen and (max-width: 571px){
+        .modal{
+            padding-top: 230px;
+        }
+    }
+</style>
 `

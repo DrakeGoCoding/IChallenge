@@ -10,19 +10,14 @@ export default class CreatorHeader extends HTMLElement {
             <div class="main-header">
                 <div class="logo">Queazy</div>
                 <div class="header-right-bar">
-                    <div class="user-icon"><i class="fa fa-user"></i></div>
                     <div class="theme-toggle"></div>
                 </div>
             </div>
         `
         const logo = this._shadowDom.querySelector('.logo');
-        const userBtn = this._shadowDom.querySelector('.user-icon');
 
         logo.addEventListener('click', e => {
             router.navigate('home-screen');
-        })
-        userBtn.addEventListener('click', e => {
-            // TO UPDATE
         })
     }
 }

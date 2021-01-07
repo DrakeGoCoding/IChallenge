@@ -1,3 +1,5 @@
+import { writeToLocalStorage } from "../../utils.js";
+
 export default class QuizInput extends HTMLElement {
     constructor() {
         super()
@@ -45,13 +47,11 @@ export default class QuizInput extends HTMLElement {
                         <input id='check4' type="radio" name="correct" class="correct-check" ${this.check4}> D. 
                         <textarea id='ans4' placeholder='Add Answer'>${this.answer4}</textarea>
                     </div>
+                    <div class="redirect-btns">
+                        <button id='summit-btn'>Done</button>
+                        <button id='cancel-btn'>Cancel</button>
+                    </div>
                 </div>
-            </div>
-            </div>
-
-            <div class="redirect-btns">
-                <button id='summit-btn'>Done</button>
-                <button id='cancel-btn'>Cancel</button>
             </div>
         `
 
@@ -93,8 +93,10 @@ export default class QuizInput extends HTMLElement {
             })
         }
 
+        const quizSetModal = this.parentElement.getRootNode().querySelector('.container');
         summitBtn.addEventListener('click', async(e) => {
             let check = true;
+
             const previewItemList = this.parentElement.querySelector('preview-column').shadowRoot.querySelector('.preview-item-list');
             for (const previewItem of previewItemList.children) {
                 let questionCount = previewItem.shadowRoot.querySelector('.question-count');
@@ -105,11 +107,13 @@ export default class QuizInput extends HTMLElement {
             }
 
             if (check) {
+                let quizList = [];
                 for (const previewItem of previewItemList.children) {
                     const quiz = previewItem.toQuiz();
-                    console.log(quiz);
-                    // TO DO: Push quizset to firebase;
+                    quizList.push(quiz);
                 }
+                writeToLocalStorage('currentQuizList', quizList);
+                quizSetModal.style.display = 'block';
             }
         })
 

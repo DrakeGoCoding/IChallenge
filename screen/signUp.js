@@ -1,5 +1,4 @@
 import Account from "../model/Account.js"
-import { getAccountDocByUserName } from "../utils.js"
 
 const style = `
 :root {

@@ -503,6 +503,7 @@ class LoginScreen extends HTMLElement {
             if (accountDoc) {
                 if (CryptoJS.MD5(password).toString(CryptoJS.enc.Hex) === accountDoc.password) {
                     writeToLocalStorage('currentUser', {
+                        'id': accountDoc.id,
                         'userName': accountDoc.userName,
                         'password': accountDoc.password
                     });

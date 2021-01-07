@@ -50,13 +50,13 @@ const style = `
 }
 `
 
-class QuizHeader extends HTMLElement{
-    constructor(){
+class QuizHeader extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
 
-    connectedCallback(){
+    connectedCallback() {
         this._shadowDom.innerHTML = `
        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -73,6 +73,11 @@ class QuizHeader extends HTMLElement{
             </div>
         </div>
         `
+
+        const logo = this._shadowDom.querySelector('.logo');
+        logo.addEventListener('click', e => {
+            router.navigate('home-screen');
+        })
     }
 }
 

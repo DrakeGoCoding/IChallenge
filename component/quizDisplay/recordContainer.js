@@ -77,6 +77,26 @@ const style = `
     box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
     cursor: pointer;
 }
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+    
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
 @media only screen and (max-width: 768px){
     .record-container{
         width: 400px;
@@ -95,12 +115,12 @@ const style = `
 }
 `
 
-class RecordContainer extends HTMLElement{
-    constructor(){
+class RecordContainer extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
-    async connectedCallback(){
+    async connectedCallback() {
         this.id = this.getAttribute('id');
         const quizSetDoc = await getQuizSetDocByID(this.id);
         const quizSet = await QuizSet.parseDocument(quizSetDoc)
@@ -113,7 +133,7 @@ class RecordContainer extends HTMLElement{
         </style>
         <div class="record-container">
             <div class="quiz-name">${quizSet.title}</div>
-            <div class="high-score">Score Records</div>
+            <div class="high-score">High Score</div>
             <div class="record-table">
                 <table id='record-table'>
                     <tr>
@@ -125,7 +145,7 @@ class RecordContainer extends HTMLElement{
                   </table>
             </div>
             <div class="btn-row">
-                <div class="quiz-btn"> <i class="fa fa-repeat"></i> Try Again</div>
+                <div class="quiz-btn"> <i class="fa fa-repeat"></i> Replay</div>
             </div>
         </div>
         `
@@ -135,7 +155,7 @@ class RecordContainer extends HTMLElement{
             var score = item['score']
             var timeAchieved = item['timeAchieved']
             timeAchieved = convertDate(timeAchieved)
-           
+
             //var dateString = formatDate(dateOfBirth);
             var trHTML = `<tr>
                             <td>${player}</td>
