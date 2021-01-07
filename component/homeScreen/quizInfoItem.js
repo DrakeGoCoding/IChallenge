@@ -23,7 +23,6 @@ class QuizInfoItem extends HTMLElement {
                     <div class="quiz-img"> <i class="fa fa-quora" aria-hidden="true"></i> </div>
                 </div>
                 <div class="quiz-info-right">
-                    <span id="delete-btn"><i class="fa fa-trash"></span>
                     <div class="quiz-name">${this.title}</div>
                     <div class="quiz-created-time">${this.timeCreated}</div>
                     <div class="quiz-summary">
@@ -132,9 +131,6 @@ const style = `
         box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
     }
 
-    #delete-btn{
-        float: right;
-    }
     @media only screen and (max-width: 1023px){
         .quiz-info-item{
             width: 60vw;
