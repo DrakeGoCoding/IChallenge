@@ -108,7 +108,7 @@ class HomeHeader extends HTMLElement {
         <div class="main-header">
             <div class="logo">Queazy</div>
             <div class="header-right-bar">
-                <div id="user-icon"><i class="fa fa-user"></i></div>
+                <div id="user-icon"><i class="fa fa-sign-out"></i></div>
                 <div class="search-box">
                     <div class="search-icon"><i class="fa fa-search"></i></div>
                     <input id="input-title" type="text" placeholder="Enter quiz title">

@@ -53,7 +53,9 @@ class QuizInfoItem extends HTMLElement {
 
         shareBtn.addEventListener('click', e => {
             const url = `https://drakegocoding.github.io/Queazy/#!quiz-starter/${this.id}`;
-            console.log(url);
+            navigator.clipboard.writeText(url);
+            const quizSetModal = this.parentElement.getRootNode().querySelector('#quizset-modal');
+            quizSetModal.style.display = 'block';
         })
     }
 }
