@@ -44,19 +44,16 @@ export default class QuizCreator extends HTMLElement {
 
         const confirmBtn = this._shadowDom.querySelector('#confirm-btn');
         confirmBtn.addEventListener('click', async(e) => {
-            let check = true;
             const title = this._shadowDom.querySelector('.name-input textarea').value.trim();
             const description = this._shadowDom.querySelector('.description-input textarea').value.trim();
 
             if (title === '') this._shadowDom.querySelector('.name-input div').style.color = '#EE1D52'
             else this._shadowDom.querySelector('.name-input div').style.color = '#69C9D0'
-            check = check && (title === '') ? false : true;
 
             if (description === '') this._shadowDom.querySelector('.description-input div').style.color = '#EE1D52'
             else this._shadowDom.querySelector('.description-input div').style.color = '#69C9D0'
-            check = check && (description === '') ? false : true;
 
-            if (check) {
+            if (title !== '' && description !== '') {
                 const quizSet = new QuizSet(title, description);
                 const quizList = getItemFromLocalStorage('currentQuizList');
                 quizList.forEach(quiz => quizSet.addQuiz(quiz));
@@ -109,8 +106,8 @@ const style = `
     }
 
     .record-container{
-        margin-top: 50px;
-        transform: translate(50%);
+        position: relative;
+        margin: auto;
         width: 50%;
         background-color:#252525;
         border-radius: 20px;
@@ -157,6 +154,7 @@ const style = `
         color: #000;
         border-radius: 10px;
         margin-left: 15px;
+        outline: none;
     }
     #confirm-btn:hover, #cancel-btn:hover{
         box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
@@ -182,6 +180,16 @@ const style = `
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
         background: #555; 
+    }
+
+    @media only screen and (max-width: 425px){
+        .record-container{
+            width: 70%;
+            font-size: 12px;
+        }
+        .name-input textarea, .description-input textarea{
+            font-size: 12px;
+        }
     }
 </style>
 `
