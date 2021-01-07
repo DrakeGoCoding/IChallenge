@@ -93,6 +93,7 @@ export default class QuizInput extends HTMLElement {
 
         summitBtn.addEventListener('click', async(e) => {
             let check = true;
+
             const previewItemList = this.parentElement.querySelector('preview-column').shadowRoot.querySelector('.preview-item-list');
             for (const previewItem of previewItemList.children) {
                 let questionCount = previewItem.shadowRoot.querySelector('.question-count');
@@ -102,10 +103,14 @@ export default class QuizInput extends HTMLElement {
                 check = check && isValidQuiz;
             }
 
+            let quizList = [];
+
             if (check) {
                 for (const previewItem of previewItemList.children) {
                     const quiz = previewItem.toQuiz();
-                    console.log(quiz);
+                    quizList.push(quiz);
+
+                    console.log(quizList);
                     // TO DO: Push quizset to firebase;
                 }
             }
