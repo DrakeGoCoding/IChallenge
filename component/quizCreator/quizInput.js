@@ -46,10 +46,12 @@ export default class QuizInput extends HTMLElement {
                         <textarea id='ans4' placeholder='Add Answer'>${this.answer4}</textarea>
                     </div>
                 </div>
-                <div class="redirect-btns">
-                    <button id='summit-btn'>Done</button>
-                    <button id='cancel-btn'>Cancel</button>
-                </div>
+            </div>
+            </div>
+
+            <div class="redirect-btns">
+                <button id='summit-btn'>Done</button>
+                <button id='cancel-btn'>Cancel</button>
             </div>
         `
 
@@ -173,6 +175,7 @@ const style = `
         width: calc(100% - 400px);
         margin-left: 350px;
         font-family: 'JetBrains Mono', monospace;
+        opacity: 0.8;
     }
     #question-input{     
         height: 160px;
@@ -183,6 +186,7 @@ const style = `
         color: #fff;
         padding: 60px;
         box-sizing: border-box;
+        border-radius: 10px;
         font-size: 30px;
         text-align: center;
     }
@@ -201,6 +205,7 @@ const style = `
         align-items: center;
         padding-left: 20px;
         margin-top: 10px;
+        border-radius: 10px;
     }
     .answer textarea{  
         background-color: #252525;
