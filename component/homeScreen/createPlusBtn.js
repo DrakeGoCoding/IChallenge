@@ -7,10 +7,12 @@ const style = `
         font-size: 60px;
         left: 90vw;
         top: 80vh;
+        transition: .5s;
     }
     #create-btn:hover{
         cursor: pointer;
-        text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+        text-shadow: 4px 4px 0 #c20440,-4px -4px 0 #1fceab;
+        transition: .5s;
     }
     @media only screen and (max-width: 786px){
         #create-btn{

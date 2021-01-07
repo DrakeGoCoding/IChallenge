@@ -37,11 +37,13 @@ const style = `
     }
     .add-question-btn:hover{
         cursor: pointer;
-        box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+        box-shadow: 4px 4px 0 #c20440,-4px -4px 0 #1fceab;
+        transition: .5s;
     }
     .add-question-btn-plus:hover{
         cursor: pointer;
-        text-shadow:3px 3px 0 #69C9D0,-3px -3px 0 #EE1D52;
+        text-shadow:3px 3px 0 #c20440,-3px -3px 0 #1fceab;
+        transition: .5s;
     }
 
     @media only screen and (max-width: 817px){

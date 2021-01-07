@@ -8,7 +8,7 @@ export default class CreatorHeader extends HTMLElement {
         this._shadowDom.innerHTML = `
             ${style} 
             <div class="main-header">
-                <div class="logo">Queazy</div>
+                <div class="logo"><img src="../img/Logo.png" alt="logo"></div>
                 <div class="header-right-bar">
                     <div class="theme-toggle"></div>
                 </div>
@@ -38,15 +38,18 @@ const style = `
         justify-content: space-between;
         align-items: center;
     }
-    .logo{
-        margin-left: 4vw;
-        font-family: 'Rowdies', cursive;
-        font-size: 65px;
-        color: #fff;
-        text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+    
+    .logo img {
+        position: relative;
+        padding: 30px 50px;
+        max-width: 190px;
+        transition: 0.5s;
+        cursor: pointer;
     }
-    .logo:hover{
-        cursor:pointer;
+
+    .logo img:hover {
+        max-width: 200px;
+        transition: 0.5s;
     }
     .header-right-bar{
         display: flex;
@@ -66,8 +69,13 @@ const style = `
         .main-header{
             height: 70px;
         }
-        .logo{
-            font-size: 50px;
+        .logo img{
+            max-width: 150px;
+            transition: .5s;
+        }
+        .logo img:hover {
+            max-width: 160px;
+            transition: 0.5s;
         }
         .user-icon{
             font-size: 35px;
@@ -77,8 +85,13 @@ const style = `
         .main-header{
             height: 80px
         }
-        .logo{
-            font-size: 40px;
+        .logo img{
+            max-width: 100px;
+            transition: .5s;
+        }
+        .logo img:hover {
+            max-width: 110px;
+            transition: 0.5s;
         }
         .user-icon{
             font-size: 28px;

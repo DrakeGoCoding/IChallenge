@@ -72,10 +72,12 @@ const style = `
     border-radius: 10px;
     padding: 0 10px;
     margin-left: 25px;
+    transition: .5s;
 }
 .quiz-btn:hover{
-    box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+    box-shadow: 4px 4px 0 #c20440,-4px -4px 0 #1fceab;
     cursor: pointer;
+    transition: .5s;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -145,7 +147,7 @@ class RecordContainer extends HTMLElement {
                   </table>
             </div>
             <div class="btn-row">
-                <div class="quiz-btn"> <i class="fa fa-repeat"></i> Replay</div>
+                <div class="quiz-btn"> <i class="fa fa-repeat"></i>Replay</div>
             </div>
         </div>
         `

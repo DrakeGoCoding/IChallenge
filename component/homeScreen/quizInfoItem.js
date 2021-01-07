@@ -101,6 +101,7 @@ const style = `
         font-size: 8vw;
         text-align: center;
         line-height: 12vw;
+        text-shadow: 3px 3px 0 #c20440,-3px -3px 0 #1fceab;
     }
     .quiz-info-right{
         width: 80%;
@@ -130,21 +131,25 @@ const style = `
     .quiz-btn{
         display: flex;
         justify-content: flex-end;
+        transition: .5s;
     }
     #delete-btn{
         float:right;
         font-size: 1.5rem;
+        transition: .5s;
     }
     #share-btn, #play-btn, #view-btn{
         margin-left: 1vw;
         border: 2px solid #fff;
         padding: 0.4vw;
         border-radius: 10px;
+        transition: .5s;
     }
     #share-btn:hover, #play-btn:hover, #view-btn:hover, #delete-btn:hover{
         cursor: pointer;
         background-color: #010101;
-        box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+        box-shadow: 4px 4px 0 #c20440,-4px -4px 0 #1fceab;
+        transition: .5s;
     }
 
     @media only screen and (max-width: 1023px){

@@ -10,15 +10,15 @@ const style = `
     align-items: center;
     z-index: 6;
 }
-.logo{
+.logo img{
     margin-left: 4vw;
-    font-family: 'Rowdies', cursive;
-    font-size: 60px;
-    color: #fff;
-    text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+    max-width: 190px;
+    transition: .5s;
 }
 .logo:hover{
     cursor:pointer;
+    max-width: 200px;
+    transition: .5s;
 }
 .header-right-bar{
     display: flex;
@@ -30,8 +30,15 @@ const style = `
     .main-header{
         height: 70px;
     }
-    .logo{
-        font-size: 50px;
+    .logo img{
+        margin-left: 3vw;
+        max-width: 150px;
+        transition: .5s;
+    }
+    .logo:hover{
+        cursor:pointer;
+        max-width: 160px;
+        transition: .5s;
     }
     .user-icon{
         font-size: 35px;
@@ -41,8 +48,15 @@ const style = `
     .main-header{
         height: 80px
     }
-    .logo{
-        font-size: 40px;
+    .logo img{
+        margin-left: 3vw;
+        max-width: 100px;
+        transition: .5s;
+    }
+    .logo:hover{
+        cursor:pointer;
+        max-width: 110px;
+        transition: .5s;
     }
     .user-icon{
         font-size: 28px;
@@ -67,7 +81,7 @@ class QuizHeader extends HTMLElement {
          </style>
          
         <div class="main-header">
-            <div class="logo">Queazy</div>
+            <div class="logo"><img src="../img/Logo.png" class="logo" alt="logo"></div>
             <div class="header-right-bar">
                 <div class="theme-toggle"></div>
             </div>
