@@ -8,7 +8,7 @@ export default class CreatorHeader extends HTMLElement {
         this._shadowDom.innerHTML = `
             ${style} 
             <div class="main-header">
-                <div class="logo"><img src="../img/Logo.png" alt="logo"></div>
+                <div class="logo"><img src="../../img/Logo.png" alt="logo"></div>
                 <div class="header-right-bar">
                     <div class="theme-toggle"></div>
                 </div>
