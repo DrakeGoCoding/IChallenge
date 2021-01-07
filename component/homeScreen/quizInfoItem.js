@@ -48,12 +48,12 @@ class QuizInfoItem extends HTMLElement {
 
         const quizInfoList = this.parentElement.getRootNode().querySelector('.quiz-info-list');
         deleteBtn.addEventListener('click', async(e) => {
+            quizInfoList.removeChild(this);
+
             const currentUser = getItemFromLocalStorage('currentUser');
             const accountDoc = await getAccountDocByUserName(currentUser.userName);
             const account = await Account.parseDocument(accountDoc);
             await account.deleteQuizSet(this.id);
-
-            quizInfoList.removeChild(this);
         })
 
         playBtn.addEventListener('click', e => {
