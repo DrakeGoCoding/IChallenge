@@ -142,6 +142,7 @@ class HomeHeader extends HTMLElement {
 
         inputTitle.addEventListener('keyup', e => {
             const title = inputTitle.value.trim();
+            console.log(title);
             quizInfoList.setAttribute('filter', title);
         })
 
