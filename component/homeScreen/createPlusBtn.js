@@ -29,6 +29,7 @@ class CreatePlusBtn extends HTMLElement {
     connectedCallback() {
         this._shadowDom.innerHTML = `
         ${style}
+        
         <div id="create-btn"> <i class="fa fa-plus-circle"></i> </div>
         `
     }

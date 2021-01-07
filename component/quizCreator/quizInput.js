@@ -45,10 +45,10 @@ export default class QuizInput extends HTMLElement {
                         <input id='check4' type="radio" name="correct" class="correct-check" ${this.check4}> D. 
                         <textarea id='ans4' placeholder='Add Answer'>${this.answer4}</textarea>
                     </div>
-                </div>
-                <div class="redirect-btns">
-                    <button id='summit-btn'>Done</button>
-                    <button id='cancel-btn'>Cancel</button>
+                    <div class="redirect-btns">
+                        <button id='summit-btn'>Done</button>
+                        <button id='cancel-btn'>Cancel</button>
+                    </div>
                 </div>
             </div>
         `
@@ -91,6 +91,7 @@ export default class QuizInput extends HTMLElement {
             })
         }
 
+        const quizSetModal = this.parentElement.getRootNode().querySelector('.container');
         summitBtn.addEventListener('click', async(e) => {
             let check = true;
 
@@ -112,6 +113,8 @@ export default class QuizInput extends HTMLElement {
 
                     console.log(quizList);
                     // TO DO: Push quizset to firebase;
+
+                    quizSetModal.style.display = 'block';
                 }
             }
         })
@@ -178,6 +181,7 @@ const style = `
         width: calc(100% - 400px);
         margin-left: 350px;
         font-family: 'JetBrains Mono', monospace;
+        opacity: 0.8;
     }
     #question-input{     
         height: 160px;
@@ -188,6 +192,7 @@ const style = `
         color: #fff;
         padding: 60px;
         box-sizing: border-box;
+        border-radius: 10px;
         font-size: 30px;
         text-align: center;
     }
@@ -206,6 +211,7 @@ const style = `
         align-items: center;
         padding-left: 20px;
         margin-top: 10px;
+        border-radius: 10px;
     }
     .answer textarea{  
         background-color: #252525;
