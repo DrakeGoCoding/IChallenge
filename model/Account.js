@@ -47,8 +47,8 @@ export default class Account {
             this.quizCollection[index].deleteAllQuizzes().then(() => {
                 this.quizCollection.splice(index, 1);
 
-                db.collection('QuizSets').doc(quizSetId).delete();
-                db.collection('Accounts').doc(this.id).update({
+                await db.collection('QuizSets').doc(quizSetId).delete();
+                await db.collection('Accounts').doc(this.id).update({
                     quizCollection: firebase.firestore.FieldValue.arrayRemove(db.doc('QuizSets/' + quizSetId))
                 })
 
