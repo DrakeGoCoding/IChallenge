@@ -101,8 +101,8 @@ export default class QuizInput extends HTMLElement {
             for (const previewItem of previewItemList.children) {
                 let questionCount = previewItem.shadowRoot.querySelector('.question-count');
                 const isValidQuiz = previewItem.isValidPreviewItem();
-                if (isValidQuiz) questionCount.style.color = '#c20440';
-                else questionCount.style.color = '#1fceab';
+                if (isValidQuiz) questionCount.style.color = '#1fceab';
+                else questionCount.style.color = '#c20440';
                 check = check && isValidQuiz;
             }
 
