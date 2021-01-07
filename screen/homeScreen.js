@@ -35,8 +35,6 @@ class HomeScreen extends HTMLElement {
         const createQuizSetBtn = this._shadowDom.querySelector('create-plus-btn');
         createQuizSetBtn.addEventListener('click', e => {
             router.navigate('quiz-creator');
-
-            // TO DO: open a modal for quizset initialization
         })
 
     }
