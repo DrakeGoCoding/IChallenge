@@ -46,12 +46,14 @@ class QuizInfoItem extends HTMLElement {
         const viewBtn = this._shadowDom.querySelector('#view-btn');
         const shareBtn = this._shadowDom.querySelector('#share-btn');
 
+        const quizInfoList = this.parentElement.getRootNode().querySelector('.quiz-info-list');
         deleteBtn.addEventListener('click', async(e) => {
-            // const currentUser = getItemFromLocalStorage('currentUser');
-            // const accountDoc = await getAccountDocByUserName(currentUser.userName);
-            // const account = await Account.parseDocument(accountDoc);
+            const currentUser = getItemFromLocalStorage('currentUser');
+            const accountDoc = await getAccountDocByUserName(currentUser.userName);
+            const account = await Account.parseDocument(accountDoc);
+            await account.deleteQuizSet(this.id);
 
-            // account.deleteQuizSet(this.id);
+            quizInfoList.removeChild(this);
         })
 
         playBtn.addEventListener('click', e => {
