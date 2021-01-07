@@ -12,6 +12,9 @@ class QuizInfolist extends HTMLElement {
 
         const currentUser = getItemFromLocalStorage('currentUser');
         const accountDoc = await getAccountDocByUserName(currentUser.userName);
+
+        this.observeQuizCollectionChange();
+
         const account = await Account.parseDocument(accountDoc);
 
         this.quizCollection = account.quizCollection;
@@ -76,6 +79,29 @@ class QuizInfolist extends HTMLElement {
 
             this._shadowDom.querySelector('.quiz-info-list').innerHTML = quizInfoListHtml;
         }
+    }
+
+    observeQuizCollectionChange() {
+        let firstRun = true;
+        const currentUser = getItemFromLocalStorage('currentUser');
+        firebase.firestore()
+            .collection('Accounts')
+            .doc(currentUser.id)
+            .onSnapshot(snapShot => {
+                if (firstRun) firstRun = false;
+                else {
+                    const docChanges = snapShot.docChanges();
+                    for (const docChange of docChanges) {
+                        if (docChange.type === 'modified') {
+                            console.log(docChange.doc.data());
+                        }
+                    }
+                }
+            });
+    }
+
+    appendNewQuizSet() {
+
     }
 }
 

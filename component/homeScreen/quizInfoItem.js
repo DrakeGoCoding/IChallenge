@@ -1,4 +1,4 @@
-import { convertDate } from '../../utils.js'
+import { convertDate, getItemFromLocalStorage } from '../../utils.js'
 
 class QuizInfoItem extends HTMLElement {
     constructor() {
@@ -31,7 +31,7 @@ class QuizInfoItem extends HTMLElement {
                     </div>
                     <div class="quiz-description">${this.description}</div>
                     <div class="quiz-btn">
-                        <div id="view-btn"> <i class="fa fa-eye"></i> <span>View Records</span> </div>
+                        <div id="view-btn"> <i class="fa fa-trophy"></i> <span>View Records</span> </div>
                         <div id="play-btn"> <i class="fa fa-play"></i> <span>Play Now</span> </div>
                         <div id="share-btn"> <i class="fa fa-share-alt"></i> <span>Share</span> </div>
                     </div>
