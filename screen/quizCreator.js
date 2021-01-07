@@ -34,6 +34,7 @@ export default class QuizCreator extends HTMLElement {
                     </div>     
                 </div>
             </div>
+            <animation-bg></animation-bg>
         `
         const cancelButton = this._shadowDom.getElementById('cancel-btn')
         cancelButton.addEventListener('click', () => {
