@@ -61,7 +61,7 @@ class QuizInfolist extends HTMLElement {
             let quizInfoListHtml = '';
 
             this.quizCollection.forEach(quizSet => {
-                if (quizSet.title.includes(newValue))
+                if (quizSet.title.toLowerCase().includes(newValue))
                     quizInfoListHtml += `
                         <quiz-info-item 
                             title="${quizSet.title}"

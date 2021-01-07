@@ -194,7 +194,7 @@ class QuizContainer extends HTMLElement {
                 this.questionCounter += 1;
             } else {
                 quizSet.addNewRecord(this.player, correctCount)
-                    // alert(`Congrats ${this.player}! This is the end of the quiz. You have got ${correctCount} points!`)
+                alert(`This is the end of the quiz. You've got ${correctCount} points!`)
                 router.navigate(`#!quiz-record/${this.id}`)
             }
         })
