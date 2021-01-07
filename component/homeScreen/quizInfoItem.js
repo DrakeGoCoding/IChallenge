@@ -48,7 +48,7 @@ class QuizInfoItem extends HTMLElement {
         })
 
         viewBtn.addEventListener('click', e => {
-            window.open(`#!quiz-record/${this.id}`, '_blank');
+            router.navigate(`#!quiz-record/${this.id}`, '_blank');
         })
 
         shareBtn.addEventListener('click', e => {

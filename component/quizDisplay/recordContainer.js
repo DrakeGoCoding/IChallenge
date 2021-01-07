@@ -145,7 +145,7 @@ class RecordContainer extends HTMLElement {
                   </table>
             </div>
             <div class="btn-row">
-                <div class="quiz-btn"> <i class="fa fa-repeat"></i> Try Again</div>
+                <div class="quiz-btn"> <i class="fa fa-repeat"></i> Replay</div>
             </div>
         </div>
         `
