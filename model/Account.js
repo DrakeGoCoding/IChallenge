@@ -44,13 +44,13 @@ export default class Account {
         const index = this.quizCollection.findIndex(quizSet => quizSet.id === quizSetId);
 
         if (index !== -1) {
-            this.quizCollection[index].deleteAllQuizzes().then(() => {
+            this.quizCollection[index].deleteAllQuizzes().then(async() => {
                 this.quizCollection.splice(index, 1);
 
-                await db.collection('QuizSets').doc(quizSetId).delete();
                 await db.collection('Accounts').doc(this.id).update({
                     quizCollection: firebase.firestore.FieldValue.arrayRemove(db.doc('QuizSets/' + quizSetId))
                 })
+                await db.collection('QuizSets').doc(quizSetId).delete();
 
                 console.log(`QuizSet with id ${quizSetId} is deleted`);
             })
