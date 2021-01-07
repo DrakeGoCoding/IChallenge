@@ -39,6 +39,7 @@ const style = `
         width: 280px;
         height: 100vh;
         background-color:#252525;
+        opacity: 0.8;
         color: #fff;
         font-family: 'JetBrains Mono', monospace;
         height: calc(100% - 100px);
@@ -82,7 +83,12 @@ const style = `
             overflow-x: auto;
             display: flex;
             flex-direction: row;
-        }    
+        }
+        /* width */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }  
     }
 </style>
 `

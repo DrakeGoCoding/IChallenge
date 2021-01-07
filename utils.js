@@ -13,10 +13,6 @@ export function writeToLocalStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }
 
-export function removeItemFromLocalStorage(key) {
-    localStorage.removeItem(key)
-  }
-
 /**
  * 
  * @param {String} key
@@ -133,4 +129,9 @@ export function convertDate(dateStr) {
 
 function validateNiceNumber(number) {
     return (number < 10) ? ('0' + number) : (number)
+}
+
+export function sortRank(list) {
+    let sortedList = list.sort((player1, player2) => player1.score === player2.score ? player1.timeAchieved - player2.timeAchieved : player2.score - player1.score);
+    return sortedList;
 }

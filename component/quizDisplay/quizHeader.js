@@ -8,11 +8,12 @@ const style = `
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 6;
 }
 .logo{
     margin-left: 4vw;
     font-family: 'Rowdies', cursive;
-    font-size: 65px;
+    font-size: 60px;
     color: #fff;
     text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }
@@ -49,13 +50,13 @@ const style = `
 }
 `
 
-class QuizHeader extends HTMLElement{
-    constructor(){
+class QuizHeader extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
 
-    connectedCallback(){
+    connectedCallback() {
         this._shadowDom.innerHTML = `
        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -72,6 +73,11 @@ class QuizHeader extends HTMLElement{
             </div>
         </div>
         `
+
+        const logo = this._shadowDom.querySelector('.logo');
+        logo.addEventListener('click', e => {
+            router.navigate('home-screen');
+        })
     }
 }
 

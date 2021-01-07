@@ -1,38 +1,49 @@
-import { getItemFromLocalStorage, getQuizSetDocByID } from "../../utils.js";
+import { getQuizSetDocByID } from "../../utils.js";
 
 const style = `
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
     .starter-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         margin: auto;
-        width: 550px;
-        background-color:#010101;
+        width: 800px;
+        height: 100vh;
+        background-color:rgba(1, 1, 1, 0);
         border-radius: 20px;
-        padding: 40px;
+        padding: 0px;
         box-sizing: border-box;
         font-family: 'JetBrains Mono', monospace;
         color: #fff;
         font-size: 14px;
     }
     .quiz-name{
-        font-size: 5rem;
+        font-size: 4.5rem;
         text-align: center;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
     .quiz-description{
-        font-size: 2rem;
+        font-size: 1.5rem;
         text-align: center;
-        margin-bottom: 60px;
+        margin-bottom: 30px;
+        overflow: auto;
+        height: 80px;
     }
     .greeting{
         font-size: 1.5rem;
         text-align: center;
         margin-bottom: 30px;
     }
+    .name-input{
+        padding: 0 120px;
+        z-index: 5;
+    }
     .name-input textarea{   
         color: #fff;
-        width: 500px;
-        height: 60px;
+        width: 100%;
+        height: 65px;
         line-height: 60px;
         text-align: center;
         padding: 0 15px;
@@ -41,6 +52,7 @@ const style = `
         background-color: transparent;
         border: 2px solid #fff;
         border-radius: 10px;
+        border-sizing: border-box;
         outline: none;
         resize: none;
     }
@@ -56,11 +68,61 @@ const style = `
         font-size: 18px;
         border-radius: 10px;
         margin: 30px auto 0;
+        z-index: 5;
+        transition: .5s;
     }
     .start-btn:hover{
         box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
         cursor: pointer;
+        height: 52px;
+        transition: .5s;
     }
+    /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+    }
+    @media only screen and (max-width: 768px){
+        .starter-container{
+            width: 400px;
+        }
+        .quiz-name{
+            font-size: 4rem;
+        }
+        .name-input{
+            padding: 0;
+        }
+        .quiz-description{
+            font-size: 1.5rem;
+        }
+    }
+    @media only screen and (max-width: 400px){
+        .starter-container{
+            width: 90vw;
+            font-size: 12px;
+            padding: 20px;
+        }
+        .quiz-name{
+            font-size: 3.5rem;
+        }
+        .quiz-description{
+            font-size: 1.2rem;
+        }
 </style>
 `
 
@@ -71,9 +133,8 @@ class StarterContainer extends HTMLElement {
     }
 
     async connectedCallback() {
-        //let quizSetId = getItemFromLocalStorage("currentQuiz");
-        const quizSet = await getQuizSetDocByID(quizSetId);
-
+        this.id = this.getAttribute('id');
+        const quizSet = await getQuizSetDocByID(this.id);
         this._shadowDom.innerHTML = `
             ${style}
             <div class="starter-container">
@@ -87,6 +148,16 @@ class StarterContainer extends HTMLElement {
                 <div class="start-btn"> <i class="fa fa-play"></i> Start the Quiz</div>
             </div>
         `
+
+        const startBtn = this._shadowDom.querySelector('.start-btn');
+        const nameInput = this._shadowDom.querySelector('.name-input textarea');
+        nameInput.addEventListener('keyup', e => {
+            nameInput.scrollTop = nameInput.scrollHeight;
+        })
+        startBtn.addEventListener('click', e => {
+            const name = nameInput.value.trim();
+            if (name !== '') router.navigate(`#!quiz-display/${this.id}/${name}`);
+        })
     }
 }
 

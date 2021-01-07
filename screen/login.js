@@ -1,5 +1,3 @@
-// import { redirect } from '../index.js'
-import Account from '../model/Account.js'
 import { getAccountDocByUserName, writeToLocalStorage } from '../utils.js'
 
 const style = `
@@ -441,16 +439,16 @@ const style = `
     }
 
 `
-class LoginScreen extends HTMLElement{
-    constructor(){
+class LoginScreen extends HTMLElement {
+    constructor() {
         super()
-        this._shadowRoot = this.attachShadow ({mode: 'open'})
+        this._shadowRoot = this.attachShadow({ mode: 'open' })
     }
     setError(id, message) {
         this._shadowRoot.getElementById(id).setAttribute('error', message)
     }
-    connectedCallback(){
-        this._shadowRoot.innerHTML=`
+    connectedCallback() {
+        this._shadowRoot.innerHTML = `
         <style>
             ${style}
         </style>
@@ -483,50 +481,43 @@ class LoginScreen extends HTMLElement{
         </div>
         `
         const loginForm = this._shadowRoot.getElementById('login-form')
-        loginForm.addEventListener('submit', async (e) => {
+        loginForm.addEventListener('submit', async(e) => {
             e.preventDefault()
             const userName = this._shadowRoot.getElementById('userName').value
             const password = this._shadowRoot.getElementById('password').value
             let isValid = true
 
-            if (userName.trim() === ''){
+            if (userName.trim() === '') {
                 isValid = false
                 this.setError('userName', 'Please input your user name')
             }
-            if (password.trim() ===''){
+            if (password.trim() === '') {
                 isValid = false
                 this.setError('password', 'Please input password')
             }
-            if (!isValid){
+            if (!isValid) {
                 return
             }
-            // const user = await firebase.firestore()
-            // .collection('Accounts')
-            // .where('userName', '==', userName)
-            // .where('password', '==', CryptoJS.MD5(password).toString())
-            // .get()
-            // if (user.empty) {
-            //     alert('User name or password is wrong, try again')
-            // } else {
-            //     writeToLocalStorage('currentUser', getDataFromDocs(user)[0])
-            //     redirect('home-screen')
-            // }
+
             const accountDoc = await getAccountDocByUserName(userName)
-            if(accountDoc){
-                if(CryptoJS.MD5(password).toString(CryptoJS.enc.Hex) === accountDoc.password){
-                    const account = await Account.parseDocument(accountDoc);
-                    writeToLocalStorage('currentUser', account);
+            if (accountDoc) {
+                if (CryptoJS.MD5(password).toString(CryptoJS.enc.Hex) === accountDoc.password) {
+                    writeToLocalStorage('currentUser', {
+                        'id': accountDoc.id,
+                        'userName': accountDoc.userName,
+                        'password': accountDoc.password
+                    });
                     router.navigate('home-screen')
                 } else {
-                    this.setError('password', `Oops, you've just entered a password from another dimension.`)
+                    this.setError('password', `Incorrect password.`)
                 }
-                
+
             }
-        
+
         })
         this._shadowRoot.querySelector('.register h3 a').addEventListener('click', () => {
             router.navigate('signup-screen')
         })
     }
-} 
+}
 window.customElements.define('login-screen', LoginScreen)

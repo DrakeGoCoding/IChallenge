@@ -1,3 +1,17 @@
+const style = `
+<style>
+    .main{
+        margin-top: 150px;
+    }
+
+    @media only screen and (max-width: 786px){
+        .main{
+            margin-top: 100px;
+        }
+    }
+</style>
+`
+
 class HomeScreen extends HTMLElement {
     constructor() {
         super()
@@ -5,6 +19,8 @@ class HomeScreen extends HTMLElement {
     }
 
     connectedCallback() {
+        this.quizSetUrl = this.getAttribute('url') || '';
+
         this._shadowDom.innerHTML = `
             ${style}       
             <div class='home-container'> 
@@ -16,23 +32,12 @@ class HomeScreen extends HTMLElement {
             </div>
         `
 
+        const createQuizSetBtn = this._shadowDom.querySelector('create-plus-btn');
+        createQuizSetBtn.addEventListener('click', e => {
+            router.navigate('quiz-creator');
+        })
+
     }
 }
 
 window.customElements.define('home-screen', HomeScreen)
-
-const style = `
-<style>
-    .main{
-        margin-top: 150px;
-        margin-bottom: 150px;
-    }
-
-    @media only screen and (max-width: 786px){
-        .main{
-            margin-top: 100px;
-            margin-bottom: 100px;
-        }
-    }
-</style>
-`

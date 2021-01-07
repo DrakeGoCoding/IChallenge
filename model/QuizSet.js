@@ -51,14 +51,13 @@ export default class QuizSet {
             })
 
             console.log(`Quiz with id ${quizId} is deleted`);
-        }
-        else console.log(`Quiz with id ${quizId} is unavailable`);
+        } else console.log(`Quiz with id ${quizId} is unavailable`);
     }
-    
+
     // delete all quizzes from this quizset then update database
     async deleteAllQuizzes() {
         this.quizList.forEach(quiz => this.deleteQuiz(quiz.id));
-        for (const quiz of this.quizList){
+        for (const quiz of this.quizList) {
             await this.deleteQuiz(quiz.id);
         }
     }
@@ -73,24 +72,27 @@ export default class QuizSet {
     addNewRecord(player, score) {
         const quizSetDoc = db.collection('QuizSets').doc(this.id);
         const newRecord = {
-            'player': player,
-            'score': score,
-            'timeAchieved': new Date().toISOString()
-        }
-        // If highscoreList has not reached maximum, just push newHighScore
+                'player': player,
+                'score': score,
+                'timeAchieved': new Date().toISOString()
+            }
+            // If highscoreList has not reached maximum, just push newHighScore
         if (this.highScoreList.length < MAX_HIGHSCORE_LIST) {
             this.highScoreList.push(newRecord);
             quizSetDoc.update({
                 recordCount: ++this.recordCount,
                 highScoreList: firebase.firestore.FieldValue.arrayUnion(newRecord)
             })
-        }
-        else {
+        } else {
             // else if highScoreList is full, check if newRecord beats any lowest highscore and replace it if possible
             let minHighScore = this.highScoreList.reduce((prev, cur) => prev.score < cur.score ? prev : cur);
             if (score > minHighScore.score) {
                 quizSetDoc.update({
-                    highScoreList: firebase.firestore.FieldValue.arrayRemove(minHighScore)
+                    highScoreList: firebase.firestore.FieldValue.arrayRemove({
+                        'player': minHighScore.player,
+                        'score': minHighScore.score,
+                        'timeAchieved': minHighScore.timeAchieved.toISOString()
+                    })
                 })
                 quizSetDoc.update({
                     recordCount: ++this.recordCount,
@@ -137,5 +139,5 @@ export default class QuizSet {
     }
 }
 
-const MAX_HIGHSCORE_LIST = 5;
+const MAX_HIGHSCORE_LIST = 10;
 const db = firebase.firestore();

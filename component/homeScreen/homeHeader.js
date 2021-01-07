@@ -27,25 +27,16 @@ const style = `
     flex-direction: row-reverse;
 }
 #user-icon{
-    margin-right: 6.5vw;
+    margin-right: 4vw;
     color: #fff;
     font-size: 40px;
-}
-#logout-btn{
-    margin-right: -7vw;
-    color: #fff;
-    font-size: 35px;
-}
-#logout-btn:hover{
-    cursor: pointer;
-    text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }
 #user-icon:hover{
     cursor: pointer;
     text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
 }
 .search-box{
-    margin-right: 8vw;
+    margin-right: 2vw;
     display: flex;
     color: white;
     align-items: center;
@@ -74,10 +65,8 @@ const style = `
         font-size: 50px;
     }
     #user-icon{
-        font-size: 30px;
+        font-size: 35px;
     }
-    #logout-btn{
-        font-size: 30px;
     .search-box{
         font-size: 20px;
     }
@@ -85,7 +74,7 @@ const style = `
         font-size: 12px;
     }
 }
-@media only screen and (max-width: 400px){
+@media only screen and (max-width: 425px){
     .main-header{
         height: 80px
     }
@@ -94,11 +83,6 @@ const style = `
     }
     #user-icon{
         font-size: 28px;
-        margin-right:10vh;
-    }
-    #logout-btn{
-        font-size: 28px;
-        margin-right:-10vh;
     }
     .search-box{
         display: none;
@@ -106,7 +90,6 @@ const style = `
 }
 `
 
-// import { removeItemFromLocalStorage } from ''
 class HomeHeader extends HTMLElement {
     constructor() {
         super()
@@ -125,24 +108,32 @@ class HomeHeader extends HTMLElement {
         <div class="main-header">
             <div class="logo">Queazy</div>
             <div class="header-right-bar">
-                <div id="user-icon"><i class="fa fa-user"></i></div>
-                <div id="logout-btn"><i class="fa fa-sign-out" aria-hidden="true"></i></div>
+                <div id="user-icon"><i class="fa fa-sign-out"></i></div>
                 <div class="search-box">
                     <div class="search-icon"><i class="fa fa-search"></i></div>
-                    <input type="text" placeholder="Search quizzes' title">
+                    <input id="input-title" type="text" placeholder="Enter quiz title">
                 </div>
                 <div class="theme-toggle"></div>
             </div>
         </div>
         `
-        this._shadowDom.getElementById('logout-btn').addEventListener('click', () => {
-            removeItemFromLocalStorage('currentUser')
-            router.navigate('login-screen')
+
+        const userBtn = this._shadowDom.querySelector('#user-icon');
+        const inputTitle = this._shadowDom.querySelector('#input-title');
+        const quizInfoList = this.parentNode.getRootNode()
+            .querySelector('.main')
+            .querySelector('quiz-info-list');
+
+        inputTitle.addEventListener('keyup', e => {
+            const title = inputTitle.value.trim();
+            quizInfoList.setAttribute('filter', title);
+        })
+
+        userBtn.addEventListener('click', e => {
+            localStorage.removeItem('currentUser');
+            router.navigate('homepage-screen');
         })
     }
+}
 
-}
-function removeItemFromLocalStorage(key) {
-    localStorage.removeItem(key)
-}
 window.customElements.define('home-header', HomeHeader)

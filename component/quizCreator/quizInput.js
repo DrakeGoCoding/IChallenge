@@ -1,3 +1,5 @@
+import { writeToLocalStorage } from "../../utils.js";
+
 export default class QuizInput extends HTMLElement {
     constructor() {
         super()
@@ -45,10 +47,10 @@ export default class QuizInput extends HTMLElement {
                         <input id='check4' type="radio" name="correct" class="correct-check" ${this.check4}> D. 
                         <textarea id='ans4' placeholder='Add Answer'>${this.answer4}</textarea>
                     </div>
-                </div>
-                <div class="redirect-btns">
-                    <button id='summit-btn'>Done</button>
-                    <button id='cancel-btn'>Cancel</button>
+                    <div class="redirect-btns">
+                        <button id='summit-btn'>Done</button>
+                        <button id='cancel-btn'>Cancel</button>
+                    </div>
                 </div>
             </div>
         `
@@ -78,15 +80,12 @@ export default class QuizInput extends HTMLElement {
 
         for (let i = 0; i < answerList.length; i++) {
             const answer = answerList[i];
+            const check = checkList[i];
             answer.addEventListener('keyup', e => {
                 let content = answer.value.trim();
                 if (content === '') this.previewItem.removeAttribute(`answer${i + 1}`);
                 else this.previewItem.setAttribute(`answer${i + 1}`, content);
             })
-        }
-
-        for (let i = 0; i < checkList.length; i++) {
-            const check = checkList[i];
             check.addEventListener('click', e => {
                 const isChecked = check.checked;
                 if (isChecked) this.previewItem.setAttribute(`check${i + 1}`, 'checked');
@@ -94,20 +93,32 @@ export default class QuizInput extends HTMLElement {
             })
         }
 
+        const quizSetModal = this.parentElement.getRootNode().querySelector('.container');
         summitBtn.addEventListener('click', async(e) => {
+            let check = true;
+
             const previewItemList = this.parentElement.querySelector('preview-column').shadowRoot.querySelector('.preview-item-list');
             for (const previewItem of previewItemList.children) {
-                if (previewItem.isValidPreviewItem()) {
-                    // TO DO: update firebase and redirect to home screen
-                    previewItem.shadowRoot.querySelector('.question-count').style.color = '#69C9D0';
-                } else previewItem.shadowRoot.querySelector('.question-count').style.color = '#EE1D52';
+                let questionCount = previewItem.shadowRoot.querySelector('.question-count');
+                const isValidQuiz = previewItem.isValidPreviewItem();
+                if (isValidQuiz) questionCount.style.color = '#69C9D0';
+                else questionCount.style.color = '#EE1D52';
+                check = check && isValidQuiz;
             }
-            console.log("submit");
+
+            if (check) {
+                let quizList = [];
+                for (const previewItem of previewItemList.children) {
+                    const quiz = previewItem.toQuiz();
+                    quizList.push(quiz);
+                }
+                writeToLocalStorage('currentQuizList', quizList);
+                quizSetModal.style.display = 'block';
+            }
         })
 
         cancelBtn.addEventListener('click', async(e) => {
-            // TO DO: Redirect to home screen
-            console.log("redirect to home screen");
+            router.navigate('home-screen');
         })
     }
 
@@ -168,6 +179,7 @@ const style = `
         width: calc(100% - 400px);
         margin-left: 350px;
         font-family: 'JetBrains Mono', monospace;
+        opacity: 0.8;
     }
     #question-input{     
         height: 160px;
@@ -178,6 +190,7 @@ const style = `
         color: #fff;
         padding: 60px;
         box-sizing: border-box;
+        border-radius: 10px;
         font-size: 30px;
         text-align: center;
     }
@@ -196,6 +209,7 @@ const style = `
         align-items: center;
         padding-left: 20px;
         margin-top: 10px;
+        border-radius: 10px;
     }
     .answer textarea{  
         background-color: #252525;
@@ -298,11 +312,18 @@ const style = `
             font-size: 18px;
             height: 60px;        
         }
+        .redirect-btns{
+            margin-top: 50px;
+        }
         #summit-btn, #cancel-btn{
             top: 75vh;
             font-size: 15px;
             width: 120px;
             height: 40px;
+        }
+        /* width */
+        ::-webkit-scrollbar {
+            width: 5px;
         }
     }
 </style>

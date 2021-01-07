@@ -12,7 +12,7 @@ const style = `
         cursor: pointer;
         text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
     }
-    @media only screen and (max-width: 768px){
+    @media only screen and (max-width: 786px){
         #create-btn{
             font-size: 50px;
             left: 80vw;
@@ -29,6 +29,7 @@ class CreatePlusBtn extends HTMLElement {
     connectedCallback() {
         this._shadowDom.innerHTML = `
         ${style}
+        
         <div id="create-btn"> <i class="fa fa-plus-circle"></i> </div>
         `
     }

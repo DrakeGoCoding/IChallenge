@@ -11,14 +11,18 @@
             margin: 0;
             padding: 0;
         }
+        button {
+            font-family: 'JetBrains Mono', monospace;
+        }
         .container{
             background-color: #010101;
             width: 100vw;
             height: 100vh;
         }
         .record-container{
-            margin: auto;
-            width: 550px;
+            position: fixed;
+            transform: translateX(50%);
+            width: 50%;
             background-color:#252525;
             border-radius: 20px;
             padding: 40px;
@@ -26,6 +30,7 @@
             font-family: 'JetBrains Mono', monospace;
             color: #fff;
             font-size: 20px;
+            transition: all 1s;
         }
         .name-input, .description-input{
             display: flex;
@@ -66,32 +71,55 @@
             box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
             cursor: pointer;
         }
+
+        /* create-btn*/
+
+        #create-btn{
+        position: fixed;
+        color: #fff;
+        font-size: 60px;
+        left: 90vw;
+        top: 80vh;
+        }
+        #create-btn:hover{
+            cursor: pointer;
+            text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
+        }
+        @media only screen and (max-width: 786px){
+            #create-btn{
+                font-size: 50px;
+                left: 80vw;
+            }
+        }
+        /*Function*/
+
+
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="record-container">
-            
-            <div class="name-input">
-                <div>Enter your Quiz's name</div>
-                <textarea placeholder="Sample Quiz"></textarea>
+    <main>
+        <div class="container">
+            <div class="record-container">       
+                    <div class="name-input">
+                        <div>Enter your Quiz's name</div>
+                        <textarea placeholder="Sample Quiz"></textarea>
+                    </div>
+                    
+                    <div class="description-input">
+                        <div>Enter your Quiz's description</div>
+                        <textarea placeholder="This quiz is about..."></textarea>
+                    </div>
+                    <div class="btn-row">
+                        <button id='confirm-btn'>Confirm</button>
+                        <button id='cancel-btn'>Cancel</button>
+                    </div>     
             </div>
-            
-            <div class="description-input">
-                <div>Enter your Quiz's description</div>
-                <textarea placeholder="This quiz is about..."></textarea>
-            </div>
-            <div class="btn-row">
-                <div id='confirm-btn'>Confirm</div>
-                <div id='cancel-btn'>Cancel</div>
-            </div>
-            
-            
         </div>
+    </main>
+        <button>
+            <div id="create-btn"><i class="fa fa-plus-circle"></i></div>
+        </button>
 
-        
-
-    </div>
-    </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
-import { convertDate, writeToLocalStorage } from '../../utils.js'
+import Account from '../../model/Account.js'
+import { convertDate, getAccountDocByUserName, getItemFromLocalStorage, getQuizSetDocByID } from '../../utils.js'
 
 class QuizInfoItem extends HTMLElement {
     constructor() {
@@ -23,6 +24,7 @@ class QuizInfoItem extends HTMLElement {
                     <div class="quiz-img"> <i class="fa fa-quora" aria-hidden="true"></i> </div>
                 </div>
                 <div class="quiz-info-right">
+                    <div id="delete-btn"> <i class="fa fa-trash"></i></div>
                     <div class="quiz-name">${this.title}</div>
                     <div class="quiz-created-time">${this.timeCreated}</div>
                     <div class="quiz-summary">
@@ -31,17 +33,42 @@ class QuizInfoItem extends HTMLElement {
                     </div>
                     <div class="quiz-description">${this.description}</div>
                     <div class="quiz-btn">
-                        <div id="view-btn"> <i class="fa fa-eye"></i> <span>View Records</span> </div>
+                        <div id="view-btn"> <i class="fa fa-trophy"></i> <span>View Records</span> </div>
                         <div id="play-btn"> <i class="fa fa-play"></i> <span>Play Now</span> </div>
                         <div id="share-btn"> <i class="fa fa-share-alt"></i> <span>Share</span> </div>
                     </div>
                 </div>
             </div>
         `
-        this._shadowDom.getElementById('play-btn').addEventListener('click', () => {
-            writeToLocalStorage('currentQuiz', this.id)
-            window.open(`#!/quizset/${this.id}`, '_blank')
-            
+
+        const deleteBtn = this._shadowDom.querySelector('#delete-btn');
+        const playBtn = this._shadowDom.querySelector('#play-btn');
+        const viewBtn = this._shadowDom.querySelector('#view-btn');
+        const shareBtn = this._shadowDom.querySelector('#share-btn');
+
+        const quizInfoList = this.parentElement.getRootNode().querySelector('.quiz-info-list');
+        deleteBtn.addEventListener('click', async(e) => {
+            quizInfoList.removeChild(this);
+
+            const currentUser = getItemFromLocalStorage('currentUser');
+            const accountDoc = await getAccountDocByUserName(currentUser.userName);
+            const account = await Account.parseDocument(accountDoc);
+            await account.deleteQuizSet(this.id);
+        })
+
+        playBtn.addEventListener('click', e => {
+            window.open(`#!quiz-starter/${this.id}`, '_blank');
+        })
+
+        viewBtn.addEventListener('click', e => {
+            router.navigate(`#!quiz-record/${this.id}`, '_blank');
+        })
+
+        shareBtn.addEventListener('click', e => {
+            const url = `https://drakegocoding.github.io/Queazy/#!quiz-starter/${this.id}`;
+            navigator.clipboard.writeText(url);
+            const quizSetModal = this.parentElement.getRootNode().querySelector('#quizset-modal');
+            quizSetModal.style.display = 'block';
         })
     }
 }
@@ -61,6 +88,8 @@ const style = `
         display: flex;
         margin-bottom: 5vh;
         padding: 2rem;
+        z-index: 3;
+        
     }
     .quiz-info-left{
         margin-right: 2rem;
@@ -102,14 +131,17 @@ const style = `
         display: flex;
         justify-content: flex-end;
     }
+    #delete-btn{
+        float:right;
+        font-size: 1.5rem;
+    }
     #share-btn, #play-btn, #view-btn{
         margin-left: 1vw;
         border: 2px solid #fff;
         padding: 0.4vw;
         border-radius: 10px;
     }
-
-    #share-btn:hover, #play-btn:hover, #view-btn:hover{
+    #share-btn:hover, #play-btn:hover, #view-btn:hover, #delete-btn:hover{
         cursor: pointer;
         background-color: #010101;
         box-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
@@ -144,6 +176,9 @@ const style = `
             font-size: 4rem;
             padding: 0.5rem;
             margin-right: 1rem;
+        }
+        #delete-btn{
+            font-size: 1rem;
         }
         #share-btn, #play-btn, #view-btn{
             padding: 5px 12px;

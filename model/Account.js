@@ -20,19 +20,19 @@ export default class Account {
         this.password = password;
         this.quizCollection = [];
     }
-    
+
     /**
      * 
      * @param {QuizSet} quizSet 
      */
     // add a new quizset to this account object and update database
-    addQuizSet(quizSet) {
+    async addQuizSet(quizSet) {
         this.quizCollection.push(quizSet);
-        quizSet.pushToFireBase().then(quizId => {
-            db.collection('Accounts').doc(this.id).update({
-                quizCollection: firebase.firestore.FieldValue.arrayUnion(db.doc('QuizSets/' + quizId))
-            })
-        });
+        const quizSetId = await quizSet.pushToFireBase();
+        await db.collection('Accounts').doc(this.id).update({
+            quizCollection: firebase.firestore.FieldValue.arrayUnion(db.doc('QuizSets/' + quizSetId))
+        })
+
     }
 
     /**
@@ -46,7 +46,7 @@ export default class Account {
         if (index !== -1) {
             this.quizCollection[index].deleteAllQuizzes().then(() => {
                 this.quizCollection.splice(index, 1);
-                
+
                 db.collection('QuizSets').doc(quizSetId).delete();
                 db.collection('Accounts').doc(this.id).update({
                     quizCollection: firebase.firestore.FieldValue.arrayRemove(db.doc('QuizSets/' + quizSetId))
@@ -55,8 +55,7 @@ export default class Account {
                 console.log(`QuizSet with id ${quizSetId} is deleted`);
             })
 
-        }
-        else console.log(`QuizSet with id ${quizSetId} is unavailable`);
+        } else console.log(`QuizSet with id ${quizSetId} is unavailable`);
     }
 
     // push a new account to database

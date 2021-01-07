@@ -1,24 +1,26 @@
 const style = `
 .main{
-    margin-top: 150px;
+    margin-top: 0px;
     position: fixed;
     width: 100%;
 }
 `
 
-class QuizStarter extends HTMLElement{
-    constructor(){
+class QuizStarter extends HTMLElement {
+    constructor() {
         super()
-        this._shadowDom = this.attachShadow({mode: 'open'})
+        this._shadowDom = this.attachShadow({ mode: 'open' })
     }
-    connectedCallback(){
-        this._shadowDom.innerHTML=`
+    connectedCallback() {
+        this.id = this.getAttribute('id');
+        this._shadowDom.innerHTML = `
         <style>
             ${style}
         </style>
         <quiz-header></quiz-header>
         <div class='main'>
-            <starter-container></starter-container>
+            <animation-bg></animation-bg>
+            <starter-container id=${this.id}></starter-container>
         </div>
         `
     }

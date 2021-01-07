@@ -10,11 +10,15 @@ export default class CreatorHeader extends HTMLElement {
             <div class="main-header">
                 <div class="logo">Queazy</div>
                 <div class="header-right-bar">
-                    <div class="user-icon"><i class="fa fa-user"></i></div>
                     <div class="theme-toggle"></div>
                 </div>
             </div>
         `
+        const logo = this._shadowDom.querySelector('.logo');
+
+        logo.addEventListener('click', e => {
+            router.navigate('home-screen');
+        })
     }
 }
 
@@ -28,7 +32,7 @@ const style = `
         position: fixed;
         top: 0;
         width: 100%;
-        height: 80px;
+        height: 100px;
         background-color: #010101;
         display: flex;
         justify-content: space-between;
@@ -58,7 +62,7 @@ const style = `
         cursor: pointer;
         text-shadow: 4px 4px 0 #69C9D0,-4px -4px 0 #EE1D52;
     }
-    @media only screen and (max-width: 1000px){
+    @media only screen and (max-width: 786px){
         .main-header{
             height: 70px;
         }
@@ -69,7 +73,7 @@ const style = `
             font-size: 35px;
         }
     }
-    @media only screen and (max-width: 400px){
+    @media only screen and (max-width: 425px){
         .main-header{
             height: 80px
         }
