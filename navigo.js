@@ -33,11 +33,11 @@ router
             if (check) {
                 redirect('home-screen')
             } else {
-                router.navigate('login-screen')
+                router.navigate('homepage-screen')
             }
         },
         '*': function() {
-            router.navigate('homepage-screen')
+            router.navigate('home-screen')
         },
     })
     .resolve();
