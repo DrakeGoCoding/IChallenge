@@ -1,3 +1,5 @@
+import { writeToLocalStorage } from "../../utils.js";
+
 export default class QuizInput extends HTMLElement {
     constructor() {
         super()
@@ -104,18 +106,14 @@ export default class QuizInput extends HTMLElement {
                 check = check && isValidQuiz;
             }
 
-            let quizList = [];
-
             if (check) {
+                let quizList = [];
                 for (const previewItem of previewItemList.children) {
                     const quiz = previewItem.toQuiz();
                     quizList.push(quiz);
-
-                    console.log(quizList);
-                    // TO DO: Push quizset to firebase;
-
-                    quizSetModal.style.display = 'block';
                 }
+                writeToLocalStorage('currentQuizList', quizList);
+                quizSetModal.style.display = 'block';
             }
         })
 

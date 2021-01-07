@@ -1,3 +1,7 @@
+import Account from "../model/Account.js";
+import QuizSet from "../model/QuizSet.js";
+import { getAccountDocByUserName, getItemFromLocalStorage } from "../utils.js";
+
 export default class QuizCreator extends HTMLElement {
     constructor() {
         super()
@@ -35,6 +39,35 @@ export default class QuizCreator extends HTMLElement {
         cancelButton.addEventListener('click', () => {
             const container = this._shadowDom.querySelector('.container');
             container.style.display = "none";
+        })
+
+        const confirmBtn = this._shadowDom.querySelector('#confirm-btn');
+        confirmBtn.addEventListener('click', async(e) => {
+            let check = true;
+            const title = this._shadowDom.querySelector('.name-input textarea').value.trim();
+            const description = this._shadowDom.querySelector('.description-input textarea').value.trim();
+
+            if (title === '') this._shadowDom.querySelector('.name-input div').style.color = '#EE1D52'
+            else this._shadowDom.querySelector('.name-input div').style.color = '#69C9D0'
+            check = check && (title === '') ? false : true;
+
+            if (description === '') this._shadowDom.querySelector('.description-input div').style.color = '#EE1D52'
+            else this._shadowDom.querySelector('.description-input div').style.color = '#69C9D0'
+            check = check && (description === '') ? false : true;
+
+            if (check) {
+                const quizSet = new QuizSet(title, description);
+                const quizList = getItemFromLocalStorage('currentQuizList');
+                quizList.forEach(quiz => quizSet.addQuiz(quiz));
+
+                localStorage.removeItem('currentQuizList');
+                const currentUser = getItemFromLocalStorage('currentUser');
+                const accountDoc = await getAccountDocByUserName(currentUser.userName);
+                const account = await Account.parseDocument(accountDoc);
+                account.addQuizSet(quizSet).then(() => {
+                    router.navigate('home-screen');
+                });
+            }
         })
     }
 
