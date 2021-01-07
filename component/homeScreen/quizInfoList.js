@@ -109,7 +109,7 @@ const style = `
         width: 50%;
         border-radius: 10px;
         animation-name: animatetop;
-        animation-duration: 0.8s;
+        animation-duration: 0.5s;
     }
 
     @keyframes animatetop {
