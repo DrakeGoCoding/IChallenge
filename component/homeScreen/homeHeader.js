@@ -122,7 +122,7 @@ class HomeHeader extends HTMLElement {
             ${style} 
          </style>
         <div class="main-header">
-            <div class="logo"><img src="../../img/Logo.png" class="logo" alt="logo"></div>
+            <div class="logo"><img src="../../../img/Logo.png" class="logo" alt="logo"></div>
             <div class="header-right-bar">
                 <div id="user-icon"><i class="fa fa-sign-out"></i></div>
                 <div class="search-box">
